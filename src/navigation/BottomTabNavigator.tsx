@@ -1,14 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import InstrumentsScreen from "../features/instruments/screens/InstrumentsScreen";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import HomeScreen from "../features/home/screens/HomeScreen";
+import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
 import SearchScreen from "../features/search/screens/SearchScreen";
 import OrdersScreen from "../features/orders/screens/OrdersScreen";
 
 export type BottomTabParamList = {
-  Instruments: undefined;
-  Portfolio: undefined;
+  Home: undefined;
+  Market: undefined;
   Search: undefined;
+  Portfolio: undefined;
   Orders: undefined;
 };
 
@@ -25,31 +28,36 @@ export default function BottomTabNavigator() {
           backgroundColor: "#6200ee",
         },
         headerTintColor: "#fff",
+        tabBarStyle: {
+          height: 73,
+          paddingBottom: 30,
+        },
       }}
     >
       <Tab.Screen
-        name="Instruments"
-        component={InstrumentsScreen}
+        name="Home"
+        component={HomeScreen}
         options={{
-          title: "Instrumentos",
+          title: "Inicio",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="chart-line"
-              size={size}
+              name="home-outline"
+              size={22}
               color={color}
             />
           ),
         }}
       />
       <Tab.Screen
-        name="Portfolio"
-        component={PortfolioScreen}
+        name="Market"
+        component={MarketScreen}
         options={{
-          title: "Portfolio",
+          title: "Market",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="briefcase"
-              size={size}
+              name="chart-line-variant"
+              size={22}
               color={color}
             />
           ),
@@ -60,8 +68,33 @@ export default function BottomTabNavigator() {
         component={SearchScreen}
         options={{
           title: "Buscar",
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.centralButtonContainer}>
+              <View style={styles.centralButtonOuter}>
+                <View style={styles.centralButton}>
+                  <MaterialCommunityIcons
+                    name="magnify"
+                    size={28}
+                    color="#fff"
+                  />
+                </View>
+              </View>
+            </View>
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="Portfolio"
+        component={PortfolioScreen}
+        options={{
+          title: "Portfolio",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="magnify" size={size} color={color} />
+            <MaterialCommunityIcons
+              name="briefcase-outline"
+              size={22}
+              color={color}
+            />
           ),
         }}
       />
@@ -72,8 +105,8 @@ export default function BottomTabNavigator() {
           title: "Órdenes",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="file-document"
-              size={size}
+              name="file-document-outline"
+              size={22}
               color={color}
             />
           ),
@@ -82,3 +115,28 @@ export default function BottomTabNavigator() {
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  centralButtonContainer: {
+    position: "absolute",
+    bottom: -10,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  centralButtonOuter: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: "rgba(98, 0, 238, 0.15)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  centralButton: {
+    width: 48,
+    height: 48,
+    borderRadius: 28,
+    backgroundColor: "#6200ee",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
