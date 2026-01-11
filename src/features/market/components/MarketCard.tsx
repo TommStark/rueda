@@ -1,24 +1,43 @@
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { MarketAsset } from "../../../shared/types/api.types";
+import { Ionicons } from "@expo/vector-icons";
+import { MarketAsset } from "../types/market.types";
+import {
+  getTickerIcon,
+  hasTickerIcon,
+  getTickerColor,
+} from "../../../shared/utils/icons";
 
 interface MarketCardProps {
   asset: MarketAsset;
+  onPress?: () => void;
 }
 
-export default function MarketCard({ asset }: MarketCardProps) {
+export default function MarketCard({ asset, onPress }: MarketCardProps) {
   const priceChange =
     ((asset.last_price - asset.close_price) / asset.close_price) * 100;
   const isPositive = priceChange >= 0;
 
+  const localIcon = getTickerIcon(asset.ticker);
+  const hasLocalIcon = hasTickerIcon(asset.ticker);
+  const tickerColor = getTickerColor(asset.ticker);
+
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.content}>
         <View style={styles.leftSection}>
           <View style={styles.logoContainer}>
-            {asset.logo ? (
+            {hasLocalIcon && localIcon ? (
+              <Image source={localIcon} style={styles.logo} />
+            ) : asset.logo ? (
               <Image source={{ uri: asset.logo }} style={styles.logo} />
+            ) : tickerColor ? (
+              <View style={[styles.logo, { backgroundColor: tickerColor }]}>
+                <Text style={styles.colorPlaceholderText}>
+                  {asset.ticker.substring(0, 2).toUpperCase()}
+                </Text>
+              </View>
             ) : (
               <View style={[styles.logo, styles.placeholderLogo]}>
                 <Text style={styles.placeholderText}>
@@ -63,15 +82,18 @@ export default function MarketCard({ asset }: MarketCardProps) {
             </Text>
           </View>
         </View>
+        <View style={styles.chevronContainer}>
+          <Ionicons name="chevron-forward" size={20} color="#ccc" />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#f0f0f0",
     backgroundColor: "#fff",
@@ -80,6 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    gap: 12,
   },
   leftSection: {
     flexDirection: "row",
@@ -87,12 +110,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logoContainer: {
-    marginRight: 10,
+    marginRight: 12,
   },
   logo: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   placeholderLogo: {
     backgroundColor: "#e0e0e0",
@@ -104,23 +127,41 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#666",
   },
+  colorPlaceholderText: {
+    fontSize: 14,
+    fontWeight: "800",
+    color: "#fff",
+    letterSpacing: -0.5,
+  },
   infoContainer: {
     flex: 1,
   },
   ticker: {
-    fontWeight: "bold",
-    marginBottom: 2,
+    fontSize: 17,
+    fontWeight: "800",
+    marginBottom: 3,
+    letterSpacing: -0.3,
+    color: "#1a1a1a",
   },
   name: {
     color: "#666",
-    fontSize: 12,
+    fontSize: 13,
+    fontWeight: "500",
   },
   rightSection: {
     alignItems: "flex-end",
+    marginRight: 8,
+  },
+  chevronContainer: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   price: {
-    fontWeight: "bold",
+    fontSize: 17,
+    fontWeight: "800",
     marginBottom: 4,
+    letterSpacing: -0.3,
+    color: "#1a1a1a",
   },
   changeContainer: {
     flexDirection: "row",
@@ -128,8 +169,8 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   change: {
-    fontWeight: "600",
-    fontSize: 12,
+    fontWeight: "700",
+    fontSize: 13,
   },
   positive: {
     color: "#4caf50",

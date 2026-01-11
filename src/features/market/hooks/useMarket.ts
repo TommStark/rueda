@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchMarketAssets } from "../api/market.api";
 import { normalizeApiError } from "../../../shared/utils/errors";
-import { AssetType } from "../../../shared/types/api.types";
+import { AssetType } from "../types/market.types";
 
 export const MARKET_QUERY_KEY = ["market"] as const;
 

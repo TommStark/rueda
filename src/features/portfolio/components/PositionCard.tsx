@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
-import { PortfolioPosition } from "../../../shared/types/api.types";
+import { PortfolioPosition } from "../types/portfolio.types";
 
 interface PositionCardProps {
   position: PortfolioPosition;

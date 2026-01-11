@@ -1,6 +1,6 @@
 import apiClient from "../../../shared/api/client";
 import { API_ENDPOINTS } from "../../../shared/constants/api";
-import { SearchResult } from "../../../shared/types/api.types";
+import { SearchResult } from "../types/search.types";
 
 export const searchInstruments = async (
   query: string,

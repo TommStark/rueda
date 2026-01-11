@@ -1,11 +1,19 @@
-import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
-import { Text, ActivityIndicator, Card } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet, View, ScrollView, RefreshControl } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, ActivityIndicator } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
-import PositionCard from "../components/PositionCard";
-import { PortfolioPosition } from "../../../shared/types/api.types";
+import AssetCard from "../components/AssetCard";
+import ActionButton from "../components/ActionButton";
+import AppHeader from "../../../shared/components/AppHeader";
+import { PortfolioPosition } from "../types/portfolio.types";
+import { RootStackParamList } from "../../../navigation/RootStackNavigator";
 
 export default function PortfolioScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data, isLoading, error, refetch, isRefetching } = usePortfolio();
   const apiError = usePortfolioError(error);
 
@@ -13,99 +21,160 @@ export default function PortfolioScreen() {
     (sum, pos) => sum + pos.quantity * pos.last_price,
     0
   );
-  const totalCost = data?.reduce(
-    (sum, pos) => sum + pos.quantity * pos.avg_cost_price,
+
+  const totalYesterdayValue = data?.reduce(
+    (sum, pos) => sum + pos.quantity * pos.close_price,
     0
   );
-  const totalProfitLoss = (totalValue || 0) - (totalCost || 0);
-  const totalProfitLossPercent =
-    totalCost && totalCost > 0 ? (totalProfitLoss / totalCost) * 100 : 0;
-  const isPositive = totalProfitLoss >= 0;
+
+  const totalChange = (totalValue || 0) - (totalYesterdayValue || 0);
+  const totalChangePercent =
+    totalYesterdayValue && totalYesterdayValue > 0
+      ? (totalChange / totalYesterdayValue) * 100
+      : 0;
+  const isPositive = totalChange >= 0;
 
   if (isLoading) {
     return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" />
-        <Text variant="bodyMedium" style={styles.loadingText}>
-          Cargando portfolio...
-        </Text>
-      </View>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.centerContainer}>
+          <ActivityIndicator size="large" color="#6200ee" />
+          <Text variant="bodyMedium" style={styles.loadingText}>
+            Loading portfolio...
+          </Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   if (error && !data) {
     return (
-      <View style={styles.centerContainer}>
-        <MaterialCommunityIcons name="alert-circle" size={48} color="#f44336" />
-        <Text variant="headlineSmall" style={styles.errorTitle}>
-          Error
-        </Text>
-        <Text variant="bodyMedium" style={styles.errorMessage}>
-          {apiError?.message || "Error al cargar portfolio"}
-        </Text>
-      </View>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.centerContainer}>
+          <Ionicons name="alert-circle" size={48} color="#f44336" />
+          <Text variant="headlineSmall" style={styles.errorTitle}>
+            Error
+          </Text>
+          <Text variant="bodyMedium" style={styles.errorMessage}>
+            {apiError?.message || "Error loading portfolio"}
+          </Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <View style={styles.centerContainer}>
-        <MaterialCommunityIcons name="briefcase" size={48} color="#6200ee" />
-        <Text variant="headlineMedium">Portfolio vacío</Text>
-        <Text variant="bodyMedium" style={styles.subtitle}>
-          No tienes posiciones abiertas
-        </Text>
-      </View>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.centerContainer}>
+          <Ionicons name="briefcase-outline" size={48} color="#6200ee" />
+          <Text variant="headlineMedium">Empty Portfolio</Text>
+          <Text variant="bodyMedium" style={styles.subtitle}>
+            You don't have any positions
+          </Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
+  const groupedData = data.reduce((acc, position) => {
+    const existing = acc.find((p) => p.ticker === position.ticker);
+    if (existing) {
+      existing.quantity += position.quantity;
+    } else {
+      acc.push({ ...position });
+    }
+    return acc;
+  }, [] as PortfolioPosition[]);
+
+  const displayedAssets = groupedData.slice(0, 3);
+  const hasMoreAssets = groupedData.length > 3;
+
+  const handleSeeAll = () => {
+    navigation.navigate("AllAssets", { assets: groupedData });
+  };
+
   return (
-    <View style={styles.container}>
-      <Card style={styles.summaryCard}>
-        <Card.Content>
-          <Text variant="titleMedium" style={styles.summaryTitle}>
-            Resumen del Portfolio
-          </Text>
-          <View style={styles.summaryRow}>
-            <Text variant="bodyMedium" style={styles.label}>
-              Valor total:
-            </Text>
-            <Text variant="titleLarge" style={styles.totalValue}>
-              ${totalValue?.toFixed(2)}
-            </Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text variant="bodySmall" style={styles.label}>
-              P&L Total:
-            </Text>
-            <Text
-              variant="bodyMedium"
-              style={[
-                styles.profitLoss,
-                isPositive ? styles.positive : styles.negative,
-              ]}
-            >
-              {isPositive ? "+" : ""}${totalProfitLoss.toFixed(2)} (
-              {isPositive ? "+" : ""}
-              {totalProfitLossPercent.toFixed(2)}%)
-            </Text>
-          </View>
-        </Card.Content>
-      </Card>
-      <FlatList
-        data={data}
-        keyExtractor={(item: PortfolioPosition) => item.ticker}
-        renderItem={({ item }) => <PositionCard position={item} />}
-        contentContainerStyle={styles.listContent}
+    <SafeAreaView style={styles.safeArea}>
+      <AppHeader screenName="Portfolio" />
+      <ScrollView
+        style={styles.container}
         refreshControl={
           <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
         }
-      />
-    </View>
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.balanceCard}>
+          <Text variant="bodySmall" style={styles.balanceLabel}>
+            TOTAL BALANCE
+          </Text>
+          <Text style={styles.balanceAmount}>
+            $
+            {totalValue?.toLocaleString("en-US", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </Text>
+          <View style={styles.changeContainer}>
+            <View style={styles.currencyBadge}>
+              <Text style={styles.currencyText}>ARS</Text>
+            </View>
+            <View style={styles.changeRow}>
+              <Ionicons
+                name={isPositive ? "trending-up" : "trending-down"}
+                size={16}
+                color="#4caf50"
+              />
+              <Text style={[styles.changeText, styles.positive]}>
+                {isPositive ? "+" : ""}$
+                {Math.abs(totalChange).toLocaleString("en-US", {
+                  minimumFractionDigits: 0,
+                })}{" "}
+                ({isPositive ? "+" : ""}
+                {totalChangePercent.toFixed(2)}%)
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.actionsContainer}>
+          <ActionButton icon="add" label="Buy" variant="primary" />
+          <ActionButton icon="arrow-down" label="Deposit" />
+          <ActionButton icon="arrow-up" label="Withdraw" />
+          <ActionButton icon="ellipsis-horizontal" label="More" />
+        </View>
+
+        <View style={styles.assetsHeader}>
+          <Text variant="titleLarge" style={styles.assetsTitle}>
+            Your Assets
+          </Text>
+          {hasMoreAssets && (
+            <Text style={styles.seeAllText} onPress={handleSeeAll}>
+              See all
+            </Text>
+          )}
+        </View>
+
+        <View style={styles.assetsList}>
+          {displayedAssets.map((position, index) => (
+            <AssetCard
+              key={`${position.ticker}-${index}`}
+              position={position}
+            />
+          ))}
+        </View>
+
+        <View style={styles.bottomSpacer} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#fafafa",
+  },
   container: {
     flex: 1,
   },
@@ -116,25 +185,87 @@ const styles = StyleSheet.create({
     gap: 16,
     padding: 16,
   },
-  summaryCard: {
-    margin: 16,
-    marginBottom: 8,
+  balanceCard: {
+    backgroundColor: "#fff",
+    marginHorizontal: 20,
+    marginTop: 8,
+    marginBottom: 24,
+    padding: 24,
+    borderRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
   },
-  summaryTitle: {
-    fontWeight: "bold",
-    marginBottom: 12,
+  balanceLabel: {
+    fontSize: 12,
+    fontWeight: "700",
+    color: "#999",
+    letterSpacing: 1.2,
+    marginBottom: 10,
   },
-  summaryRow: {
+  balanceAmount: {
+    fontSize: 44,
+    fontWeight: "800",
+    color: "#1a1a1a",
+    marginBottom: 14,
+    letterSpacing: -1,
+  },
+  changeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  currencyBadge: {
+    backgroundColor: "#f5f5f5",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  currencyText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#666",
+  },
+  changeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  changeText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  actionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  assetsHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 4,
+    paddingHorizontal: 20,
+    marginBottom: 16,
   },
-  totalValue: {
-    fontWeight: "bold",
+  assetsTitle: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "#1a1a1a",
+    letterSpacing: -0.5,
   },
-  listContent: {
-    paddingBottom: 8,
+  seeAllText: {
+    fontSize: 15,
+    color: "#6200ee",
+    fontWeight: "700",
+  },
+  assetsList: {
+    gap: 0,
+  },
+  bottomSpacer: {
+    height: 24,
   },
   loadingText: {
     marginTop: 8,
@@ -149,12 +280,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#666",
-  },
-  label: {
-    color: "#666",
-  },
-  profitLoss: {
-    fontWeight: "600",
   },
   positive: {
     color: "#4caf50",

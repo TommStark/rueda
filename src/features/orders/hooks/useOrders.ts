@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchOrders, createOrder } from "../api/orders.api";
 import { normalizeApiError } from "../../../shared/utils/errors";
-import { CreateOrderRequest } from "../../../shared/types/api.types";
+import { CreateOrderRequest } from "../types/orders.types";
 
 export const ORDERS_QUERY_KEY = ["orders"] as const;
 

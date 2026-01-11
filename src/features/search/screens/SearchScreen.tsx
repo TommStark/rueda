@@ -10,7 +10,7 @@ import { Text, ActivityIndicator, Searchbar } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSearch, useSearchError } from "../hooks/useSearch";
 import SearchResultCard from "../components/SearchResultCard";
-import { SearchResult } from "../../../shared/types/api.types";
+import { SearchResult } from "../types/search.types";
 import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
 
 export default function SearchScreen() {

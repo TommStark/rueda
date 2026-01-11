@@ -3,13 +3,20 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { Text, ActivityIndicator, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useMarket, useMarketError } from "../hooks/useMarket";
 import MarketCard from "../components/MarketCard";
 import FilterTabs from "../components/FilterTabs";
-import { MarketAsset, AssetType } from "../../../shared/types/api.types";
+import AppHeader from "../../../shared/components/AppHeader";
+import { MarketAsset, AssetType } from "../types/market.types";
 import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
+import { RootStackParamList } from "../../../navigation/RootStackNavigator";
+
+type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function MarketScreen() {
+  const navigation = useNavigation<MarketScreenNavigationProp>();
   const [selectedType, setSelectedType] = useState<AssetType>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
@@ -68,7 +75,12 @@ export default function MarketScreen() {
       <FlatList
         data={allAssets}
         keyExtractor={(item: MarketAsset, index) => `${item.id}-${index}`}
-        renderItem={({ item }) => <MarketCard asset={item} />}
+        renderItem={({ item }) => (
+          <MarketCard
+            asset={item}
+            onPress={() => navigation.navigate("NewOrder", { asset: item })}
+          />
+        )}
         onRefresh={refetch}
         refreshing={isRefetching}
         showsVerticalScrollIndicator={false}
@@ -78,13 +90,8 @@ export default function MarketScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
+      <AppHeader screenName="Market" />
       <View style={styles.headerContainer}>
-        <View style={styles.titleContainer}>
-          <Text variant="headlineMedium" style={styles.title}>
-            Market
-          </Text>
-          <MaterialCommunityIcons name="bell-outline" size={24} color="#000" />
-        </View>
         <Searchbar
           placeholder="Search (e.g., MTR, MOLA)..."
           onChangeText={setSearchQuery}
@@ -118,16 +125,6 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: "#fff",
     paddingTop: 16,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  title: {
-    fontWeight: "bold",
   },
   searchbar: {
     marginHorizontal: 16,

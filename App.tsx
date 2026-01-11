@@ -3,7 +3,7 @@ import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
-import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { queryClient } from "./src/shared/config/queryClient";
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
       <SafeAreaProvider>
         <PaperProvider>
           <NavigationContainer>
-            <BottomTabNavigator />
+            <RootStackNavigator />
             <StatusBar style="auto" />
           </NavigationContainer>
         </PaperProvider>

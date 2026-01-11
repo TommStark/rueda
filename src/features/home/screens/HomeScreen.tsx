@@ -6,6 +6,7 @@ import QuickActionButton from "../components/QuickActionButton";
 import TopMoverCard from "../components/TopMoverCard";
 import ActivityItem from "../components/ActivityItem";
 import BalanceChart from "../components/BalanceChart";
+import AppHeader from "../../../shared/components/AppHeader";
 import {
   MOCK_USER_NAME,
   MOCK_TOTAL_BALANCE,
@@ -51,24 +52,8 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
+      <AppHeader screenName="Home" />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <View style={styles.avatarContainer}>
-            <MaterialCommunityIcons
-              name="account-circle"
-              size={48}
-              color="#e0e0e0"
-            />
-          </View>
-          <TouchableOpacity>
-            <MaterialCommunityIcons
-              name="bell-outline"
-              size={24}
-              color="#333"
-            />
-          </TouchableOpacity>
-        </View>
-
         <View style={styles.greetingSection}>
           <Text variant="headlineMedium" style={styles.greeting}>
             {getGreeting()}, {MOCK_USER_NAME}
@@ -198,22 +183,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fafafa",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingTop: 8,
-    paddingBottom: 8,
-  },
-  avatarContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#f5f5f5",
-    justifyContent: "center",
-    alignItems: "center",
   },
   greetingSection: {
     paddingHorizontal: 20,

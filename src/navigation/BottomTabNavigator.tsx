@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import HomeScreen from "../features/home/screens/HomeScreen";
 import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
@@ -23,11 +23,7 @@ export default function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: "#6200ee",
         tabBarInactiveTintColor: "#666",
-        headerShown: true,
-        headerStyle: {
-          backgroundColor: "#6200ee",
-        },
-        headerTintColor: "#fff",
+        headerShown: false,
         tabBarStyle: {
           height: 73,
           paddingBottom: 30,
@@ -69,6 +65,7 @@ export default function BottomTabNavigator() {
         component={SearchScreen}
         options={{
           title: "Buscar",
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.centralButtonContainer}>
               <View style={styles.centralButtonOuter}>
@@ -90,6 +87,7 @@ export default function BottomTabNavigator() {
         component={PortfolioScreen}
         options={{
           title: "Portfolio",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="briefcase-outline"
@@ -104,6 +102,7 @@ export default function BottomTabNavigator() {
         component={OrdersScreen}
         options={{
           title: "Órdenes",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="file-document-outline"

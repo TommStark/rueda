@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
-import { SearchResult } from "../../../shared/types/api.types";
+import { SearchResult } from "../types/search.types";
 
 interface SearchResultCardProps {
   result: SearchResult;
