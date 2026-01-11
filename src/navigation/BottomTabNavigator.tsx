@@ -39,6 +39,7 @@ export default function BottomTabNavigator() {
         component={HomeScreen}
         options={{
           title: "Inicio",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="home-outline"
