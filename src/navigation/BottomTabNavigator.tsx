@@ -5,14 +5,14 @@ import HomeScreen from "../features/home/screens/HomeScreen";
 import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
 import SearchScreen from "../features/search/screens/SearchScreen";
-import OrdersScreen from "../features/orders/screens/OrdersScreen";
+import HistoryScreen from "../features/history/screens/HistoryScreen";
 
 export type BottomTabParamList = {
   Home: undefined;
   Market: undefined;
   Search: undefined;
   Portfolio: undefined;
-  Orders: undefined;
+  History: undefined;
 };
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -98,17 +98,13 @@ export default function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Orders"
-        component={OrdersScreen}
+        name="History"
+        component={HistoryScreen}
         options={{
-          title: "Órdenes",
+          title: "Historial",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="file-document-outline"
-              size={22}
-              color={color}
-            />
+            <MaterialCommunityIcons name="history" size={22} color={color} />
           ),
         }}
       />

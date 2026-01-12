@@ -11,7 +11,7 @@ import PortfolioBalanceSkeleton from "../components/PortfolioBalanceSkeleton";
 import ActionButton from "../components/ActionButton";
 import AppHeader from "../../../shared/components/AppHeader";
 import { PortfolioPosition } from "../types/portfolio.types";
-import { RootStackParamList } from "../../../navigation/RootStackNavigator";
+import { RootStackParamList } from "../../../navigation/types";
 
 export default function PortfolioScreen() {
   const navigation =

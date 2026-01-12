@@ -11,7 +11,8 @@ import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../../navigation/RootStackNavigator";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../../navigation/types";
 import {
   OrderSide,
   OrderType,
@@ -24,15 +25,18 @@ import {
   getTickerColor,
 } from "../../../shared/utils/icons";
 import SwipeButton from "rn-swipe-button";
+import { useOrderHistory } from "../../history/context/OrderHistoryContext";
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
+type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 type InputMode = "QTY" | "UNIT";
 
 export default function NewOrderScreen() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NewOrderNavigationProp>();
   const route = useRoute<NewOrderRouteProp>();
   const { asset } = route.params;
+  const { addOrder } = useOrderHistory();
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const [orderType, setOrderType] = useState<OrderType>("MARKET");
@@ -42,10 +46,6 @@ export default function NewOrderScreen() {
   const [limitPrice, setLimitPrice] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOrderTypeMenu, setShowOrderTypeMenu] = useState(false);
-  const [orderResult, setOrderResult] = useState<{
-    id: string;
-    status: OrderStatus;
-  } | null>(null);
 
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
@@ -115,7 +115,24 @@ export default function NewOrderScreen() {
       };
 
       const result = await createOrder(orderData);
-      setOrderResult({ id: result.id, status: result.status });
+
+      const orderHistoryItem = {
+        id: result.id,
+        ticker: asset.ticker,
+        instrumentId: asset.id,
+        side,
+        type: orderType,
+        quantity: qtyToSubmit,
+        price: orderType === "LIMIT" ? parseFloat(limitPrice) : undefined,
+        executedPrice: asset.last_price,
+        timestamp: Date.now(),
+        status: result.status,
+        assetName: asset.name,
+      };
+
+      await addOrder(orderHistoryItem);
+
+      navigation.replace("OrderReceipt", { order: orderHistoryItem });
     } catch (error: any) {
       alert(error?.response?.data?.message || "Failed to create order");
     } finally {
@@ -126,40 +143,6 @@ export default function NewOrderScreen() {
   const handleClose = () => {
     navigation.goBack();
   };
-
-  if (orderResult) {
-    return (
-      <SafeAreaView style={styles.container} edges={["top"]}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
-            <Ionicons name="close" size={24} color="#666" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>Order Result</Text>
-          <View style={{ width: 24 }} />
-        </View>
-
-        <View style={styles.resultContent}>
-          <View
-            style={[
-              styles.statusBadge,
-              orderResult.status === "FILLED" && styles.statusFilled,
-              orderResult.status === "PENDING" && styles.statusPending,
-              orderResult.status === "REJECTED" && styles.statusRejected,
-            ]}
-          >
-            <Text style={styles.statusText}>{orderResult.status}</Text>
-          </View>
-
-          <Text style={styles.resultLabel}>Order ID</Text>
-          <Text style={styles.resultValue}>{orderResult.id}</Text>
-
-          <TouchableOpacity style={styles.doneButton} onPress={handleClose}>
-            <Text style={styles.doneButtonText}>Done</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
-    );
-  }
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
