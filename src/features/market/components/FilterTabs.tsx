@@ -1,6 +1,6 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Chip } from "react-native-paper";
-import { AssetType } from "../../../shared/types/api.types";
+import { AssetType } from "../types/market.types";
 
 interface FilterTabsProps {
   selectedType: AssetType;

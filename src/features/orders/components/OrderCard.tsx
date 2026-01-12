@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { Card, Text, Chip } from "react-native-paper";
-import { Order } from "../../../shared/types/api.types";
+import { Order } from "../types/orders.types";
 
 interface OrderCardProps {
   order: Order;
