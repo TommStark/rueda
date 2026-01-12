@@ -4,11 +4,13 @@ import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import AssetCard from "../components/AssetCard";
 import { RootStackParamList } from "../../../navigation/types";
 import { styles } from "../styles/AllAssetsScreen.styles";
 
 export default function AllAssetsScreen() {
+  const { t } = useTranslation("portfolio");
   const navigation = useNavigation();
   const route = useRoute<RouteProp<RootStackParamList, "AllAssets">>();
   const { assets } = route.params;
@@ -22,7 +24,7 @@ export default function AllAssetsScreen() {
         >
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Assets</Text>
+        <Text style={styles.headerTitle}>{t("assets.title")}</Text>
         <View style={styles.placeholder} />
       </View>
 

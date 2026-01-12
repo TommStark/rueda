@@ -7,6 +7,7 @@ import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { queryClient } from "./src/shared/config/queryClient";
 import { OrderHistoryProvider } from "./src/features/history/context/OrderHistoryContext";
 import { FavoritesProvider } from "./src/shared/context/FavoritesContext";
+import "./src/shared/config/i18n";
 
 export default function App() {
   return (
