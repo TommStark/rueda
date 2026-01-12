@@ -9,7 +9,7 @@ import { useOrderHistory } from "../context/OrderHistoryContext";
 import HistoryCard from "../components/HistoryCard";
 import AppHeader from "../../../shared/components/AppHeader";
 import { OrderHistoryItem, OrderStatus } from "../types/history.types";
-import { RootStackParamList } from "../../../navigation/RootStackNavigator";
+import { RootStackParamList } from "../../../navigation/types";
 
 type HistoryScreenNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
