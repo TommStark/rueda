@@ -1,6 +1,7 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { styles } from "../styles/QuickActionButton.styles";
 
 interface QuickActionButtonProps {
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
@@ -39,29 +40,3 @@ export default function QuickActionButton({
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    gap: 8,
-  },
-  iconContainer: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  iconContainerPrimary: {
-    backgroundColor: "#6200ee",
-  },
-  iconContainerSecondary: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#e0e0e0",
-  },
-  label: {
-    fontSize: 12,
-    color: "#333",
-  },
-});

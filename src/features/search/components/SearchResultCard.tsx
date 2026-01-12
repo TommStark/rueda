@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { SearchResult } from "../types/search.types";
+import { styles } from "../styles/SearchResultCard.styles";
 
 interface SearchResultCardProps {
   result: SearchResult;
@@ -22,19 +23,3 @@ export default function SearchResultCard({ result }: SearchResultCardProps) {
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    marginHorizontal: 16,
-    marginVertical: 8,
-  },
-  content: {
-    gap: 4,
-  },
-  ticker: {
-    fontWeight: "bold",
-  },
-  name: {
-    color: "#666",
-  },
-});

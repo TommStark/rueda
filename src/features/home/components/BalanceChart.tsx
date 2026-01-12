@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions } from "react-native";
+import { View, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
 import Svg, {
   Path,
@@ -8,6 +8,7 @@ import Svg, {
   Stop,
 } from "react-native-svg";
 import { BalanceDataPoint } from "../../../shared/mocks/home.mock";
+import { styles } from "../styles/BalanceChart.styles";
 
 interface BalanceChartProps {
   data: BalanceDataPoint[];
@@ -82,19 +83,3 @@ export default function BalanceChart({ data }: BalanceChartProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 16,
-  },
-  labelsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingHorizontal: PADDING,
-    marginTop: 8,
-  },
-  label: {
-    fontSize: 10,
-    color: "#999",
-  },
-});

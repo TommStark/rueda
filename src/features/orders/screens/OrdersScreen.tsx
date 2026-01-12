@@ -1,16 +1,11 @@
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  RefreshControl,
-  ScrollView,
-} from "react-native";
+import { View, FlatList, RefreshControl, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useOrders, useOrdersError } from "../hooks/useOrders";
 import OrderCard from "../components/OrderCard";
 import OrderCardSkeleton from "../components/OrderCardSkeleton";
 import { Order } from "../types/orders.types";
+import { styles } from "../styles/OrdersScreen.styles";
 
 export default function OrdersScreen() {
   const { data, isLoading, error, refetch, isRefetching } = useOrders();
@@ -73,33 +68,3 @@ export default function OrdersScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  centerContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 16,
-    padding: 16,
-  },
-  listContent: {
-    paddingVertical: 8,
-  },
-  loadingText: {
-    marginTop: 8,
-    color: "#666",
-  },
-  errorTitle: {
-    marginTop: 8,
-  },
-  errorMessage: {
-    color: "#666",
-    textAlign: "center",
-  },
-  subtitle: {
-    color: "#666",
-  },
-});
