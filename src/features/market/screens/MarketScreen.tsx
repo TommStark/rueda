@@ -10,7 +10,7 @@ import MarketCard from "../components/MarketCard";
 import MarketCardSkeleton from "../components/MarketCardSkeleton";
 import FilterTabs from "../components/FilterTabs";
 import AppHeader from "../../../shared/components/AppHeader";
-import { MarketAsset, AssetType } from "../types/market.types";
+import { MarketAsset, AssetType, ASSET_TYPE } from "../types/market.types";
 import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
 import { RootStackParamList } from "../../../navigation/RootStackNavigator";
 
@@ -18,7 +18,7 @@ type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function MarketScreen() {
   const navigation = useNavigation<MarketScreenNavigationProp>();
-  const [selectedType, setSelectedType] = useState<AssetType>("ALL");
+  const [selectedType, setSelectedType] = useState<AssetType>(ASSET_TYPE.ALL);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
 
@@ -26,6 +26,7 @@ export default function MarketScreen() {
     useCallback(() => {
       return () => {
         setSearchQuery("");
+        setSelectedType(ASSET_TYPE.ALL);
       };
     }, [])
   );

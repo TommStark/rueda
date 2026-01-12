@@ -1,6 +1,6 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Chip } from "react-native-paper";
-import { AssetType } from "../types/market.types";
+import { AssetType, ASSET_TYPE } from "../types/market.types";
 
 interface FilterTabsProps {
   selectedType: AssetType;
@@ -8,10 +8,10 @@ interface FilterTabsProps {
 }
 
 const FILTER_OPTIONS: { label: string; value: AssetType }[] = [
-  { label: "All", value: "ALL" },
-  { label: "Stocks", value: "STOCK" },
-  { label: "Crypto", value: "CRYPTO" },
-  { label: "Gainers", value: "GAINER" },
+  { label: "All", value: ASSET_TYPE.ALL },
+  { label: "Stocks", value: ASSET_TYPE.STOCK },
+  { label: "Crypto", value: ASSET_TYPE.CRYPTO },
+  { label: "Gainers", value: ASSET_TYPE.GAINER },
 ];
 
 export default function FilterTabs({
