@@ -1,7 +1,12 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { OrderHistoryItem } from "../types/history.types";
+import {
+  getTickerIcon,
+  hasTickerIcon,
+  getTickerColor,
+} from "../../../shared/utils/icons";
 
 interface HistoryCardProps {
   order: OrderHistoryItem;
@@ -59,14 +64,42 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
     return `${order.quantity} Shares`;
   };
 
+  const localIcon = getTickerIcon(order.ticker);
+  const hasLocalIcon = hasTickerIcon(order.ticker);
+  const tickerColor = getTickerColor(order.ticker);
+
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
-      <View style={styles.iconContainer}>
-        <MaterialCommunityIcons
-          name={getStatusIcon(order.status)}
-          size={24}
-          color={getStatusColor(order.status)}
-        />
+      <View style={styles.logoWrapper}>
+        <View style={styles.logoContainer}>
+          {hasLocalIcon && localIcon ? (
+            <Image source={localIcon} style={styles.logo} />
+          ) : tickerColor ? (
+            <View style={[styles.logo, { backgroundColor: tickerColor }]}>
+              <Text style={styles.colorPlaceholderText}>
+                {order.ticker.substring(0, 2).toUpperCase()}
+              </Text>
+            </View>
+          ) : (
+            <View style={[styles.logo, styles.placeholderLogo]}>
+              <Text style={styles.placeholderText}>
+                {order.ticker.substring(0, 2)}
+              </Text>
+            </View>
+          )}
+        </View>
+        <View
+          style={[
+            styles.statusBadge,
+            { backgroundColor: getStatusColor(order.status) },
+          ]}
+        >
+          <MaterialCommunityIcons
+            name={getStatusIcon(order.status)}
+            size={14}
+            color="#fff"
+          />
+        </View>
       </View>
 
       <View style={styles.content}>
@@ -119,13 +152,49 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     gap: 12,
   },
-  iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: "#f5f5f5",
+  logoWrapper: {
+    position: "relative",
+    width: 48,
+    height: 48,
+  },
+  logoContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    overflow: "hidden",
+  },
+  logo: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     justifyContent: "center",
     alignItems: "center",
+  },
+  placeholderLogo: {
+    backgroundColor: "#e0e0e0",
+  },
+  placeholderText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#666",
+  },
+  colorPlaceholderText: {
+    fontSize: 16,
+    fontWeight: "800",
+    color: "#fff",
+    letterSpacing: -0.5,
+  },
+  statusBadge: {
+    position: "absolute",
+    bottom: -2,
+    right: -2,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#fff",
   },
   content: {
     flex: 1,

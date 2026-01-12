@@ -6,14 +6,7 @@ import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
 import SearchScreen from "../features/search/screens/SearchScreen";
 import HistoryScreen from "../features/history/screens/HistoryScreen";
-
-export type BottomTabParamList = {
-  Home: undefined;
-  Market: undefined;
-  Search: undefined;
-  Portfolio: undefined;
-  History: undefined;
-};
+import { BottomTabParamList } from "./types";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

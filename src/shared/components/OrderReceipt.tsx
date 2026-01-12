@@ -94,11 +94,11 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   };
 
   const handleBackToMarkets = () => {
-    navigation.navigate("MainTabs");
+    navigation.goBack();
   };
 
   const handleViewPortfolio = () => {
-    navigation.navigate("MainTabs");
+    navigation.navigate("MainTabs", { screen: "Portfolio" });
   };
 
   return (
@@ -121,15 +121,22 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
         <View style={styles.statusIconContainer}>
           <View
             style={[
-              styles.statusIconCircle,
-              { backgroundColor: getStatusColor() },
+              styles.statusIconOuterCircle,
+              { backgroundColor: getStatusColor() + "17" },
             ]}
           >
-            <MaterialCommunityIcons
-              name={getStatusIcon()}
-              size={48}
-              color="#fff"
-            />
+            <View
+              style={[
+                styles.statusIconInnerCircle,
+                { backgroundColor: getStatusColor() },
+              ]}
+            >
+              <MaterialCommunityIcons
+                name={getStatusIcon()}
+                size={32}
+                color="#fff"
+              />
+            </View>
           </View>
         </View>
 
@@ -263,7 +270,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
           style={styles.primaryButton}
           labelStyle={styles.primaryButtonLabel}
         >
-          Back to Markets
+          Regresar
         </Button>
 
         <TouchableOpacity onPress={handleViewPortfolio}>
@@ -306,10 +313,17 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 24,
   },
-  statusIconCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+  statusIconOuterCircle: {
+    width: 100,
+    height: 100,
+    borderRadius: 60,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  statusIconInnerCircle: {
+    width: 75,
+    height: 75,
+    borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
   },
