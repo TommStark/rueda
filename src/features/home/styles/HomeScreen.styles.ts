@@ -6,65 +6,88 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background.secondary,
   },
-  greetingSection: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-  },
-  greeting: {
-    fontWeight: "bold",
-    color: colors.text.secondary,
-    marginBottom: 4,
-  },
-  subGreeting: {
-    color: colors.text.quaternary,
+  centerContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   balanceCard: {
-    backgroundColor: colors.background.card,
+    backgroundColor: "#fff",
     marginHorizontal: 20,
+    marginTop: 16,
+    marginBottom: 16,
     padding: 20,
-    borderRadius: 20,
-    marginBottom: 24,
-    shadowColor: colors.shadow.color,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 2,
+    borderRadius: 16,
   },
-  balanceLabel: {
-    color: colors.text.quaternary,
+  balanceHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 8,
   },
-  balanceRow: {
+  balanceLabelRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
+    gap: 8,
   },
-  balanceAmount: {
-    fontWeight: "bold",
-    color: colors.text.secondary,
-  },
-  changeChip: {
+  availableBadge: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    gap: 4,
+    backgroundColor: "#e8f5e9",
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    gap: 2,
   },
-  changeChipPositive: {
-    backgroundColor: colors.positiveLight,
-  },
-  changeChipNegative: {
-    backgroundColor: colors.negativeLight,
-  },
-  changeText: {
-    fontSize: 12,
-    fontWeight: "600",
-  },
-  changeTextPositive: {
+  availableText: {
+    fontSize: 10,
+    fontWeight: "700",
     color: colors.positive,
   },
-  changeTextNegative: {
+  balanceLabel: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: colors.text.tertiary,
+    letterSpacing: 0.5,
+    marginBottom: 8,
+  },
+  balanceAmount: {
+    fontSize: 40,
+    fontWeight: "700",
+    color: colors.text.primary,
+    marginBottom: 8,
+    letterSpacing: -1.5,
+  },
+  changeContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 12,
+  },
+  currencyBadge: {
+    backgroundColor: "#f0f0f0",
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 4,
+  },
+  currencyText: {
+    fontSize: 11,
+    fontWeight: "600",
+    color: colors.text.tertiary,
+  },
+  changeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
+  changeText: {
+    fontSize: 13,
+    fontWeight: "600",
+  },
+  positive: {
+    color: colors.positive,
+  },
+  negative: {
     color: colors.negative,
   },
   section: {
@@ -84,11 +107,6 @@ export const styles = StyleSheet.create({
   seeAllButton: {
     color: colors.primary,
     fontWeight: "600",
-  },
-  quickActionsGrid: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    paddingHorizontal: 20,
   },
   topMoversContainer: {
     paddingHorizontal: 20,

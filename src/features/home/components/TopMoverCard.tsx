@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Image, ImageSourcePropType } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
@@ -11,18 +11,21 @@ interface TopMoverCardProps {
 
 export default function TopMoverCard({ mover }: TopMoverCardProps) {
   const isPositive = mover.changePercentage >= 0;
-  const iconColor = (mover as any).color?.icon || colors.primary;
+  const tickerIcon = (mover as any).tickerIcon as ImageSourcePropType | null;
+  const hasIcon = (mover as any).hasTickerIcon as boolean;
   const backgroundColor =
     (mover as any).color?.background || colors.primaryLight;
 
   return (
     <View style={styles.container}>
       <View style={[styles.iconContainer, { backgroundColor }]}>
-        <MaterialCommunityIcons
-          name={mover.icon as any}
-          size={24}
-          color={iconColor}
-        />
+        {hasIcon && tickerIcon ? (
+          <Image source={tickerIcon} style={styles.iconImage} />
+        ) : (
+          <Text style={styles.iconText}>
+            {mover.ticker.substring(0, 2).toUpperCase()}
+          </Text>
+        )}
       </View>
       <Text variant="labelLarge" style={styles.ticker}>
         {mover.ticker}

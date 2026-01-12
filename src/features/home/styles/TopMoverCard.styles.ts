@@ -13,12 +13,22 @@ export const styles = StyleSheet.create({
     gap: 6,
   },
   iconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 4,
+    marginBottom: 12,
+  },
+  iconImage: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+  },
+  iconText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: colors.text.inverse,
   },
   ticker: {
     fontWeight: "bold",
