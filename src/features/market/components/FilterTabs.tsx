@@ -1,6 +1,7 @@
-import { StyleSheet, View, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import { Chip } from "react-native-paper";
 import { SortType, SORT_TYPE } from "../types/market.types";
+import { styles } from "../styles/FilterTabs.styles";
 
 interface FilterTabsProps {
   selectedSort: SortType;
@@ -48,26 +49,3 @@ export default function FilterTabs({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 12,
-  },
-  scrollContent: {
-    paddingHorizontal: 16,
-    gap: 8,
-  },
-  chip: {
-    borderRadius: 20,
-    borderColor: "#e0e0e0",
-  },
-  chipSelected: {
-    backgroundColor: "#6200ee",
-  },
-  chipText: {
-    fontSize: 14,
-  },
-  chipTextSelected: {
-    color: "#fff",
-  },
-});

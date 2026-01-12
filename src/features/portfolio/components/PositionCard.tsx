@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { PortfolioPosition } from "../types/portfolio.types";
+import { styles } from "../styles/PositionCard.styles";
 
 interface PositionCardProps {
   position: PortfolioPosition;
@@ -66,41 +67,3 @@ export default function PositionCard({ position }: PositionCardProps) {
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    marginHorizontal: 16,
-    marginVertical: 8,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 12,
-  },
-  ticker: {
-    fontWeight: "bold",
-  },
-  value: {
-    fontWeight: "bold",
-  },
-  details: {
-    gap: 8,
-  },
-  detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  label: {
-    color: "#666",
-  },
-  profitLoss: {
-    fontWeight: "600",
-  },
-  positive: {
-    color: "#4caf50",
-  },
-  negative: {
-    color: "#f44336",
-  },
-});
