@@ -4,6 +4,7 @@ import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
 import AssetCard from "../components/AssetCard";
@@ -16,6 +17,7 @@ import { RootStackParamList } from "../../../navigation/types";
 import { styles } from "../styles/PortfolioScreen.styles";
 
 export default function PortfolioScreen() {
+  const { t } = useTranslation("portfolio");
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data, isLoading, error, refetch, isRefetching } = usePortfolio();
@@ -73,10 +75,10 @@ export default function PortfolioScreen() {
         <View style={styles.centerContainer}>
           <Ionicons name="alert-circle" size={48} color={colors.status.error} />
           <Text variant="headlineSmall" style={styles.errorTitle}>
-            Error
+            {t("errors.title")}
           </Text>
           <Text variant="bodyMedium" style={styles.errorMessage}>
-            {apiError?.message || "Error loading portfolio"}
+            {apiError?.message || t("errors.loading")}
           </Text>
         </View>
       </SafeAreaView>
@@ -88,9 +90,9 @@ export default function PortfolioScreen() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.centerContainer}>
           <Ionicons name="briefcase-outline" size={48} color={colors.primary} />
-          <Text variant="headlineMedium">Empty Portfolio</Text>
+          <Text variant="headlineMedium">{t("empty.title")}</Text>
           <Text variant="bodyMedium" style={styles.subtitle}>
-            You don't have any positions
+            {t("empty.subtitle")}
           </Text>
         </View>
       </SafeAreaView>
@@ -124,7 +126,7 @@ export default function PortfolioScreen() {
       >
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
-            TOTAL BALANCE
+            {t("balance.label")}
           </Text>
           <Text style={styles.balanceAmount}>
             $
@@ -156,19 +158,19 @@ export default function PortfolioScreen() {
         </View>
 
         <View style={styles.actionsContainer}>
-          <ActionButton icon="add" label="Buy" variant="primary" />
-          <ActionButton icon="arrow-down" label="Deposit" />
-          <ActionButton icon="arrow-up" label="Withdraw" />
-          <ActionButton icon="ellipsis-horizontal" label="More" />
+          <ActionButton icon="add" label={t("actions.buy")} variant="primary" />
+          <ActionButton icon="arrow-down" label={t("actions.deposit")} />
+          <ActionButton icon="arrow-up" label={t("actions.withdraw")} />
+          <ActionButton icon="ellipsis-horizontal" label={t("actions.more")} />
         </View>
 
         <View style={styles.assetsHeader}>
           <Text variant="titleLarge" style={styles.assetsTitle}>
-            Your Assets
+            {t("assets.title")}
           </Text>
           {hasMoreAssets && (
             <Text style={styles.seeAllText} onPress={handleSeeAll}>
-              See all
+              {t("assets.seeAll")}
             </Text>
           )}
         </View>

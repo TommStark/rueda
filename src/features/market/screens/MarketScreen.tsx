@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { useMarket, useMarketError } from "../hooks/useMarket";
 import MarketCard from "../components/MarketCard";
 import MarketCardSkeleton from "../components/MarketCardSkeleton";
@@ -19,6 +20,7 @@ import { styles } from "../styles/MarketScreen.styles";
 type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function MarketScreen() {
+  const { t } = useTranslation("market");
   const navigation = useNavigation<MarketScreenNavigationProp>();
   const [selectedSort, setSelectedSort] = useState<SortType>(SORT_TYPE.ALL);
   const [searchQuery, setSearchQuery] = useState("");
@@ -95,7 +97,7 @@ export default function MarketScreen() {
             color={colors.status.error}
           />
           <Text variant="bodyMedium" style={styles.errorMessage}>
-            {apiError?.message || "Error al cargar activos"}
+            {apiError?.message || t("errors.loading")}
           </Text>
         </View>
       );
@@ -110,7 +112,7 @@ export default function MarketScreen() {
             color={colors.text.quaternary}
           />
           <Text variant="bodyMedium" style={styles.emptyText}>
-            No se encontraron activos
+            {t("errors.notFound")}
           </Text>
         </View>
       );
@@ -138,7 +140,7 @@ export default function MarketScreen() {
       <AppHeader screenName="Market" />
       <View style={styles.headerContainer}>
         <Searchbar
-          placeholder="Search (e.g., MTR, MOLA)..."
+          placeholder={t("search.placeholder")}
           onChangeText={setSearchQuery}
           value={searchQuery}
           style={styles.searchbar}
@@ -150,10 +152,10 @@ export default function MarketScreen() {
         />
         <View style={styles.sectionHeader}>
           <Text variant="labelMedium" style={styles.sectionTitle}>
-            TRENDING ASSETS
+            {t("section.trending")}
           </Text>
           <Text variant="labelSmall" style={styles.sectionSubtitle}>
-            Last 24h
+            {t("section.last24h")}
           </Text>
         </View>
       </View>

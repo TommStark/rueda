@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet } from "react-native";
+import { useTranslation } from "../shared/hooks/useTranslation";
 import { colors } from "../shared/theme/colors";
 import HomeScreen from "../features/home/screens/HomeScreen";
 import MarketScreen from "../features/market/screens/MarketScreen";
@@ -12,6 +13,8 @@ import { BottomTabParamList } from "./types";
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
+  const { t } = useTranslation("navigation");
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -28,7 +31,7 @@ export default function BottomTabNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: "Inicio",
+          title: t("tabs.home"),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -43,7 +46,7 @@ export default function BottomTabNavigator() {
         name="Market"
         component={MarketScreen}
         options={{
-          title: "Market",
+          title: t("tabs.market"),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -58,7 +61,7 @@ export default function BottomTabNavigator() {
         name="Favorites"
         component={FavoritesScreen}
         options={{
-          title: "Favoritos",
+          title: t("tabs.favorites"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.centralButtonContainer}>
@@ -80,7 +83,7 @@ export default function BottomTabNavigator() {
         name="Portfolio"
         component={PortfolioScreen}
         options={{
-          title: "Portfolio",
+          title: t("tabs.portfolio"),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
@@ -95,7 +98,7 @@ export default function BottomTabNavigator() {
         name="History"
         component={HistoryScreen}
         options={{
-          title: "Historial",
+          title: t("tabs.history"),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" size={22} color={color} />

@@ -3,6 +3,7 @@ import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import QuickActionButton from "../components/QuickActionButton";
 import TopMoverCard from "../components/TopMoverCard";
 import ActivityItem from "../components/ActivityItem";
@@ -19,16 +20,17 @@ import {
 } from "../../../shared/mocks/home.mock";
 
 export default function HomeScreen() {
+  const { t } = useTranslation("home");
   const isPositiveChange = MOCK_BALANCE_CHANGE_PERCENTAGE >= 0;
 
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 12) {
-      return "Good morning";
+      return t("greeting.morning");
     } else if (hour >= 12 && hour < 19) {
-      return "Good afternoon";
+      return t("greeting.afternoon");
     } else {
-      return "Good evening";
+      return t("greeting.evening");
     }
   };
 
@@ -61,13 +63,13 @@ export default function HomeScreen() {
             {getGreeting()}, {MOCK_USER_NAME}
           </Text>
           <Text variant="bodySmall" style={styles.subGreeting}>
-            Welcome back to RUEDA
+            {t("welcome")}
           </Text>
         </View>
 
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
-            Total Balance
+            {t("balance.label")}
           </Text>
           <View style={styles.balanceRow}>
             <Text variant="headlineLarge" style={styles.balanceAmount}>
@@ -109,29 +111,29 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text variant="titleMedium" style={styles.sectionTitle}>
-              Quick Actions
+              {t("quickActions.title")}
             </Text>
           </View>
           <View style={styles.quickActionsGrid}>
             <QuickActionButton
               icon="plus"
-              label="Deposit"
+              label={t("quickActions.deposit")}
               onPress={handleDeposit}
               variant="primary"
             />
             <QuickActionButton
               icon="arrow-down"
-              label="Withdraw"
+              label={t("quickActions.withdraw")}
               onPress={handleWithdraw}
             />
             <QuickActionButton
               icon="swap-horizontal"
-              label="Transfer"
+              label={t("quickActions.transfer")}
               onPress={handleTransfer}
             />
             <QuickActionButton
               icon="qrcode-scan"
-              label="Scan QR"
+              label={t("quickActions.scanQr")}
               onPress={handleScanQR}
             />
           </View>
@@ -140,11 +142,11 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text variant="titleMedium" style={styles.sectionTitle}>
-              Top Movers
+              {t("topMovers.title")}
             </Text>
             <TouchableOpacity>
               <Text variant="bodySmall" style={styles.seeAllButton}>
-                See all
+                {t("topMovers.seeAll")}
               </Text>
             </TouchableOpacity>
           </View>
@@ -162,11 +164,11 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text variant="titleMedium" style={styles.sectionTitle}>
-              Recent Activity
+              {t("recentActivity.title")}
             </Text>
             <TouchableOpacity onPress={handleViewAllActivity}>
               <Text variant="bodySmall" style={styles.seeAllButton}>
-                View History
+                {t("recentActivity.viewHistory")}
               </Text>
             </TouchableOpacity>
           </View>

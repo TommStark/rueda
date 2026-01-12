@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useOrderHistory } from "../context/OrderHistoryContext";
 import HistoryCard from "../components/HistoryCard";
@@ -19,6 +20,7 @@ type HistoryScreenNavigationProp =
 type FilterType = "ALL" | OrderStatus;
 
 export default function HistoryScreen() {
+  const { t } = useTranslation("history");
   const navigation = useNavigation<HistoryScreenNavigationProp>();
   const { orders, clearHistory, isLoading } = useOrderHistory();
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
@@ -53,9 +55,9 @@ export default function HistoryScreen() {
   if (isLoading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <AppHeader screenName="Historial" />
+        <AppHeader screenName={t("title")} />
         <View style={styles.centerContainer}>
-          <Text variant="bodyMedium">Cargando historial...</Text>
+          <Text variant="bodyMedium">{t("loading")}</Text>
         </View>
       </SafeAreaView>
     );
@@ -81,7 +83,7 @@ export default function HistoryScreen() {
           ]}
           mode={selectedFilter === "ALL" ? "flat" : "outlined"}
         >
-          All
+          {t("filters.all")}
         </Chip>
         <Chip
           selected={selectedFilter === "FILLED"}
@@ -96,7 +98,7 @@ export default function HistoryScreen() {
           ]}
           mode={selectedFilter === "FILLED" ? "flat" : "outlined"}
         >
-          Filled
+          {t("filters.filled")}
         </Chip>
         <Chip
           selected={selectedFilter === "PENDING"}
@@ -111,7 +113,7 @@ export default function HistoryScreen() {
           ]}
           mode={selectedFilter === "PENDING" ? "flat" : "outlined"}
         >
-          Pending
+          {t("filters.pending")}
         </Chip>
         <Chip
           selected={selectedFilter === "REJECTED"}
@@ -126,7 +128,7 @@ export default function HistoryScreen() {
           ]}
           mode={selectedFilter === "REJECTED" ? "flat" : "outlined"}
         >
-          Rejected
+          {t("filters.rejected")}
         </Chip>
       </ScrollView>
     </View>
@@ -135,7 +137,7 @@ export default function HistoryScreen() {
   if (orders.length === 0) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <AppHeader screenName="Order History" />
+        <AppHeader screenName={t("title")} />
         <View style={styles.centerContainer}>
           <MaterialCommunityIcons
             name="history"
@@ -143,10 +145,10 @@ export default function HistoryScreen() {
             color={colors.border.dark}
           />
           <Text variant="headlineMedium" style={styles.emptyTitle}>
-            No History
+            {t("empty.title")}
           </Text>
           <Text variant="bodyMedium" style={styles.emptySubtitle}>
-            Your executed orders will appear here
+            {t("empty.subtitle")}
           </Text>
         </View>
       </SafeAreaView>
@@ -155,7 +157,7 @@ export default function HistoryScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
-      <AppHeader screenName="Order History" />
+      <AppHeader screenName={t("title")} />
       <View style={styles.container}>
         {renderFilters()}
         <ScrollView

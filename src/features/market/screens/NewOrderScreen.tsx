@@ -12,6 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
 import {
@@ -35,6 +36,7 @@ type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 type InputMode = "QTY" | "UNIT";
 
 export default function NewOrderScreen() {
+  const { t } = useTranslation("orders");
   const navigation = useNavigation<NewOrderNavigationProp>();
   const route = useRoute<NewOrderRouteProp>();
   const { asset } = route.params;
@@ -97,12 +99,12 @@ export default function NewOrderScreen() {
     const qtyToSubmit = getQuantityToSubmit();
 
     if (qtyToSubmit <= 0) {
-      alert("Please enter a valid quantity");
+      alert(t("validation.invalidQuantity"));
       return;
     }
 
     if (orderType === "LIMIT" && !limitPrice) {
-      alert("Please enter a limit price");
+      alert(t("validation.invalidPrice"));
       return;
     }
 
@@ -137,7 +139,7 @@ export default function NewOrderScreen() {
 
       navigation.replace("OrderReceipt", { order: orderHistoryItem });
     } catch (error: any) {
-      alert(error?.response?.data?.message || "Failed to create order");
+      alert(error?.response?.data?.message || t("validation.orderFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -157,7 +159,7 @@ export default function NewOrderScreen() {
         <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>New Order</Text>
+        <Text style={styles.headerTitle}>{t("newOrder.title")}</Text>
         <TouchableOpacity
           onPress={handleToggleFavorite}
           style={styles.favoriteButton}
@@ -223,7 +225,7 @@ export default function NewOrderScreen() {
                 side === "BUY" && styles.sideButtonTextActive,
               ]}
             >
-              Buy
+              {t("newOrder.buy")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -240,19 +242,21 @@ export default function NewOrderScreen() {
                 side === "SELL" && styles.sideButtonTextActive,
               ]}
             >
-              Sell
+              {t("newOrder.sell")}
             </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>ORDER TYPE</Text>
+          <Text style={styles.sectionLabel}>{t("newOrder.orderType")}</Text>
           <TouchableOpacity
             style={styles.dropdown}
             onPress={() => setShowOrderTypeMenu(!showOrderTypeMenu)}
           >
             <Text style={styles.dropdownText}>
-              {orderType === "MARKET" ? "Market Order" : "Limit Order"}
+              {orderType === "MARKET"
+                ? t("newOrder.marketOrder")
+                : t("newOrder.limitOrder")}
             </Text>
             <Ionicons
               name={showOrderTypeMenu ? "chevron-up" : "chevron-down"}
@@ -279,7 +283,7 @@ export default function NewOrderScreen() {
                     orderType === "MARKET" && styles.dropdownItemTextActive,
                   ]}
                 >
-                  Market Order
+                  {t("newOrder.marketOrder")}
                 </Text>
                 {orderType === "MARKET" && (
                   <Ionicons name="checkmark" size={20} color={colors.primary} />
@@ -301,7 +305,7 @@ export default function NewOrderScreen() {
                     orderType === "LIMIT" && styles.dropdownItemTextActive,
                   ]}
                 >
-                  Limit Order
+                  {t("newOrder.limitOrder")}
                 </Text>
                 {orderType === "LIMIT" && (
                   <Ionicons name="checkmark" size={20} color={colors.primary} />
@@ -314,7 +318,7 @@ export default function NewOrderScreen() {
         <View style={styles.inputRow}>
           <View style={styles.inputGroup}>
             <View style={styles.inputHeader}>
-              <Text style={styles.inputLabel}>SHARES</Text>
+              <Text style={styles.inputLabel}>{t("newOrder.quantity")}</Text>
               <TouchableOpacity
                 style={styles.unitToggle}
                 onPress={() =>
@@ -347,7 +351,9 @@ export default function NewOrderScreen() {
           {orderType === "LIMIT" && (
             <View style={styles.inputGroup}>
               <View style={styles.inputHeader}>
-                <Text style={styles.inputLabel}>PRICE</Text>
+                <Text style={styles.inputLabel}>
+                  {t("newOrder.limitPrice")}
+                </Text>
                 <View style={styles.unitToggle}>
                   <Text style={styles.unitToggleText}>UNIT</Text>
                 </View>
@@ -368,7 +374,9 @@ export default function NewOrderScreen() {
 
         <View style={styles.totalSection}>
           <View style={styles.totalHeader}>
-            <Text style={styles.totalLabel}>ESTIMATED TOTAL</Text>
+            <Text style={styles.totalLabel}>
+              {t("newOrder.estimatedTotal")}
+            </Text>
             <Ionicons
               name="information-circle-outline"
               size={16}
@@ -384,7 +392,9 @@ export default function NewOrderScreen() {
           </Text>
           <View style={styles.balanceRow}>
             <View style={styles.balanceDot} />
-            <Text style={styles.balanceLabel}>Available Balance</Text>
+            <Text style={styles.balanceLabel}>
+              {t("newOrder.availableBalance")}
+            </Text>
             <Text style={styles.balanceAmount}>
               $
               {availableBalance.toLocaleString("en-US", {
@@ -408,7 +418,7 @@ export default function NewOrderScreen() {
           swipeSuccessThreshold={70}
           thumbIconBackgroundColor={colors.text.inverse}
           thumbIconBorderColor={colors.primary}
-          title="Slide to Review Order"
+          title={t("newOrder.swipeToReview")}
           titleColor={colors.text.inverse}
           titleFontSize={16}
           width="100%"
