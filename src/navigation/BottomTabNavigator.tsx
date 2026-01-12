@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import HomeScreen from "../features/home/screens/HomeScreen";
 import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
-import SearchScreen from "../features/search/screens/SearchScreen";
+import FavoritesScreen from "../features/favorites/screens/FavoritesScreen";
 import HistoryScreen from "../features/history/screens/HistoryScreen";
 import { BottomTabParamList } from "./types";
 
@@ -54,20 +54,16 @@ export default function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={SearchScreen}
+        name="Favorites"
+        component={FavoritesScreen}
         options={{
-          title: "Buscar",
+          title: "Favoritos",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.centralButtonContainer}>
               <View style={styles.centralButtonOuter}>
                 <View style={styles.centralButton}>
-                  <MaterialCommunityIcons
-                    name="magnify"
-                    size={28}
-                    color="#fff"
-                  />
+                  <MaterialCommunityIcons name="star" size={28} color="#fff" />
                 </View>
               </View>
             </View>

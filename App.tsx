@@ -6,20 +6,23 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { queryClient } from "./src/shared/config/queryClient";
 import { OrderHistoryProvider } from "./src/features/history/context/OrderHistoryContext";
+import { FavoritesProvider } from "./src/shared/context/FavoritesContext";
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <OrderHistoryProvider>
-        <SafeAreaProvider>
-          <PaperProvider>
-            <NavigationContainer>
-              <RootStackNavigator />
-              <StatusBar style="auto" />
-            </NavigationContainer>
-          </PaperProvider>
-        </SafeAreaProvider>
-      </OrderHistoryProvider>
+      <FavoritesProvider>
+        <OrderHistoryProvider>
+          <SafeAreaProvider>
+            <PaperProvider>
+              <NavigationContainer>
+                <RootStackNavigator />
+                <StatusBar style="auto" />
+              </NavigationContainer>
+            </PaperProvider>
+          </SafeAreaProvider>
+        </OrderHistoryProvider>
+      </FavoritesProvider>
     </QueryClientProvider>
   );
 }

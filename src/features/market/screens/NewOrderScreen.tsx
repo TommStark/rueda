@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
@@ -26,6 +26,7 @@ import {
 } from "../../../shared/utils/icons";
 import SwipeButton from "rn-swipe-button";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
+import { useFavorites } from "../../../shared/context/FavoritesContext";
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
 type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -37,6 +38,7 @@ export default function NewOrderScreen() {
   const route = useRoute<NewOrderRouteProp>();
   const { asset } = route.params;
   const { addOrder } = useOrderHistory();
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const [orderType, setOrderType] = useState<OrderType>("MARKET");
@@ -144,6 +146,10 @@ export default function NewOrderScreen() {
     navigation.goBack();
   };
 
+  const handleToggleFavorite = () => {
+    toggleFavorite(asset.ticker);
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <View style={styles.header}>
@@ -151,8 +157,15 @@ export default function NewOrderScreen() {
           <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>New Order</Text>
-        <TouchableOpacity>
-          <Text style={styles.helpText}>Help</Text>
+        <TouchableOpacity
+          onPress={handleToggleFavorite}
+          style={styles.favoriteButton}
+        >
+          <MaterialCommunityIcons
+            name={isFavorite(asset.ticker) ? "star" : "star-outline"}
+            size={24}
+            color="#FF9500"
+          />
         </TouchableOpacity>
       </View>
 
@@ -432,10 +445,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#1a1a1a",
   },
-  helpText: {
-    fontSize: 15,
-    color: "#6200ee",
-    fontWeight: "600",
+  favoriteButton: {
+    padding: 4,
   },
   content: {
     flex: 1,

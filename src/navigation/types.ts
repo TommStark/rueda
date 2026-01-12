@@ -6,7 +6,7 @@ import { OrderHistoryItem } from "../features/history/types/history.types";
 export type BottomTabParamList = {
   Home: undefined;
   Market: undefined;
-  Search: undefined;
+  Favorites: undefined;
   Portfolio: undefined;
   History: undefined;
 };
