@@ -2,15 +2,10 @@ export default {
   balance: {
     label: "SALDO TOTAL",
   },
-  actions: {
-    buy: "Comprar",
-    deposit: "Depositar",
-    withdraw: "Retirar",
-    more: "Más",
-  },
   assets: {
     title: "Tus Activos",
     seeAll: "Ver todo",
+    shares: "shares",
   },
   empty: {
     title: "Portfolio Vacío",

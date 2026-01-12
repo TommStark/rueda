@@ -1,4 +1,4 @@
-import { View, ScrollView, RefreshControl } from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,7 +10,7 @@ import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
 import AssetCard from "../components/AssetCard";
 import AssetCardSkeleton from "../components/AssetCardSkeleton";
 import PortfolioBalanceSkeleton from "../components/PortfolioBalanceSkeleton";
-import ActionButton from "../components/ActionButton";
+import SimpleBalanceChart from "../components/SimpleBalanceChart";
 import AppHeader from "../../../shared/components/AppHeader";
 import { PortfolioPosition } from "../types/portfolio.types";
 import { RootStackParamList } from "../../../navigation/types";
@@ -28,15 +28,15 @@ export default function PortfolioScreen() {
     0
   );
 
-  const totalYesterdayValue = data?.reduce(
-    (sum, pos) => sum + pos.quantity * pos.close_price,
+  const totalCostValue = data?.reduce(
+    (sum, pos) => sum + pos.quantity * pos.avg_cost_price,
     0
   );
 
-  const totalChange = (totalValue || 0) - (totalYesterdayValue || 0);
+  const totalChange = (totalValue || 0) - (totalCostValue || 0);
   const totalChangePercent =
-    totalYesterdayValue && totalYesterdayValue > 0
-      ? (totalChange / totalYesterdayValue) * 100
+    totalCostValue && totalCostValue > 0
+      ? (totalChange / totalCostValue) * 100
       : 0;
   const isPositive = totalChange >= 0;
 
@@ -44,10 +44,7 @@ export default function PortfolioScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <AppHeader screenName="Portfolio" />
-        <ScrollView
-          style={styles.container}
-          showsVerticalScrollIndicator={false}
-        >
+        <View style={styles.container}>
           <PortfolioBalanceSkeleton />
           <View style={styles.assetsHeader}>
             <View
@@ -59,12 +56,15 @@ export default function PortfolioScreen() {
               }}
             />
           </View>
-          <View style={styles.assetsList}>
+          <ScrollView
+            style={styles.assetsList}
+            showsVerticalScrollIndicator={false}
+          >
             {Array.from({ length: 3 }).map((_, index) => (
               <AssetCardSkeleton key={index} />
             ))}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     );
   }
@@ -119,11 +119,7 @@ export default function PortfolioScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <AppHeader screenName="Portfolio" />
-      <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 0 }}
-      >
+      <View style={styles.container}>
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
             {t("balance.label")}
@@ -143,47 +139,47 @@ export default function PortfolioScreen() {
               <Ionicons
                 name={isPositive ? "trending-up" : "trending-down"}
                 size={16}
-                color={colors.positive}
+                color={isPositive ? colors.positive : colors.negative}
               />
-              <Text style={[styles.changeText, styles.positive]}>
+              <Text
+                style={[
+                  styles.changeText,
+                  isPositive ? styles.positive : styles.negative,
+                ]}
+              >
                 {isPositive ? "+" : ""}$
                 {Math.abs(totalChange).toLocaleString("en-US", {
                   minimumFractionDigits: 0,
                 })}{" "}
                 ({isPositive ? "+" : ""}
-                {totalChangePercent.toFixed(2)}%)
+                {totalChangePercent.toFixed(1)}%)
               </Text>
             </View>
           </View>
-        </View>
-
-        <View style={styles.actionsContainer}>
-          <ActionButton icon="add" label={t("actions.buy")} variant="primary" />
-          <ActionButton icon="arrow-down" label={t("actions.deposit")} />
-          <ActionButton icon="arrow-up" label={t("actions.withdraw")} />
-          <ActionButton icon="ellipsis-horizontal" label={t("actions.more")} />
+          <SimpleBalanceChart width={280} height={70} />
         </View>
 
         <View style={styles.assetsHeader}>
-          <Text variant="titleLarge" style={styles.assetsTitle}>
-            {t("assets.title")}
-          </Text>
+          <Text style={styles.assetsTitle}>{t("assets.title")}</Text>
           {hasMoreAssets && (
-            <Text style={styles.seeAllText} onPress={handleSeeAll}>
-              {t("assets.seeAll")}
-            </Text>
+            <TouchableOpacity onPress={handleSeeAll}>
+              <Text style={styles.seeAllText}>{t("assets.seeAll")}</Text>
+            </TouchableOpacity>
           )}
         </View>
 
-        <View style={styles.assetsList}>
+        <ScrollView
+          style={styles.assetsList}
+          showsVerticalScrollIndicator={false}
+        >
           {displayedAssets.map((position, index) => (
             <AssetCard
               key={`${position.ticker}-${index}`}
               position={position}
             />
           ))}
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }

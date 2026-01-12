@@ -29,9 +29,13 @@ const getAssetIcon = (ticker: string): string => {
 
 export default function AssetCard({ position }: AssetCardProps) {
   const currentValue = position.quantity * position.last_price;
-  const priceChange = position.last_price - position.close_price;
-  const priceChangePercent = (priceChange / position.close_price) * 100;
-  const isPositive = priceChange >= 0;
+  const totalGain =
+    (position.last_price - position.avg_cost_price) * position.quantity;
+  const totalReturn =
+    ((position.last_price - position.avg_cost_price) /
+      position.avg_cost_price) *
+    100;
+  const isPositive = totalGain >= 0;
 
   const tickerIcon = getTickerIcon(position.ticker);
   const hasIcon = hasTickerIcon(position.ticker);
@@ -61,27 +65,31 @@ export default function AssetCard({ position }: AssetCardProps) {
             {position.ticker}
           </Text>
           <Text variant="bodySmall" style={styles.quantity}>
-            {position.quantity} shares
+            {position.quantity.toFixed(2)} shares
           </Text>
         </View>
       </View>
       <View style={styles.rightSection}>
-        <Text variant="titleMedium" style={styles.value}>
-          ${currentValue.toLocaleString("en-US", { minimumFractionDigits: 0 })}
+        <Text style={styles.value}>
+          $
+          {currentValue.toLocaleString("en-US", {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          })}
         </Text>
         <Text
-          variant="bodySmall"
           style={[
             styles.change,
             isPositive ? styles.positive : styles.negative,
           ]}
         >
           {isPositive ? "+" : ""}$
-          {Math.abs(priceChange * position.quantity).toLocaleString("en-US", {
+          {Math.abs(totalGain).toLocaleString("en-US", {
             minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
           })}{" "}
           ({isPositive ? "+" : ""}
-          {priceChangePercent.toFixed(1)}%)
+          {totalReturn.toFixed(1)}%)
         </Text>
       </View>
     </View>
