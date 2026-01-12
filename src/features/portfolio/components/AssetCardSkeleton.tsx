@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Skeleton from "../../../shared/components/Skeleton";
+import { colors } from "../../../shared/theme/colors";
 
 export default function AssetCardSkeleton() {
   return (
@@ -23,13 +24,13 @@ export default function AssetCardSkeleton() {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     paddingVertical: 16,
     paddingHorizontal: 20,
     marginHorizontal: 16,
     marginVertical: 6,
     borderRadius: 16,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 4,

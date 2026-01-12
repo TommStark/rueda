@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -23,17 +24,17 @@ export const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 8,
-    color: "#666",
+    color: colors.text.tertiary,
   },
   errorTitle: {
     marginTop: 8,
   },
   errorMessage: {
-    color: "#666",
+    color: colors.text.tertiary,
     textAlign: "center",
   },
   subtitle: {
-    color: "#666",
+    color: colors.text.tertiary,
     textAlign: "center",
   },
 });

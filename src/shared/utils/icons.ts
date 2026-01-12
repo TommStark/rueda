@@ -1,4 +1,5 @@
 import { ImageSourcePropType } from "react-native";
+import { colors } from "../theme/colors";
 
 const TICKER_ICONS: Record<string, ImageSourcePropType> = {
   bbar: require("../assets/icons/bbar.png"),
@@ -26,10 +27,10 @@ const TICKER_ICONS: Record<string, ImageSourcePropType> = {
 };
 
 const TICKER_COLORS: Record<string, string> = {
-  dyca: "#FF6B6B",
-  ircp: "#4ECDC4",
-  garo: "#95E1D3",
-  ars: "#FFA07A",
+  dyca: colors.ticker.dyca,
+  ircp: colors.ticker.ircp,
+  garo: colors.ticker.garo,
+  ars: colors.ticker.ars,
 };
 
 export function getTickerIcon(ticker: string): ImageSourcePropType | null {

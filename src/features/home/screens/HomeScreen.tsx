@@ -1,6 +1,7 @@
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import QuickActionButton from "../components/QuickActionButton";
 import TopMoverCard from "../components/TopMoverCard";
@@ -86,7 +87,7 @@ export default function HomeScreen() {
               <MaterialCommunityIcons
                 name={isPositiveChange ? "trending-up" : "trending-down"}
                 size={14}
-                color={isPositiveChange ? "#4caf50" : "#f44336"}
+                color={isPositiveChange ? colors.positive : colors.negative}
               />
               <Text
                 variant="bodySmall"

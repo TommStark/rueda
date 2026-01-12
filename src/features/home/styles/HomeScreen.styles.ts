@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
   },
   greetingSection: {
     paddingHorizontal: 20,
@@ -11,26 +12,26 @@ export const styles = StyleSheet.create({
   },
   greeting: {
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text.secondary,
     marginBottom: 4,
   },
   subGreeting: {
-    color: "#999",
+    color: colors.text.quaternary,
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     padding: 20,
     borderRadius: 20,
     marginBottom: 24,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 2,
   },
   balanceLabel: {
-    color: "#999",
+    color: colors.text.quaternary,
     marginBottom: 8,
   },
   balanceRow: {
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
   },
   balanceAmount: {
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text.secondary,
   },
   changeChip: {
     flexDirection: "row",
@@ -51,20 +52,20 @@ export const styles = StyleSheet.create({
     gap: 4,
   },
   changeChipPositive: {
-    backgroundColor: "#e8f5e9",
+    backgroundColor: colors.positiveLight,
   },
   changeChipNegative: {
-    backgroundColor: "#ffebee",
+    backgroundColor: colors.negativeLight,
   },
   changeText: {
     fontSize: 12,
     fontWeight: "600",
   },
   changeTextPositive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   changeTextNegative: {
-    color: "#f44336",
+    color: colors.negative,
   },
   section: {
     marginBottom: 24,
@@ -78,10 +79,10 @@ export const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text.secondary,
   },
   seeAllButton: {
-    color: "#6200ee",
+    color: colors.primary,
     fontWeight: "600",
   },
   quickActionsGrid: {
@@ -94,7 +95,7 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   activityContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     borderRadius: 16,
     overflow: "hidden",

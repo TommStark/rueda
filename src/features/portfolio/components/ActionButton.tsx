@@ -1,6 +1,7 @@
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { styles } from "../styles/ActionButton.styles";
 
 interface ActionButtonProps {
@@ -29,7 +30,9 @@ export default function ActionButton({
         <Ionicons
           name={icon}
           size={24}
-          color={variant === "primary" ? "#fff" : "#333"}
+          color={
+            variant === "primary" ? colors.text.inverse : colors.text.secondary
+          }
         />
       </TouchableOpacity>
       <Text variant="bodySmall" style={styles.label}>

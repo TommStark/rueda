@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-    backgroundColor: "#fff",
+    borderBottomColor: colors.border.light,
+    backgroundColor: colors.background.card,
   },
   content: {
     flexDirection: "row",

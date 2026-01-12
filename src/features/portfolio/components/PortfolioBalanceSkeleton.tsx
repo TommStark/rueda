@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Skeleton from "../../../shared/components/Skeleton";
+import { colors } from "../../../shared/theme/colors";
 
 export default function PortfolioBalanceSkeleton() {
   return (
@@ -29,13 +30,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     marginTop: 8,
     marginBottom: 24,
     padding: 24,
     borderRadius: 20,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 8,

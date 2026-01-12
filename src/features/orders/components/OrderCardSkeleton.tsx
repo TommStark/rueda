@@ -1,5 +1,6 @@
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import Skeleton from "../../../shared/components/Skeleton";
+import { styles } from "../styles/OrderCardSkeleton.styles";
 
 export default function OrderCardSkeleton() {
   return (
@@ -18,42 +19,3 @@ export default function OrderCardSkeleton() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#fff",
-    marginHorizontal: 16,
-    marginVertical: 8,
-    borderRadius: 12,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    elevation: 2,
-    padding: 16,
-  },
-  content: {
-    gap: 12,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  orderId: {
-    width: 80,
-    height: 16,
-  },
-  statusChip: {
-    width: 90,
-    height: 28,
-    borderRadius: 14,
-  },
-  details: {
-    gap: 8,
-  },
-  detailRow: {
-    width: "100%",
-    height: 14,
-  },
-});

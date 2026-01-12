@@ -1,7 +1,9 @@
-import { StyleSheet, View, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Text, Button } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import { colors } from "../theme/colors";
+import { styles } from "./styles/OrderReceipt.styles";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { OrderHistoryItem } from "../../features/history/types/history.types";
@@ -32,13 +34,13 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   const getStatusColor = () => {
     switch (order.status) {
       case "FILLED":
-        return "#00C853";
+        return colors.status.success;
       case "REJECTED":
-        return "#FF3B30";
+        return colors.status.error;
       case "PENDING":
-        return "#FF9500";
+        return colors.status.warning;
       default:
-        return "#999";
+        return colors.text.quaternary;
     }
   };
 
@@ -109,7 +111,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
           Order Status Confirmation
         </Text>
         <TouchableOpacity onPress={handleClose}>
-          <Ionicons name="close" size={24} color="#666" />
+          <Ionicons name="close" size={24} color={colors.text.tertiary} />
         </TouchableOpacity>
       </View>
 
@@ -134,7 +136,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
               <MaterialCommunityIcons
                 name={getStatusIcon()}
                 size={32}
-                color="#fff"
+                color={colors.text.inverse}
               />
             </View>
           </View>
@@ -166,7 +168,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
               <MaterialCommunityIcons
                 name="content-copy"
                 size={16}
-                color="#999"
+                color={colors.text.quaternary}
               />
             </View>
           </View>
@@ -181,7 +183,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
               <MaterialCommunityIcons
                 name="bitcoin"
                 size={16}
-                color="#FF9500"
+                color={colors.status.warning}
                 style={{ marginRight: 4 }}
               />
               <Text variant="bodyMedium" style={styles.detailValue}>
@@ -200,10 +202,9 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
               variant="bodyMedium"
               style={[
                 styles.detailValue,
-                {
-                  color: order.side === "BUY" ? "#00C853" : "#FF3B30",
-                  fontWeight: "600",
-                },
+                order.side === "BUY"
+                  ? styles.detailValueBuy
+                  : styles.detailValueSell,
               ]}
             >
               {order.side}
@@ -282,131 +283,3 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-  },
-  headerTitle: {
-    fontWeight: "600",
-    color: "#999",
-    fontSize: 14,
-  },
-  content: {
-    flex: 1,
-  },
-  contentContainer: {
-    alignItems: "center",
-    paddingHorizontal: 24,
-  },
-  statusIconContainer: {
-    marginTop: 40,
-    marginBottom: 24,
-  },
-  statusIconOuterCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  statusIconInnerCircle: {
-    width: 75,
-    height: 75,
-    borderRadius: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  statusTitle: {
-    fontWeight: "700",
-    color: "#1a1a1a",
-    marginBottom: 12,
-  },
-  statusBadge: {
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: 12,
-    marginBottom: 16,
-  },
-  statusBadgeText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "700",
-    letterSpacing: 0.5,
-  },
-  statusMessage: {
-    textAlign: "center",
-    color: "#666",
-    marginBottom: 32,
-    lineHeight: 22,
-  },
-  detailsCard: {
-    width: "100%",
-    backgroundColor: "#fafafa",
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 24,
-  },
-  detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 12,
-  },
-  detailLabel: {
-    color: "#999",
-    fontSize: 14,
-  },
-  detailValueContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  detailValue: {
-    color: "#1a1a1a",
-    fontSize: 14,
-    fontWeight: "500",
-  },
-  divider: {
-    height: 1,
-    backgroundColor: "#e0e0e0",
-  },
-  totalContainer: {
-    alignItems: "center",
-    marginBottom: 32,
-  },
-  totalAmount: {
-    fontWeight: "700",
-    color: "#1a1a1a",
-    marginBottom: 4,
-  },
-  totalLabel: {
-    color: "#999",
-  },
-  primaryButton: {
-    width: "100%",
-    borderRadius: 12,
-    paddingVertical: 6,
-    backgroundColor: "#6200ee",
-    marginBottom: 16,
-  },
-  primaryButtonLabel: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  linkText: {
-    color: "#6200ee",
-    fontSize: 15,
-    fontWeight: "600",
-  },
-});

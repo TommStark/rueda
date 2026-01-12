@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -13,15 +14,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   iconContainerPrimary: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
   },
   iconContainerSecondary: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
   },
   label: {
     fontSize: 12,
-    color: "#333",
+    color: colors.text.secondary,
   },
 });

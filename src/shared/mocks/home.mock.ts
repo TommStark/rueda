@@ -1,3 +1,5 @@
+import { colors } from "../theme/colors";
+
 export interface BalanceDataPoint {
   day: string;
   value: number;
@@ -50,8 +52,8 @@ export const MOCK_TOP_MOVERS: (TopMover & { color: TopMoverColor })[] = [
     changePercentage: 4.2,
     icon: "car-electric",
     color: {
-      icon: "#e82127",
-      background: "#ffebee",
+      icon: colors.brand.tesla.icon,
+      background: colors.brand.tesla.background,
     },
   },
   {
@@ -61,8 +63,8 @@ export const MOCK_TOP_MOVERS: (TopMover & { color: TopMoverColor })[] = [
     changePercentage: -1.8,
     icon: "bitcoin",
     color: {
-      icon: "#f7931a",
-      background: "#fff3e0",
+      icon: colors.brand.bitcoin.icon,
+      background: colors.brand.bitcoin.background,
     },
   },
   {
@@ -72,8 +74,8 @@ export const MOCK_TOP_MOVERS: (TopMover & { color: TopMoverColor })[] = [
     changePercentage: 6.5,
     icon: "chip",
     color: {
-      icon: "#76b900",
-      background: "#e8f5e9",
+      icon: colors.brand.nvidia.icon,
+      background: colors.brand.nvidia.background,
     },
   },
 ];

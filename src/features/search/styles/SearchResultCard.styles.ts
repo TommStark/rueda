@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
@@ -12,6 +13,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   name: {
-    color: "#666",
+    color: colors.text.tertiary,
   },
 });

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,15 +11,15 @@ export const styles = StyleSheet.create({
   },
   chip: {
     borderRadius: 20,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
   },
   chipSelected: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
   },
   chipText: {
     fontSize: 14,
   },
   chipTextSelected: {
-    color: "#fff",
+    color: colors.text.inverse,
   },
 });

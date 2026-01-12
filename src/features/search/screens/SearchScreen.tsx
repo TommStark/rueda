@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, FlatList, KeyboardAvoidingView, Platform } from "react-native";
 import { Text, Searchbar } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useSearch, useSearchError } from "../hooks/useSearch";
 import SearchResultCard from "../components/SearchResultCard";
 import SearchResultSkeleton from "../components/SearchResultSkeleton";
@@ -22,7 +23,11 @@ export default function SearchScreen() {
     if (!searchQuery) {
       return (
         <View style={styles.centerContainer}>
-          <MaterialCommunityIcons name="magnify" size={48} color="#6200ee" />
+          <MaterialCommunityIcons
+            name="magnify"
+            size={48}
+            color={colors.primary}
+          />
           <Text variant="headlineMedium">Buscar</Text>
           <Text variant="bodyMedium" style={styles.subtitle}>
             Ingresa un ticker para buscar
@@ -47,7 +52,7 @@ export default function SearchScreen() {
           <MaterialCommunityIcons
             name="alert-circle"
             size={48}
-            color="#f44336"
+            color={colors.status.error}
           />
           <Text variant="headlineSmall" style={styles.errorTitle}>
             Error
@@ -65,7 +70,7 @@ export default function SearchScreen() {
           <MaterialCommunityIcons
             name="file-search-outline"
             size={48}
-            color="#666"
+            color={colors.text.tertiary}
           />
           <Text variant="headlineMedium">Sin resultados</Text>
           <Text variant="bodyMedium" style={styles.subtitle}>

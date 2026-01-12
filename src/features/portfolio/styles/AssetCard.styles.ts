@@ -1,17 +1,18 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     paddingVertical: 16,
     paddingHorizontal: 20,
     marginHorizontal: 16,
     marginVertical: 6,
     borderRadius: 16,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 4,
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.tertiary,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -41,7 +42,7 @@ export const styles = StyleSheet.create({
   colorPlaceholder: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#fff",
+    color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   info: {
@@ -50,12 +51,12 @@ export const styles = StyleSheet.create({
   ticker: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.3,
   },
   quantity: {
     fontSize: 13,
-    color: "#999",
+    color: colors.text.quaternary,
     fontWeight: "500",
   },
   rightSection: {
@@ -65,7 +66,7 @@ export const styles = StyleSheet.create({
   value: {
     fontSize: 17,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.3,
   },
   change: {
@@ -73,9 +74,9 @@ export const styles = StyleSheet.create({
     fontSize: 13,
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#f44336",
+    color: colors.negative,
   },
 });

@@ -1,19 +1,20 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
   },
   headerContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
     paddingTop: 16,
   },
   searchbar: {
     marginHorizontal: 16,
     marginBottom: 8,
     elevation: 0,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.tertiary,
   },
   searchInput: {
     fontSize: 14,
@@ -25,14 +26,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: colors.border.light,
   },
   sectionTitle: {
-    color: "#666",
+    color: colors.text.tertiary,
     fontWeight: "600",
   },
   sectionSubtitle: {
-    color: "#999",
+    color: colors.text.quaternary,
   },
   listContainer: {
     flex: 1,
@@ -45,15 +46,15 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   loadingText: {
-    color: "#666",
+    color: colors.text.tertiary,
   },
   errorMessage: {
-    color: "#666",
+    color: colors.text.tertiary,
     textAlign: "center",
     marginTop: 8,
   },
   emptyText: {
-    color: "#666",
+    color: colors.text.tertiary,
     marginTop: 8,
   },
 });

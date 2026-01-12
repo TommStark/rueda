@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
   },
   header: {
     flexDirection: "row",
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
   },
   backButton: {
     width: 40,
@@ -22,7 +23,7 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.3,
   },
   placeholder: {

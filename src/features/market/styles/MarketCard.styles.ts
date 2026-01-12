@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
-    backgroundColor: "#fff",
+    borderBottomColor: colors.border.light,
+    backgroundColor: colors.background.card,
   },
   content: {
     flexDirection: "row",
@@ -30,19 +31,19 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   placeholderLogo: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: colors.border.medium,
     justifyContent: "center",
     alignItems: "center",
   },
   placeholderText: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   colorPlaceholderText: {
     fontSize: 14,
     fontWeight: "800",
-    color: "#fff",
+    color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   infoContainer: {
@@ -53,10 +54,10 @@ export const styles = StyleSheet.create({
     fontWeight: "800",
     marginBottom: 3,
     letterSpacing: -0.3,
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   name: {
-    color: "#666",
+    color: colors.text.tertiary,
     fontSize: 13,
     fontWeight: "500",
   },
@@ -73,7 +74,7 @@ export const styles = StyleSheet.create({
     fontWeight: "800",
     marginBottom: 4,
     letterSpacing: -0.3,
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   changeContainer: {
     flexDirection: "row",
@@ -85,9 +86,9 @@ export const styles = StyleSheet.create({
     fontSize: 13,
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#f44336",
+    color: colors.negative,
   },
 });

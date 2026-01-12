@@ -2,6 +2,7 @@ import { View, FlatList, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import AssetCard from "../components/AssetCard";
 import { RootStackParamList } from "../../../navigation/types";
@@ -19,7 +20,7 @@ export default function AllAssetsScreen() {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Assets</Text>
         <View style={styles.placeholder} />

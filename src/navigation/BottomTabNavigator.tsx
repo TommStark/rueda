@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet } from "react-native";
+import { colors } from "../shared/theme/colors";
 import HomeScreen from "../features/home/screens/HomeScreen";
 import MarketScreen from "../features/market/screens/MarketScreen";
 import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
@@ -14,8 +15,8 @@ export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#6200ee",
-        tabBarInactiveTintColor: "#666",
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.text.tertiary,
         headerShown: false,
         tabBarStyle: {
           height: 73,
@@ -63,7 +64,11 @@ export default function BottomTabNavigator() {
             <View style={styles.centralButtonContainer}>
               <View style={styles.centralButtonOuter}>
                 <View style={styles.centralButton}>
-                  <MaterialCommunityIcons name="star" size={28} color="#fff" />
+                  <MaterialCommunityIcons
+                    name="star"
+                    size={28}
+                    color={colors.text.inverse}
+                  />
                 </View>
               </View>
             </View>
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 28,
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
   },

@@ -7,6 +7,7 @@ import {
   DimensionValue,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../theme/colors";
 
 interface SkeletonProps {
   width?: DimensionValue;
@@ -67,7 +68,7 @@ export default function Skeleton({
         ]}
       >
         <LinearGradient
-          colors={["#E1E9EE", "#F2F8FC", "#E1E9EE"]}
+          colors={colors.skeletonGradient}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={StyleSheet.absoluteFill}
@@ -79,6 +80,6 @@ export default function Skeleton({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#E1E9EE",
+    backgroundColor: colors.skeleton,
   },
 });

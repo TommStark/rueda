@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   row: {
@@ -7,8 +8,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f5f5f5",
-    backgroundColor: "#fff",
+    borderBottomColor: colors.background.tertiary,
+    backgroundColor: colors.background.card,
   },
   assetSection: {
     flex: 1,
@@ -26,18 +27,18 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   placeholderLogo: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: colors.border.medium,
   },
   logoText: {
     fontSize: 14,
     fontWeight: "800",
-    color: "#fff",
+    color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   logoTextPlaceholder: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   assetInfo: {
     flex: 1,
@@ -45,13 +46,13 @@ export const styles = StyleSheet.create({
   ticker: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 2,
     letterSpacing: -0.3,
   },
   assetName: {
     fontSize: 12,
-    color: "#999",
+    color: colors.text.quaternary,
     fontWeight: "500",
   },
   trendSection: {
@@ -66,10 +67,10 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
   },
   changePositive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   changeNegative: {
-    color: "#f44336",
+    color: colors.negative,
   },
   priceSection: {
     width: 100,
@@ -79,7 +80,7 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: 14,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.3,
   },
   starButton: {
