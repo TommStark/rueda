@@ -1,11 +1,13 @@
 import { StyleSheet, View, ScrollView, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, ActivityIndicator } from "react-native-paper";
+import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
 import AssetCard from "../components/AssetCard";
+import AssetCardSkeleton from "../components/AssetCardSkeleton";
+import PortfolioBalanceSkeleton from "../components/PortfolioBalanceSkeleton";
 import ActionButton from "../components/ActionButton";
 import AppHeader from "../../../shared/components/AppHeader";
 import { PortfolioPosition } from "../types/portfolio.types";
@@ -37,12 +39,28 @@ export default function PortfolioScreen() {
   if (isLoading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#6200ee" />
-          <Text variant="bodyMedium" style={styles.loadingText}>
-            Loading portfolio...
-          </Text>
-        </View>
+        <AppHeader screenName="Portfolio" />
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
+          <PortfolioBalanceSkeleton />
+          <View style={styles.assetsHeader}>
+            <View
+              style={{
+                width: 120,
+                height: 20,
+                backgroundColor: "#f0f0f0",
+                borderRadius: 4,
+              }}
+            />
+          </View>
+          <View style={styles.assetsList}>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <AssetCardSkeleton key={index} />
+            ))}
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }

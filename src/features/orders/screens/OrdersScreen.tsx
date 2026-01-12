@@ -1,9 +1,16 @@
-import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
-import { Text, ActivityIndicator } from "react-native-paper";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+} from "react-native";
+import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useOrders, useOrdersError } from "../hooks/useOrders";
 import OrderCard from "../components/OrderCard";
-import { Order } from "../../../shared/types/api.types";
+import OrderCardSkeleton from "../components/OrderCardSkeleton";
+import { Order } from "../types/orders.types";
 
 export default function OrdersScreen() {
   const { data, isLoading, error, refetch, isRefetching } = useOrders();
@@ -11,12 +18,14 @@ export default function OrdersScreen() {
 
   if (isLoading) {
     return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" />
-        <Text variant="bodyMedium" style={styles.loadingText}>
-          Cargando órdenes...
-        </Text>
-      </View>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.listContent}
+      >
+        {Array.from({ length: 6 }).map((_, index) => (
+          <OrderCardSkeleton key={index} />
+        ))}
+      </ScrollView>
     );
   }
 

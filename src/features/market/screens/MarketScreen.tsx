@@ -1,12 +1,13 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { StyleSheet, View, FlatList } from "react-native";
-import { Text, ActivityIndicator, Searchbar } from "react-native-paper";
+import { Text, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useMarket, useMarketError } from "../hooks/useMarket";
 import MarketCard from "../components/MarketCard";
+import MarketCardSkeleton from "../components/MarketCardSkeleton";
 import FilterTabs from "../components/FilterTabs";
 import AppHeader from "../../../shared/components/AppHeader";
 import { MarketAsset, AssetType } from "../types/market.types";
@@ -21,6 +22,14 @@ export default function MarketScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
 
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setSearchQuery("");
+      };
+    }, [])
+  );
+
   const { data, isLoading, error, refetch, isRefetching } = useMarket(
     selectedType,
     debouncedSearch
@@ -32,11 +41,10 @@ export default function MarketScreen() {
   const renderAssetsList = () => {
     if (isLoading) {
       return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#6200ee" />
-          <Text variant="bodyMedium" style={styles.loadingText}>
-            Cargando activos...
-          </Text>
+        <View>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <MarketCardSkeleton key={index} />
+          ))}
         </View>
       );
     }

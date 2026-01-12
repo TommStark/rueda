@@ -6,10 +6,11 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { Text, ActivityIndicator, Searchbar } from "react-native-paper";
+import { Text, Searchbar } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSearch, useSearchError } from "../hooks/useSearch";
 import SearchResultCard from "../components/SearchResultCard";
+import SearchResultSkeleton from "../components/SearchResultSkeleton";
 import { SearchResult } from "../types/search.types";
 import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
 
@@ -37,11 +38,10 @@ export default function SearchScreen() {
 
     if (isLoading) {
       return (
-        <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" />
-          <Text variant="bodyMedium" style={styles.loadingText}>
-            Buscando...
-          </Text>
+        <View style={styles.listContent}>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <SearchResultSkeleton key={index} />
+          ))}
         </View>
       );
     }
