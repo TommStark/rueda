@@ -7,6 +7,8 @@ import {
   useCallback,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useToast } from "./ToastContext";
+import { useTranslation } from "../hooks/useTranslation";
 
 const STORAGE_KEY = "@rueda:favorites";
 
@@ -29,6 +31,8 @@ interface FavoritesProviderProps {
 export function FavoritesProvider({ children }: FavoritesProviderProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { showToast } = useToast();
+  const { t } = useTranslation("common");
 
   useEffect(() => {
     loadFavorites();
@@ -48,22 +52,34 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
     }
   };
 
-  const toggleFavorite = useCallback(async (ticker: string) => {
-    try {
-      setFavorites((prev) => {
-        const normalizedTicker = ticker.toUpperCase();
-        const isFav = prev.includes(normalizedTicker);
-        const updated = isFav
-          ? prev.filter((t) => t !== normalizedTicker)
-          : [...prev, normalizedTicker];
+  const toggleFavorite = useCallback(
+    async (ticker: string) => {
+      try {
+        let wasAdded = false;
+        setFavorites((prev) => {
+          const normalizedTicker = ticker.toUpperCase();
+          const isFav = prev.includes(normalizedTicker);
+          wasAdded = !isFav;
+          const updated = isFav
+            ? prev.filter((t) => t !== normalizedTicker)
+            : [...prev, normalizedTicker];
 
-        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        return updated;
-      });
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-    }
-  }, []);
+          AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+          return updated;
+        });
+
+        setTimeout(() => {
+          showToast(
+            wasAdded ? t("toast.favoriteAdded") : t("toast.favoriteRemoved"),
+            wasAdded ? "success" : "info"
+          );
+        }, 100);
+      } catch (error) {
+        console.error("Error toggling favorite:", error);
+      }
+    },
+    [showToast, t]
+  );
 
   const isFavorite = useCallback(
     (ticker: string) => {

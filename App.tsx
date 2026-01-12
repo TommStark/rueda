@@ -7,23 +7,28 @@ import RootStackNavigator from "./src/navigation/RootStackNavigator";
 import { queryClient } from "./src/shared/config/queryClient";
 import { OrderHistoryProvider } from "./src/features/history/context/OrderHistoryContext";
 import { FavoritesProvider } from "./src/shared/context/FavoritesContext";
+import { ToastProvider } from "./src/shared/context/ToastContext";
+import Toast from "./src/shared/components/Toast";
 import "./src/shared/config/i18n";
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <FavoritesProvider>
-        <OrderHistoryProvider>
-          <SafeAreaProvider>
-            <PaperProvider>
-              <NavigationContainer>
-                <RootStackNavigator />
-                <StatusBar style="auto" />
-              </NavigationContainer>
-            </PaperProvider>
-          </SafeAreaProvider>
-        </OrderHistoryProvider>
-      </FavoritesProvider>
+      <ToastProvider>
+        <FavoritesProvider>
+          <OrderHistoryProvider>
+            <SafeAreaProvider>
+              <PaperProvider>
+                <NavigationContainer>
+                  <RootStackNavigator />
+                  <StatusBar style="auto" />
+                </NavigationContainer>
+                <Toast />
+              </PaperProvider>
+            </SafeAreaProvider>
+          </OrderHistoryProvider>
+        </FavoritesProvider>
+      </ToastProvider>
     </QueryClientProvider>
   );
 }

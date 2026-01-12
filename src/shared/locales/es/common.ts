@@ -49,4 +49,8 @@ export default {
     backToMarkets: "Regresar",
     viewPortfolio: "Ver Portfolio",
   },
+  toast: {
+    favoriteAdded: "Agregado a favoritos",
+    favoriteRemoved: "Eliminado de favoritos",
+  },
 };
