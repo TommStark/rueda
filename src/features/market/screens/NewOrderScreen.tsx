@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   TouchableOpacity,
   TextInput,
@@ -29,11 +28,10 @@ import {
 import SwipeButton from "rn-swipe-button";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
 import { useFavorites } from "../../../shared/context/FavoritesContext";
+import { styles } from "../styles/NewOrderScreen.styles";
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
 type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
-type InputMode = "QTY" | "UNIT";
 
 export default function NewOrderScreen() {
   const { t } = useTranslation("orders");
@@ -45,9 +43,8 @@ export default function NewOrderScreen() {
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const [orderType, setOrderType] = useState<OrderType>("MARKET");
-  const [inputMode, setInputMode] = useState<InputMode>("QTY");
-  const [quantity, setQuantity] = useState("");
-  const [totalAmount, setTotalAmount] = useState("");
+  const [quantity, setQuantity] = useState<number>(0);
+  const [investmentAmount, setInvestmentAmount] = useState<string>("");
   const [limitPrice, setLimitPrice] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOrderTypeMenu, setShowOrderTypeMenu] = useState(false);
@@ -62,43 +59,50 @@ export default function NewOrderScreen() {
 
   const availableBalance = 5420.5;
 
-  const calculateQuantity = (amount: string): number => {
-    const amountNum = parseFloat(amount);
-    if (isNaN(amountNum) || amountNum <= 0) return 0;
-    return Math.floor(amountNum / asset.last_price);
+  const getCurrentPrice = () => {
+    return orderType === "LIMIT" && limitPrice
+      ? parseFloat(limitPrice)
+      : asset.last_price;
   };
 
-  const calculateTotal = (qty: string): number => {
-    const qtyNum = parseInt(qty);
-    if (isNaN(qtyNum) || qtyNum <= 0) return 0;
-    const price =
-      orderType === "LIMIT" && limitPrice
-        ? parseFloat(limitPrice)
-        : asset.last_price;
-    return qtyNum * price;
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    const total = newQuantity * getCurrentPrice();
+    setInvestmentAmount(total > 0 ? total.toFixed(2) : "");
+  };
+
+  const handleInvestmentAmountChange = (amount: string) => {
+    setInvestmentAmount(amount);
+    const amountNum = parseFloat(amount);
+    if (!isNaN(amountNum) && amountNum > 0) {
+      const calculatedQty = Math.floor(amountNum / getCurrentPrice());
+      setQuantity(calculatedQty);
+    } else {
+      setQuantity(0);
+    }
+  };
+
+  const handlePercentagePress = (percentage: number) => {
+    const amount = availableBalance * percentage;
+    handleInvestmentAmountChange(amount.toFixed(2));
+  };
+
+  const incrementQuantity = () => {
+    handleQuantityChange(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      handleQuantityChange(quantity - 1);
+    }
   };
 
   const getEstimatedTotal = (): number => {
-    if (inputMode === "QTY" && quantity) {
-      return calculateTotal(quantity);
-    } else if (inputMode === "UNIT" && totalAmount) {
-      return parseFloat(totalAmount) || 0;
-    }
-    return 0;
-  };
-
-  const getQuantityToSubmit = (): number => {
-    if (inputMode === "QTY") {
-      return parseInt(quantity) || 0;
-    } else {
-      return calculateQuantity(totalAmount);
-    }
+    return quantity * getCurrentPrice();
   };
 
   const handleSubmitOrder = async () => {
-    const qtyToSubmit = getQuantityToSubmit();
-
-    if (qtyToSubmit <= 0) {
+    if (quantity <= 0) {
       alert(t("validation.invalidQuantity"));
       return;
     }
@@ -115,7 +119,7 @@ export default function NewOrderScreen() {
         instrument_id: asset.id,
         side,
         type: orderType,
-        quantity: qtyToSubmit,
+        quantity: quantity,
         ...(orderType === "LIMIT" && { price: parseFloat(limitPrice) }),
       };
 
@@ -127,7 +131,7 @@ export default function NewOrderScreen() {
         instrumentId: asset.id,
         side,
         type: orderType,
-        quantity: qtyToSubmit,
+        quantity: quantity,
         price: orderType === "LIMIT" ? parseFloat(limitPrice) : undefined,
         executedPrice: asset.last_price,
         timestamp: Date.now(),
@@ -153,6 +157,11 @@ export default function NewOrderScreen() {
     toggleFavorite(asset.ticker);
   };
 
+  useEffect(() => {
+    setQuantity(0);
+    setInvestmentAmount("");
+  }, [side]);
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
       <View style={styles.header}>
@@ -172,7 +181,12 @@ export default function NewOrderScreen() {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={true}
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={styles.assetHeader}>
           <View style={styles.assetIconContainer}>
             {hasIcon && tickerIcon ? (
@@ -214,7 +228,6 @@ export default function NewOrderScreen() {
           <TouchableOpacity
             style={[
               styles.sideButton,
-              styles.sideButtonLeft,
               side === "BUY" && styles.sideButtonActiveBuy,
             ]}
             onPress={() => setSide("BUY")}
@@ -231,7 +244,6 @@ export default function NewOrderScreen() {
           <TouchableOpacity
             style={[
               styles.sideButton,
-              styles.sideButtonRight,
               side === "SELL" && styles.sideButtonActiveSell,
             ]}
             onPress={() => setSide("SELL")}
@@ -315,454 +327,140 @@ export default function NewOrderScreen() {
           )}
         </View>
 
-        <View style={styles.inputRow}>
-          <View style={styles.inputGroup}>
-            <View style={styles.inputHeader}>
-              <Text style={styles.inputLabel}>{t("newOrder.quantity")}</Text>
-              <TouchableOpacity
-                style={styles.unitToggle}
-                onPress={() =>
-                  setInputMode(inputMode === "QTY" ? "UNIT" : "QTY")
-                }
-              >
-                <Text style={styles.unitToggleText}>
-                  {inputMode === "QTY" ? "UNIT" : "QTY"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+        {orderType === "LIMIT" && (
+          <View style={styles.limitPriceSection}>
+            <Text style={styles.inputLabel}>{t("newOrder.limitPrice")}</Text>
             <TextInput
-              style={styles.input}
-              value={inputMode === "QTY" ? quantity : totalAmount}
-              onChangeText={(text) => {
-                if (inputMode === "QTY") {
-                  setQuantity(text.replace(/[^0-9]/g, ""));
-                } else {
-                  setTotalAmount(text.replace(/[^0-9.]/g, ""));
-                }
-              }}
-              placeholder={inputMode === "QTY" ? "10" : "1000.00"}
+              style={styles.limitPriceInput}
+              value={limitPrice}
+              onChangeText={(text) =>
+                setLimitPrice(text.replace(/[^0-9.]/g, ""))
+              }
+              placeholder="$0.00"
               keyboardType="numeric"
             />
-            <Text style={styles.inputHint}>
-              {inputMode === "QTY" ? "Qty" : "Per Share"}
-            </Text>
+            <Text style={styles.inputHint}>Precio por acción</Text>
           </View>
+        )}
 
-          {orderType === "LIMIT" && (
-            <View style={styles.inputGroup}>
-              <View style={styles.inputHeader}>
-                <Text style={styles.inputLabel}>
-                  {t("newOrder.limitPrice")}
-                </Text>
-                <View style={styles.unitToggle}>
-                  <Text style={styles.unitToggleText}>UNIT</Text>
-                </View>
-              </View>
-              <TextInput
-                style={styles.input}
-                value={limitPrice}
-                onChangeText={(text) =>
-                  setLimitPrice(text.replace(/[^0-9.]/g, ""))
-                }
-                placeholder="148.50"
-                keyboardType="numeric"
-              />
-              <Text style={styles.inputHint}>Per Share</Text>
-            </View>
-          )}
-        </View>
-
-        <View style={styles.totalSection}>
-          <View style={styles.totalHeader}>
-            <Text style={styles.totalLabel}>
-              {t("newOrder.estimatedTotal")}
-            </Text>
-            <Ionicons
-              name="information-circle-outline"
-              size={16}
-              color={colors.text.quaternary}
+        <View style={styles.inputSection}>
+          <Text style={styles.inputLabel}>{t("newOrder.quantity")}</Text>
+          <View style={styles.quantityInputContainer}>
+            <TouchableOpacity
+              style={styles.quantityButton}
+              onPress={decrementQuantity}
+            >
+              <Text style={styles.quantityButtonText}>−</Text>
+            </TouchableOpacity>
+            <TextInput
+              style={styles.quantityInput}
+              value={quantity.toString()}
+              onChangeText={(text) => {
+                const num = parseInt(text.replace(/[^0-9]/g, "")) || 0;
+                handleQuantityChange(num);
+              }}
+              placeholder="0"
+              keyboardType="numeric"
             />
-          </View>
-          <Text style={styles.totalAmount}>
-            $
-            {getEstimatedTotal().toLocaleString("en-US", {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Text>
-          <View style={styles.balanceRow}>
-            <View style={styles.balanceDot} />
-            <Text style={styles.balanceLabel}>
-              {t("newOrder.availableBalance")}
-            </Text>
-            <Text style={styles.balanceAmount}>
-              $
-              {availableBalance.toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-              })}
-            </Text>
+            <TouchableOpacity
+              style={styles.quantityButton}
+              onPress={incrementQuantity}
+            >
+              <Text style={styles.quantityButtonText}>+</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
-        <SwipeButton
-          containerStyles={styles.swipeButton}
-          disabled={isSubmitting}
-          disableResetOnTap={true}
-          height={60}
-          onSwipeSuccess={handleSubmitOrder}
-          railBackgroundColor={colors.primary}
-          railBorderColor={colors.primary}
-          railFillBackgroundColor={colors.primaryLight}
-          railFillBorderColor={colors.primaryLight}
-          shouldResetAfterSuccess={true}
-          swipeSuccessThreshold={70}
-          thumbIconBackgroundColor={colors.text.inverse}
-          thumbIconBorderColor={colors.primary}
-          title={t("newOrder.swipeToReview")}
-          titleColor={colors.text.inverse}
-          titleFontSize={16}
-          width="100%"
-          railStyles={{
-            borderRadius: 30,
-          }}
-          thumbIconStyles={{
-            borderRadius: 26,
-          }}
-        />
+        <View style={styles.inputSection}>
+          <Text style={styles.inputLabel}>
+            {side === "SELL" ? t("newOrder.totalToSell") : t("newOrder.total")}
+          </Text>
+          <View style={styles.amountInputContainer}>
+            <TextInput
+              style={[
+                styles.amountInput,
+                side === "SELL" && styles.amountInputDisabled,
+              ]}
+              value={investmentAmount}
+              onChangeText={handleInvestmentAmountChange}
+              placeholder="$0"
+              keyboardType="numeric"
+              editable={side === "BUY"}
+            />
+            {side === "BUY" && (
+              <View style={styles.percentageChips}>
+                <TouchableOpacity
+                  style={styles.percentageChip}
+                  onPress={() => handlePercentagePress(0.25)}
+                >
+                  <Text style={styles.percentageChipText}>25%</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.percentageChip}
+                  onPress={() => handlePercentagePress(0.5)}
+                >
+                  <Text style={styles.percentageChipText}>50%</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.percentageChip}
+                  onPress={() => handlePercentagePress(1.0)}
+                >
+                  <Text style={styles.percentageChipText}>100%</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            <View style={styles.availableBalanceRow}>
+              <Text style={styles.availableBalanceLabel}>
+                {t("newOrder.availableBalance")}
+              </Text>
+              <Text style={styles.availableBalanceAmount}>
+                $
+                {availableBalance.toLocaleString("en-US", {
+                  minimumFractionDigits: 2,
+                })}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.swipeButtonContainer}>
+          <SwipeButton
+            disabled={isSubmitting || quantity <= 0}
+            disableResetOnTap={true}
+            height={48}
+            onSwipeSuccess={handleSubmitOrder}
+            railBackgroundColor={
+              isSubmitting || quantity <= 0
+                ? colors.border.medium
+                : colors.primary
+            }
+            railBorderColor={
+              isSubmitting || quantity <= 0
+                ? colors.border.medium
+                : colors.primary
+            }
+            railFillBackgroundColor={colors.primaryLight}
+            railFillBorderColor={colors.primaryLight}
+            shouldResetAfterSuccess={false}
+            swipeSuccessThreshold={70}
+            thumbIconBackgroundColor={
+              isSubmitting || quantity <= 0
+                ? colors.background.secondary
+                : colors.primaryLight
+            }
+            thumbIconBorderColor="transparent"
+            title={t("newOrder.swipeToConfirm")}
+            titleColor={colors.text.inverse}
+            titleFontSize={15}
+            width="100%"
+            thumbIconStyles={{
+              borderRadius: 24,
+              width: 44,
+              height: 44,
+            }}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.primary,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border.light,
-  },
-  closeButton: {
-    padding: 4,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.text.primary,
-  },
-  favoriteButton: {
-    padding: 4,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  assetHeader: {
-    alignItems: "center",
-    paddingVertical: 24,
-  },
-  assetIconContainer: {
-    marginBottom: 12,
-  },
-  assetIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  assetIconPlaceholder: {
-    backgroundColor: colors.border.medium,
-  },
-  assetIconText: {
-    fontSize: 20,
-    fontWeight: "800",
-    color: colors.text.inverse,
-  },
-  assetTicker: {
-    fontSize: 24,
-    fontWeight: "800",
-    color: colors.text.primary,
-    marginBottom: 4,
-    letterSpacing: -0.5,
-  },
-  assetPriceRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  assetPrice: {
-    fontSize: 17,
-    fontWeight: "600",
-    color: colors.text.primary,
-  },
-  assetChange: {
-    fontSize: 14,
-    fontWeight: "700",
-  },
-  changePositive: {
-    color: colors.positive,
-  },
-  changeNegative: {
-    color: colors.negative,
-  },
-  sideToggle: {
-    flexDirection: "row",
-    marginBottom: 24,
-    gap: 12,
-  },
-  sideButton: {
-    flex: 1,
-    paddingVertical: 14,
-    borderRadius: 12,
-    alignItems: "center",
-    backgroundColor: colors.background.secondary,
-    borderWidth: 1,
-    borderColor: "transparent",
-  },
-  sideButtonLeft: {},
-  sideButtonRight: {},
-  sideButtonActiveBuy: {
-    backgroundColor: colors.status.infoLight,
-    borderColor: colors.buy,
-  },
-  sideButtonActiveSell: {
-    backgroundColor: colors.negativeLight,
-    borderColor: colors.sell,
-  },
-  sideButtonText: {
-    fontSize: 16,
-    fontWeight: "700",
-    color: colors.text.tertiary,
-  },
-  sideButtonTextActive: {
-    color: colors.text.primary,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: colors.text.quaternary,
-    marginBottom: 8,
-    letterSpacing: 0.5,
-  },
-  dropdown: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    backgroundColor: colors.background.secondary,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.border.medium,
-  },
-  dropdownText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: colors.text.primary,
-  },
-  dropdownMenu: {
-    backgroundColor: colors.background.primary,
-    borderRadius: 12,
-    marginTop: 8,
-    borderWidth: 1,
-    borderColor: colors.border.medium,
-    overflow: "hidden",
-  },
-  dropdownItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border.light,
-  },
-  dropdownItemActive: {
-    backgroundColor: colors.background.secondary,
-  },
-  dropdownItemText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: colors.text.tertiary,
-  },
-  dropdownItemTextActive: {
-    color: colors.primary,
-  },
-  inputRow: {
-    flexDirection: "row",
-    gap: 12,
-    marginBottom: 20,
-  },
-  inputGroup: {
-    flex: 1,
-  },
-  inputHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  inputLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: colors.text.quaternary,
-    letterSpacing: 0.5,
-  },
-  unitToggle: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    backgroundColor: colors.status.infoLight,
-    borderRadius: 6,
-  },
-  unitToggleText: {
-    fontSize: 10,
-    fontWeight: "700",
-    color: colors.buy,
-    letterSpacing: 0.5,
-  },
-  input: {
-    backgroundColor: colors.background.primary,
-    borderWidth: 1,
-    borderColor: colors.border.medium,
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.text.primary,
-    marginBottom: 6,
-  },
-  inputHint: {
-    fontSize: 12,
-    color: colors.text.quaternary,
-    fontWeight: "500",
-  },
-  totalSection: {
-    backgroundColor: colors.background.tertiary,
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 20,
-  },
-  totalHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
-    marginBottom: 8,
-  },
-  totalLabel: {
-    fontSize: 11,
-    fontWeight: "700",
-    color: colors.text.quaternary,
-    letterSpacing: 0.5,
-  },
-  totalAmount: {
-    fontSize: 32,
-    fontWeight: "800",
-    color: colors.text.primary,
-    marginBottom: 16,
-    letterSpacing: -1,
-  },
-  balanceRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  balanceDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: colors.positive,
-  },
-  balanceLabel: {
-    fontSize: 13,
-    color: colors.text.tertiary,
-    fontWeight: "500",
-    flex: 1,
-  },
-  balanceAmount: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: colors.text.primary,
-  },
-  swipeButton: {
-    marginBottom: 20,
-    alignSelf: "center",
-  },
-  submitButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 16,
-    paddingVertical: 18,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 8,
-    marginBottom: 20,
-  },
-  submitButtonDisabled: {
-    opacity: 0.6,
-  },
-  submitButtonText: {
-    fontSize: 17,
-    fontWeight: "700",
-    color: colors.text.inverse,
-  },
-  resultContent: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  statusBadge: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
-    marginBottom: 32,
-  },
-  statusFilled: {
-    backgroundColor: colors.positiveLight,
-  },
-  statusPending: {
-    backgroundColor: colors.status.warningLight,
-  },
-  statusRejected: {
-    backgroundColor: colors.negativeLight,
-  },
-  statusText: {
-    fontSize: 16,
-    fontWeight: "800",
-    color: colors.text.primary,
-  },
-  resultLabel: {
-    fontSize: 13,
-    color: colors.text.quaternary,
-    marginBottom: 8,
-    fontWeight: "600",
-  },
-  resultValue: {
-    fontSize: 18,
-    fontWeight: "700",
-    color: colors.text.primary,
-    marginBottom: 32,
-  },
-  doneButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-  },
-  doneButtonText: {
-    fontSize: 17,
-    fontWeight: "700",
-    color: colors.text.inverse,
-  },
-});
