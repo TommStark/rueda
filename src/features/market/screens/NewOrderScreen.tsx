@@ -10,6 +10,7 @@ import {
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
@@ -154,7 +155,7 @@ export default function NewOrderScreen() {
     <SafeAreaView style={styles.container} edges={["top"]}>
       <View style={styles.header}>
         <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
-          <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
+          <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>New Order</Text>
         <TouchableOpacity
@@ -164,7 +165,7 @@ export default function NewOrderScreen() {
           <MaterialCommunityIcons
             name={isFavorite(asset.ticker) ? "star" : "star-outline"}
             size={24}
-            color="#FF9500"
+            color={colors.favorite}
           />
         </TouchableOpacity>
       </View>
@@ -256,7 +257,7 @@ export default function NewOrderScreen() {
             <Ionicons
               name={showOrderTypeMenu ? "chevron-up" : "chevron-down"}
               size={20}
-              color="#999"
+              color={colors.text.quaternary}
             />
           </TouchableOpacity>
           {showOrderTypeMenu && (
@@ -281,7 +282,7 @@ export default function NewOrderScreen() {
                   Market Order
                 </Text>
                 {orderType === "MARKET" && (
-                  <Ionicons name="checkmark" size={20} color="#6200ee" />
+                  <Ionicons name="checkmark" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
               <TouchableOpacity
@@ -303,7 +304,7 @@ export default function NewOrderScreen() {
                   Limit Order
                 </Text>
                 {orderType === "LIMIT" && (
-                  <Ionicons name="checkmark" size={20} color="#6200ee" />
+                  <Ionicons name="checkmark" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
             </View>
@@ -371,7 +372,7 @@ export default function NewOrderScreen() {
             <Ionicons
               name="information-circle-outline"
               size={16}
-              color="#999"
+              color={colors.text.quaternary}
             />
           </View>
           <Text style={styles.totalAmount}>
@@ -399,16 +400,16 @@ export default function NewOrderScreen() {
           disableResetOnTap={true}
           height={60}
           onSwipeSuccess={handleSubmitOrder}
-          railBackgroundColor="#6200ee"
-          railBorderColor="#6200ee"
-          railFillBackgroundColor="#8c3eff"
-          railFillBorderColor="#8c3eff"
+          railBackgroundColor={colors.primary}
+          railBorderColor={colors.primary}
+          railFillBackgroundColor={colors.primaryLight}
+          railFillBorderColor={colors.primaryLight}
           shouldResetAfterSuccess={true}
           swipeSuccessThreshold={70}
-          thumbIconBackgroundColor="#fff"
-          thumbIconBorderColor="#6200ee"
+          thumbIconBackgroundColor={colors.text.inverse}
+          thumbIconBorderColor={colors.primary}
           title="Slide to Review Order"
-          titleColor="#fff"
+          titleColor={colors.text.inverse}
           titleFontSize={16}
           width="100%"
           railStyles={{
@@ -426,7 +427,7 @@ export default function NewOrderScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
   },
   header: {
     flexDirection: "row",
@@ -435,7 +436,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: colors.border.light,
   },
   closeButton: {
     padding: 4,
@@ -443,7 +444,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   favoriteButton: {
     padding: 4,
@@ -467,17 +468,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   assetIconPlaceholder: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: colors.border.medium,
   },
   assetIconText: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#fff",
+    color: colors.text.inverse,
   },
   assetTicker: {
     fontSize: 24,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 4,
     letterSpacing: -0.5,
   },
@@ -489,17 +490,17 @@ const styles = StyleSheet.create({
   assetPrice: {
     fontSize: 17,
     fontWeight: "600",
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   assetChange: {
     fontSize: 14,
     fontWeight: "700",
   },
   changePositive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   changeNegative: {
-    color: "#f44336",
+    color: colors.negative,
   },
   sideToggle: {
     flexDirection: "row",
@@ -511,27 +512,27 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.secondary,
     borderWidth: 1,
     borderColor: "transparent",
   },
   sideButtonLeft: {},
   sideButtonRight: {},
   sideButtonActiveBuy: {
-    backgroundColor: "#e3f2fd",
-    borderColor: "#2196f3",
+    backgroundColor: colors.status.infoLight,
+    borderColor: colors.buy,
   },
   sideButtonActiveSell: {
-    backgroundColor: "#fce4ec",
-    borderColor: "#f44336",
+    backgroundColor: colors.negativeLight,
+    borderColor: colors.sell,
   },
   sideButtonText: {
     fontSize: 16,
     fontWeight: "700",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   sideButtonTextActive: {
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   section: {
     marginBottom: 20,
@@ -539,7 +540,7 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     marginBottom: 8,
     letterSpacing: 0.5,
   },
@@ -549,22 +550,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 14,
     paddingHorizontal: 16,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.secondary,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
   },
   dropdownText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   dropdownMenu: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
     borderRadius: 12,
     marginTop: 8,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
     overflow: "hidden",
   },
   dropdownItem: {
@@ -574,18 +575,18 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: colors.border.light,
   },
   dropdownItemActive: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.secondary,
   },
   dropdownItemText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   dropdownItemTextActive: {
-    color: "#6200ee",
+    color: colors.primary,
   },
   inputRow: {
     flexDirection: "row",
@@ -604,40 +605,40 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     letterSpacing: 0.5,
   },
   unitToggle: {
     paddingHorizontal: 8,
     paddingVertical: 4,
-    backgroundColor: "#e3f2fd",
+    backgroundColor: colors.status.infoLight,
     borderRadius: 6,
   },
   unitToggleText: {
     fontSize: 10,
     fontWeight: "700",
-    color: "#2196f3",
+    color: colors.buy,
     letterSpacing: 0.5,
   },
   input: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 16,
     fontSize: 18,
     fontWeight: "700",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 6,
   },
   inputHint: {
     fontSize: 12,
-    color: "#999",
+    color: colors.text.quaternary,
     fontWeight: "500",
   },
   totalSection: {
-    backgroundColor: "#f8f9fa",
+    backgroundColor: colors.background.tertiary,
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
@@ -651,13 +652,13 @@ const styles = StyleSheet.create({
   totalLabel: {
     fontSize: 11,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     letterSpacing: 0.5,
   },
   totalAmount: {
     fontSize: 32,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 16,
     letterSpacing: -1,
   },
@@ -670,25 +671,25 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: "#4caf50",
+    backgroundColor: colors.positive,
   },
   balanceLabel: {
     fontSize: 13,
-    color: "#666",
+    color: colors.text.tertiary,
     fontWeight: "500",
     flex: 1,
   },
   balanceAmount: {
     fontSize: 14,
     fontWeight: "700",
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   swipeButton: {
     marginBottom: 20,
     alignSelf: "center",
   },
   submitButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
     borderRadius: 16,
     paddingVertical: 18,
     flexDirection: "row",
@@ -703,7 +704,7 @@ const styles = StyleSheet.create({
   submitButtonText: {
     fontSize: 17,
     fontWeight: "700",
-    color: "#fff",
+    color: colors.text.inverse,
   },
   resultContent: {
     flex: 1,
@@ -718,33 +719,33 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   statusFilled: {
-    backgroundColor: "#e8f5e9",
+    backgroundColor: colors.positiveLight,
   },
   statusPending: {
-    backgroundColor: "#fff3e0",
+    backgroundColor: colors.status.warningLight,
   },
   statusRejected: {
-    backgroundColor: "#ffebee",
+    backgroundColor: colors.negativeLight,
   },
   statusText: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   resultLabel: {
     fontSize: 13,
-    color: "#999",
+    color: colors.text.quaternary,
     marginBottom: 8,
     fontWeight: "600",
   },
   resultValue: {
     fontSize: 18,
     fontWeight: "700",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 32,
   },
   doneButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 48,
@@ -752,6 +753,6 @@ const styles = StyleSheet.create({
   doneButtonText: {
     fontSize: 17,
     fontWeight: "700",
-    color: "#fff",
+    color: colors.text.inverse,
   },
 });

@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.tertiary,
   },
   container: {
     flex: 1,
@@ -26,28 +27,28 @@ export const styles = StyleSheet.create({
   filterChip: {
     marginRight: 8,
     borderRadius: 20,
-    borderColor: "#e0e0e0",
-    backgroundColor: "#fff",
+    borderColor: colors.border.medium,
+    backgroundColor: colors.background.primary,
     height: 36,
   },
   filterChipSelectedAll: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
   },
   filterChipSelectedFilled: {
-    backgroundColor: "#00C853",
+    backgroundColor: colors.status.success,
   },
   filterChipSelectedPending: {
-    backgroundColor: "#FF9500",
+    backgroundColor: colors.status.warning,
   },
   filterChipSelectedRejected: {
-    backgroundColor: "#FF3B30",
+    backgroundColor: colors.status.error,
   },
   filterChipText: {
     fontSize: 14,
-    color: "#666",
+    color: colors.text.tertiary,
   },
   filterChipTextSelected: {
-    color: "#fff",
+    color: colors.text.inverse,
     fontWeight: "600",
   },
   scrollView: {
@@ -56,17 +57,17 @@ export const styles = StyleSheet.create({
   monthHeader: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    color: "#999",
+    color: colors.text.quaternary,
     fontSize: 12,
     fontWeight: "600",
     letterSpacing: 0.5,
   },
   emptyTitle: {
     marginTop: 16,
-    color: "#666",
+    color: colors.text.tertiary,
   },
   emptySubtitle: {
-    color: "#999",
+    color: colors.text.quaternary,
     textAlign: "center",
   },
 });

@@ -3,6 +3,7 @@ import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { RecentActivity } from "../../../shared/mocks/home.mock";
 import { styles } from "../styles/ActivityItem.styles";
+import { colors } from "../../../shared/theme/colors";
 
 interface ActivityItemProps {
   activity: RecentActivity;
@@ -14,30 +15,30 @@ export default function ActivityItem({ activity }: ActivityItemProps) {
   const getIconBackgroundColor = () => {
     switch (activity.type) {
       case "buy":
-        return "#e8eaf6";
+        return colors.activity.buy.background;
       case "sell":
-        return "#fff3e0";
+        return colors.activity.sell.background;
       case "deposit":
-        return "#e8f5e9";
+        return colors.activity.deposit.background;
       case "withdraw":
-        return "#ffebee";
+        return colors.activity.withdraw.background;
       default:
-        return "#f5f5f5";
+        return colors.background.secondary;
     }
   };
 
   const getIconColor = () => {
     switch (activity.type) {
       case "buy":
-        return "#5e35b1";
+        return colors.activity.buy.icon;
       case "sell":
-        return "#f57c00";
+        return colors.activity.sell.icon;
       case "deposit":
-        return "#43a047";
+        return colors.activity.deposit.icon;
       case "withdraw":
-        return "#e53935";
+        return colors.activity.withdraw.icon;
       default:
-        return "#666";
+        return colors.text.tertiary;
     }
   };
 

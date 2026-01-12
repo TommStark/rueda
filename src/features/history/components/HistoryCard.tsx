@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { OrderHistoryItem } from "../types/history.types";
 import {
   getTickerIcon,
@@ -18,13 +19,13 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "FILLED":
-        return "#00C853";
+        return colors.status.success;
       case "REJECTED":
-        return "#FF3B30";
+        return colors.status.error;
       case "PENDING":
-        return "#FF9500";
+        return colors.status.warning;
       default:
-        return "#999";
+        return colors.text.tertiary;
     }
   };
 
@@ -98,7 +99,7 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
           <MaterialCommunityIcons
             name={getStatusIcon(order.status)}
             size={14}
-            color="#fff"
+            color={colors.text.inverse}
           />
         </View>
       </View>
@@ -128,7 +129,7 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
       <MaterialCommunityIcons
         name="chevron-right"
         size={20}
-        color="#ccc"
+        color={colors.border.dark}
         style={styles.arrow}
       />
     </TouchableOpacity>

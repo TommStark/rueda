@@ -1,42 +1,43 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.primary,
   },
   header: {
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: colors.border.light,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.5,
   },
   tableHeader: {
     flexDirection: "row",
     paddingHorizontal: 20,
     paddingVertical: 12,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
     borderBottomWidth: 1,
-    borderBottomColor: "#f0f0f0",
+    borderBottomColor: colors.border.light,
   },
   columnHeader: {
     flex: 1,
     fontSize: 11,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     letterSpacing: 0.5,
   },
   columnHeaderRight: {
     width: 80,
     fontSize: 11,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     letterSpacing: 0.5,
     textAlign: "right",
   },
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 14,
-    color: "#999",
+    color: colors.text.quaternary,
   },
   emptyContainer: {
     flex: 1,
@@ -61,12 +62,12 @@ export const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: "700",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 8,
   },
   emptySubtitle: {
     fontSize: 14,
-    color: "#999",
+    color: colors.text.quaternary,
     textAlign: "center",
     lineHeight: 20,
   },

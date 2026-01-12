@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { Card, Text, Chip } from "react-native-paper";
 import { Order } from "../types/orders.types";
 import { styles } from "../styles/OrderCard.styles";
+import { colors } from "../../../shared/theme/colors";
 
 interface OrderCardProps {
   order: Order;
@@ -11,18 +12,18 @@ export default function OrderCard({ order }: OrderCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "FILLED":
-        return "#4caf50";
+        return colors.status.success;
       case "PENDING":
-        return "#ff9800";
+        return colors.status.warning;
       case "REJECTED":
-        return "#f44336";
+        return colors.status.error;
       default:
-        return "#666";
+        return colors.text.tertiary;
     }
   };
 
   const getSideColor = (side: string) => {
-    return side === "BUY" ? "#2196f3" : "#f44336";
+    return side === "BUY" ? colors.buy : colors.sell;
   };
 
   const getStatusLabel = (status: string) => {

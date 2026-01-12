@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 16,
     marginVertical: 6,
     paddingVertical: 16,
@@ -31,17 +32,17 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   placeholderLogo: {
-    backgroundColor: "#e0e0e0",
+    backgroundColor: colors.border.medium,
   },
   placeholderText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   colorPlaceholderText: {
     fontSize: 16,
     fontWeight: "800",
-    color: "#fff",
+    color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   statusBadge: {
@@ -54,7 +55,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 2,
-    borderColor: "#fff",
+    borderColor: colors.background.primary,
   },
   content: {
     flex: 1,
@@ -74,20 +75,20 @@ export const styles = StyleSheet.create({
   ticker: {
     fontWeight: "700",
     fontSize: 16,
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   orderType: {
-    color: "#666",
+    color: colors.text.tertiary,
     fontSize: 13,
   },
   date: {
-    color: "#999",
+    color: colors.text.quaternary,
     fontSize: 12,
   },
   quantity: {
     fontWeight: "600",
     fontSize: 15,
-    color: "#1a1a1a",
+    color: colors.text.primary,
   },
   status: {
     fontSize: 12,

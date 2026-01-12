@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -13,16 +14,16 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   primaryButton: {
-    backgroundColor: "#6200ee",
+    backgroundColor: colors.primary,
   },
   secondaryButton: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.tertiary,
     borderWidth: 1,
-    borderColor: "#e0e0e0",
+    borderColor: colors.border.medium,
   },
   label: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#333",
+    color: colors.text.secondary,
   },
 });

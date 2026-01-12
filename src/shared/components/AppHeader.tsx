@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../theme/colors";
 import { styles } from "./styles/AppHeader.styles";
 
 interface AppHeaderProps {
@@ -24,7 +25,11 @@ export default function AppHeader({
         style={styles.notificationButton}
         onPress={onNotificationPress}
       >
-        <Ionicons name="notifications-outline" size={24} color="#333" />
+        <Ionicons
+          name="notifications-outline"
+          size={24}
+          color={colors.text.secondary}
+        />
       </TouchableOpacity>
     </View>
   );

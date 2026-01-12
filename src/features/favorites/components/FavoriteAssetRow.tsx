@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { MarketAsset } from "../../market/types/market.types";
 import {
   getTickerIcon,
@@ -86,7 +87,11 @@ export default function FavoriteAssetRow({
       </View>
       <View style={styles.starSection}>
         <TouchableOpacity onPress={handleStarPress} style={styles.starButton}>
-          <MaterialCommunityIcons name="star" size={20} color="#FF9500" />
+          <MaterialCommunityIcons
+            name="star"
+            size={20}
+            color={colors.favorite}
+          />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

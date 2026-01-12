@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     width: 100,
     padding: 12,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#f0f0f0",
+    borderColor: colors.border.light,
     alignItems: "center",
     gap: 6,
   },
@@ -21,11 +22,11 @@ export const styles = StyleSheet.create({
   },
   ticker: {
     fontWeight: "bold",
-    color: "#333",
+    color: colors.text.secondary,
   },
   name: {
     fontSize: 10,
-    color: "#999",
+    color: colors.text.quaternary,
     textAlign: "center",
   },
   price: {
@@ -42,9 +43,9 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#f44336",
+    color: colors.negative,
   },
 });

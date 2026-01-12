@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { TopMover } from "../../../shared/mocks/home.mock";
 import { styles } from "../styles/TopMoverCard.styles";
 
@@ -10,8 +11,9 @@ interface TopMoverCardProps {
 
 export default function TopMoverCard({ mover }: TopMoverCardProps) {
   const isPositive = mover.changePercentage >= 0;
-  const iconColor = (mover as any).color?.icon || "#6200ee";
-  const backgroundColor = (mover as any).color?.background || "#f0e6ff";
+  const iconColor = (mover as any).color?.icon || colors.primary;
+  const backgroundColor =
+    (mover as any).color?.background || colors.primaryLight;
 
   return (
     <View style={styles.container}>
@@ -35,7 +37,7 @@ export default function TopMoverCard({ mover }: TopMoverCardProps) {
         <MaterialCommunityIcons
           name={isPositive ? "trending-up" : "trending-down"}
           size={14}
-          color={isPositive ? "#4caf50" : "#f44336"}
+          color={isPositive ? colors.positive : colors.negative}
         />
         <Text
           variant="bodySmall"

@@ -1,6 +1,7 @@
 import { View, FlatList, RefreshControl, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useOrders, useOrdersError } from "../hooks/useOrders";
 import OrderCard from "../components/OrderCard";
 import OrderCardSkeleton from "../components/OrderCardSkeleton";
@@ -27,7 +28,11 @@ export default function OrdersScreen() {
   if (error && !data) {
     return (
       <View style={styles.centerContainer}>
-        <MaterialCommunityIcons name="alert-circle" size={48} color="#f44336" />
+        <MaterialCommunityIcons
+          name="alert-circle"
+          size={48}
+          color={colors.status.error}
+        />
         <Text variant="headlineSmall" style={styles.errorTitle}>
           Error
         </Text>
@@ -44,7 +49,7 @@ export default function OrdersScreen() {
         <MaterialCommunityIcons
           name="file-document"
           size={48}
-          color="#6200ee"
+          color={colors.primary}
         />
         <Text variant="headlineMedium">Sin órdenes</Text>
         <Text variant="bodyMedium" style={styles.subtitle}>

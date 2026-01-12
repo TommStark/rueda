@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../theme/colors";
 
 export const styles = StyleSheet.create({
   header: {
@@ -7,13 +8,13 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 16,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#ffe4d6",
+    backgroundColor: colors.avatar,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
   screenName: {
     fontSize: 20,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.3,
   },
   notificationButton: {

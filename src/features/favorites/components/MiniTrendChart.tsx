@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Svg, { Polyline } from "react-native-svg";
+import { colors } from "../../../shared/theme/colors";
 
 interface MiniTrendChartProps {
   isPositive: boolean;
@@ -13,7 +14,7 @@ export default function MiniTrendChart({ isPositive }: MiniTrendChartProps) {
     ? "0,20 12,16 24,12 36,10 48,6 60,4"
     : "0,4 12,8 24,10 36,14 48,18 60,20";
 
-  const strokeColor = isPositive ? "#4caf50" : "#f44336";
+  const strokeColor = isPositive ? colors.positive : colors.negative;
 
   return (
     <View style={styles.container}>

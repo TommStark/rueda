@@ -1,6 +1,7 @@
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { styles } from "../styles/QuickActionButton.styles";
 
 interface QuickActionButtonProps {
@@ -31,7 +32,7 @@ export default function QuickActionButton({
         <MaterialCommunityIcons
           name={icon}
           size={24}
-          color={isPrimary ? "#fff" : "#333"}
+          color={isPrimary ? colors.text.inverse : colors.text.secondary}
         />
       </View>
       <Text variant="bodySmall" style={styles.label}>

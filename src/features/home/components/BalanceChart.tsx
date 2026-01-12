@@ -1,5 +1,6 @@
 import { View, Dimensions } from "react-native";
 import { Text } from "react-native-paper";
+import { colors } from "../../../shared/theme/colors";
 import Svg, {
   Path,
   Circle,
@@ -55,20 +56,25 @@ export default function BalanceChart({ data }: BalanceChartProps) {
       <Svg width={CHART_WIDTH} height={CHART_HEIGHT}>
         <Defs>
           <LinearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor="#6200ee" stopOpacity="0.3" />
-            <Stop offset="1" stopColor="#6200ee" stopOpacity="0.05" />
+            <Stop offset="0" stopColor={colors.primary} stopOpacity="0.3" />
+            <Stop offset="1" stopColor={colors.primary} stopOpacity="0.05" />
           </LinearGradient>
         </Defs>
         <Path d={areaPath} fill="url(#gradient)" />
-        <Path d={pathData} stroke="#6200ee" strokeWidth="3" fill="none" />
+        <Path
+          d={pathData}
+          stroke={colors.primary}
+          strokeWidth="3"
+          fill="none"
+        />
         {points.map((point, index) => (
           <Circle
             key={index}
             cx={point.x}
             cy={point.y}
             r="4"
-            fill="#6200ee"
-            stroke="#fff"
+            fill={colors.primary}
+            stroke={colors.text.inverse}
             strokeWidth="2"
           />
         ))}

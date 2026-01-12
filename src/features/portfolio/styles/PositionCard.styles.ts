@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   card: {
@@ -25,15 +26,15 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   label: {
-    color: "#666",
+    color: colors.text.tertiary,
   },
   profitLoss: {
     fontWeight: "600",
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#f44336",
+    color: colors.negative,
   },
 });

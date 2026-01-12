@@ -3,6 +3,7 @@ import { View, FlatList } from "react-native";
 import { Text, Searchbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useMarket, useMarketError } from "../hooks/useMarket";
@@ -91,7 +92,7 @@ export default function MarketScreen() {
           <MaterialCommunityIcons
             name="alert-circle"
             size={48}
-            color="#f44336"
+            color={colors.status.error}
           />
           <Text variant="bodyMedium" style={styles.errorMessage}>
             {apiError?.message || "Error al cargar activos"}
@@ -106,7 +107,7 @@ export default function MarketScreen() {
           <MaterialCommunityIcons
             name="chart-line-variant"
             size={48}
-            color="#999"
+            color={colors.text.quaternary}
           />
           <Text variant="bodyMedium" style={styles.emptyText}>
             No se encontraron activos

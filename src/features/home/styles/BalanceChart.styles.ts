@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 const PADDING = 20;
 
@@ -14,6 +15,6 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontSize: 10,
-    color: "#999",
+    color: colors.text.quaternary,
   },
 });

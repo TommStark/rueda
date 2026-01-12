@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    backgroundColor: colors.background.secondary,
   },
   container: {
     flex: 1,
@@ -16,13 +17,13 @@ export const styles = StyleSheet.create({
     padding: 16,
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     marginTop: 8,
     marginBottom: 24,
     padding: 24,
     borderRadius: 20,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 8,
@@ -31,14 +32,14 @@ export const styles = StyleSheet.create({
   balanceLabel: {
     fontSize: 12,
     fontWeight: "700",
-    color: "#999",
+    color: colors.text.quaternary,
     letterSpacing: 1.2,
     marginBottom: 10,
   },
   balanceAmount: {
     fontSize: 44,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     marginBottom: 14,
     letterSpacing: -1,
   },
@@ -48,7 +49,7 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   currencyBadge: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: colors.background.tertiary,
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 6,
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
   currencyText: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#666",
+    color: colors.text.tertiary,
   },
   changeRow: {
     flexDirection: "row",
@@ -83,12 +84,12 @@ export const styles = StyleSheet.create({
   assetsTitle: {
     fontSize: 22,
     fontWeight: "800",
-    color: "#1a1a1a",
+    color: colors.text.primary,
     letterSpacing: -0.5,
   },
   seeAllText: {
     fontSize: 15,
-    color: "#6200ee",
+    color: colors.primary,
     fontWeight: "700",
   },
   assetsList: {
@@ -96,22 +97,22 @@ export const styles = StyleSheet.create({
   },
   loadingText: {
     marginTop: 8,
-    color: "#666",
+    color: colors.text.tertiary,
   },
   errorTitle: {
     marginTop: 8,
   },
   errorMessage: {
-    color: "#666",
+    color: colors.text.tertiary,
     textAlign: "center",
   },
   subtitle: {
-    color: "#666",
+    color: colors.text.tertiary,
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#f44336",
+    color: colors.negative,
   },
 });

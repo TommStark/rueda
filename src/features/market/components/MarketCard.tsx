@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { MarketAsset } from "../types/market.types";
 import {
   getTickerIcon,
@@ -71,7 +72,7 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
             <MaterialCommunityIcons
               name={isPositive ? "trending-up" : "trending-down"}
               size={16}
-              color={isPositive ? "#4caf50" : "#f44336"}
+              color={isPositive ? colors.positive : colors.negative}
             />
             <Text
               variant="bodySmall"
@@ -86,7 +87,11 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
           </View>
         </View>
         <View style={styles.chevronContainer}>
-          <Ionicons name="chevron-forward" size={20} color="#ccc" />
+          <Ionicons
+            name="chevron-forward"
+            size={20}
+            color={colors.border.dark}
+          />
         </View>
       </View>
     </TouchableOpacity>

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: "#f5f5f5",
+    borderBottomColor: colors.background.tertiary,
   },
   iconContainer: {
     width: 44,
@@ -22,20 +23,20 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "600",
-    color: "#333",
+    color: colors.text.secondary,
     marginBottom: 2,
   },
   subtitle: {
-    color: "#999",
+    color: colors.text.quaternary,
     fontSize: 12,
   },
   amount: {
     fontWeight: "bold",
   },
   positive: {
-    color: "#4caf50",
+    color: colors.positive,
   },
   negative: {
-    color: "#333",
+    color: colors.text.secondary,
   },
 });

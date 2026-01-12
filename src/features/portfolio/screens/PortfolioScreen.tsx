@@ -2,6 +2,7 @@ import { View, ScrollView, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
@@ -51,7 +52,7 @@ export default function PortfolioScreen() {
               style={{
                 width: 120,
                 height: 20,
-                backgroundColor: "#f0f0f0",
+                backgroundColor: colors.border.light,
                 borderRadius: 4,
               }}
             />
@@ -70,7 +71,7 @@ export default function PortfolioScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.centerContainer}>
-          <Ionicons name="alert-circle" size={48} color="#f44336" />
+          <Ionicons name="alert-circle" size={48} color={colors.status.error} />
           <Text variant="headlineSmall" style={styles.errorTitle}>
             Error
           </Text>
@@ -86,7 +87,7 @@ export default function PortfolioScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.centerContainer}>
-          <Ionicons name="briefcase-outline" size={48} color="#6200ee" />
+          <Ionicons name="briefcase-outline" size={48} color={colors.primary} />
           <Text variant="headlineMedium">Empty Portfolio</Text>
           <Text variant="bodyMedium" style={styles.subtitle}>
             You don't have any positions
@@ -140,7 +141,7 @@ export default function PortfolioScreen() {
               <Ionicons
                 name={isPositive ? "trending-up" : "trending-down"}
                 size={16}
-                color="#4caf50"
+                color={colors.positive}
               />
               <Text style={[styles.changeText, styles.positive]}>
                 {isPositive ? "+" : ""}$

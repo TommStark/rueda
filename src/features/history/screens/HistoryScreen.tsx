@@ -3,6 +3,7 @@ import { View, FlatList, ScrollView } from "react-native";
 import { Text, Button, Chip } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors } from "../../../shared/theme/colors";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useOrderHistory } from "../context/OrderHistoryContext";
@@ -136,7 +137,11 @@ export default function HistoryScreen() {
       <SafeAreaView style={styles.safeArea}>
         <AppHeader screenName="Order History" />
         <View style={styles.centerContainer}>
-          <MaterialCommunityIcons name="history" size={64} color="#ccc" />
+          <MaterialCommunityIcons
+            name="history"
+            size={64}
+            color={colors.border.dark}
+          />
           <Text variant="headlineMedium" style={styles.emptyTitle}>
             No History
           </Text>
