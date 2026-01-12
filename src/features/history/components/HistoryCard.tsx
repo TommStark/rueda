@@ -120,12 +120,6 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
             <Text variant="titleMedium" style={styles.quantity}>
               {getQuantityLabel()}
             </Text>
-            <Text
-              variant="labelMedium"
-              style={[styles.status, { color: getStatusColor(order.status) }]}
-            >
-              {order.status}
-            </Text>
           </View>
         </View>
       </View>
@@ -202,15 +196,14 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   leftSection: {
     flex: 1,
     gap: 2,
   },
   rightSection: {
-    alignItems: "flex-end",
-    gap: 4,
+    justifyContent: "center",
   },
   ticker: {
     fontWeight: "700",

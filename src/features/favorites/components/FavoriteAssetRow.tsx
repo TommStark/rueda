@@ -147,9 +147,11 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   trendSection: {
-    flex: 1,
+    width: 70,
     alignItems: "center",
+    justifyContent: "center",
     gap: 4,
+    paddingLeft: 17,
   },
   changeText: {
     fontSize: 12,

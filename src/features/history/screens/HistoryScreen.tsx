@@ -148,13 +148,14 @@ export default function HistoryScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <AppHeader screenName="Order History" />
       <View style={styles.container}>
         {renderFilters()}
         <ScrollView
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 0 }}
         >
           {Object.entries(groupedOrders).map(([monthYear, monthOrders]) => (
             <View key={monthYear}>
@@ -170,7 +171,6 @@ export default function HistoryScreen() {
               ))}
             </View>
           ))}
-          <View style={styles.bottomPadding} />
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -237,9 +237,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     letterSpacing: 0.5,
-  },
-  bottomPadding: {
-    height: 80,
   },
   emptyTitle: {
     marginTop: 16,

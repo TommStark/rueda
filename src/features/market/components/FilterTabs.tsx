@@ -1,22 +1,23 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { Chip } from "react-native-paper";
-import { AssetType, ASSET_TYPE } from "../types/market.types";
+import { SortType, SORT_TYPE } from "../types/market.types";
 
 interface FilterTabsProps {
-  selectedType: AssetType;
-  onTypeChange: (type: AssetType) => void;
+  selectedSort: SortType;
+  onSortChange: (sort: SortType) => void;
 }
 
-const FILTER_OPTIONS: { label: string; value: AssetType }[] = [
-  { label: "All", value: ASSET_TYPE.ALL },
-  { label: "Stocks", value: ASSET_TYPE.STOCK },
-  { label: "Crypto", value: ASSET_TYPE.CRYPTO },
-  { label: "Gainers", value: ASSET_TYPE.GAINER },
+const SORT_OPTIONS: { label: string; value: SortType }[] = [
+  { label: "All", value: SORT_TYPE.ALL },
+  { label: "Top Gainers", value: SORT_TYPE.GAINERS },
+  { label: "Top Losers", value: SORT_TYPE.LOSERS },
+  { label: "A-Z", value: SORT_TYPE.A_Z },
+  { label: "Price", value: SORT_TYPE.PRICE },
 ];
 
 export default function FilterTabs({
-  selectedType,
-  onTypeChange,
+  selectedSort,
+  onSortChange,
 }: FilterTabsProps) {
   return (
     <View style={styles.container}>
@@ -25,20 +26,20 @@ export default function FilterTabs({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {FILTER_OPTIONS.map((option) => (
+        {SORT_OPTIONS.map((option) => (
           <Chip
             key={option.value}
-            selected={selectedType === option.value}
-            onPress={() => onTypeChange(option.value)}
+            selected={selectedSort === option.value}
+            onPress={() => onSortChange(option.value)}
             style={[
               styles.chip,
-              selectedType === option.value && styles.chipSelected,
+              selectedSort === option.value && styles.chipSelected,
             ]}
             textStyle={[
               styles.chipText,
-              selectedType === option.value && styles.chipTextSelected,
+              selectedSort === option.value && styles.chipTextSelected,
             ]}
-            mode={selectedType === option.value ? "flat" : "outlined"}
+            mode={selectedSort === option.value ? "flat" : "outlined"}
           >
             {option.label}
           </Chip>

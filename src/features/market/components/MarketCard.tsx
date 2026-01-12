@@ -51,7 +51,9 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
               {asset.ticker}
             </Text>
             <Text variant="bodySmall" style={styles.name} numberOfLines={1}>
-              {asset.name}
+              {asset.name.length > 16
+                ? `${asset.name.substring(0, 16)}...`
+                : asset.name}
             </Text>
           </View>
         </View>
@@ -116,6 +118,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
   placeholderLogo: {
     backgroundColor: "#e0e0e0",

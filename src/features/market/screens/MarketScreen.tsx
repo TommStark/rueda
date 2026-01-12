@@ -10,15 +10,15 @@ import MarketCard from "../components/MarketCard";
 import MarketCardSkeleton from "../components/MarketCardSkeleton";
 import FilterTabs from "../components/FilterTabs";
 import AppHeader from "../../../shared/components/AppHeader";
-import { MarketAsset, AssetType, ASSET_TYPE } from "../types/market.types";
+import { MarketAsset, SortType, SORT_TYPE } from "../types/market.types";
 import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
-import { RootStackParamList } from "../../../navigation/RootStackNavigator";
+import { RootStackParamList } from "../../../navigation/types";
 
 type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function MarketScreen() {
   const navigation = useNavigation<MarketScreenNavigationProp>();
-  const [selectedType, setSelectedType] = useState<AssetType>(ASSET_TYPE.ALL);
+  const [selectedSort, setSelectedSort] = useState<SortType>(SORT_TYPE.ALL);
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
 
@@ -26,18 +26,52 @@ export default function MarketScreen() {
     useCallback(() => {
       return () => {
         setSearchQuery("");
-        setSelectedType(ASSET_TYPE.ALL);
+        setSelectedSort(SORT_TYPE.ALL);
       };
     }, [])
   );
 
-  const { data, isLoading, error, refetch, isRefetching } = useMarket(
-    selectedType,
-    debouncedSearch
-  );
+  const { data, isLoading, error, refetch, isRefetching } =
+    useMarket(debouncedSearch);
 
   const apiError = useMarketError(error);
-  const allAssets = data || [];
+
+  const sortAssets = (
+    assets: MarketAsset[],
+    sortType: SortType
+  ): MarketAsset[] => {
+    const sorted = [...assets];
+
+    switch (sortType) {
+      case SORT_TYPE.GAINERS:
+        return sorted.sort((a, b) => {
+          const changeA =
+            ((a.last_price - a.close_price) / a.close_price) * 100;
+          const changeB =
+            ((b.last_price - b.close_price) / b.close_price) * 100;
+          return changeB - changeA;
+        });
+      case SORT_TYPE.LOSERS:
+        return sorted.sort((a, b) => {
+          const changeA =
+            ((a.last_price - a.close_price) / a.close_price) * 100;
+          const changeB =
+            ((b.last_price - b.close_price) / b.close_price) * 100;
+          return changeA - changeB;
+        });
+      case SORT_TYPE.A_Z:
+        return sorted.sort((a, b) => a.ticker.localeCompare(b.ticker));
+      case SORT_TYPE.PRICE:
+        return sorted.sort((a, b) => b.last_price - a.last_price);
+      case SORT_TYPE.ALL:
+      default:
+        return sorted;
+    }
+  };
+
+  const allAssets = useMemo(() => {
+    return sortAssets(data || [], selectedSort);
+  }, [data, selectedSort]);
 
   const renderAssetsList = () => {
     if (isLoading) {
@@ -109,8 +143,8 @@ export default function MarketScreen() {
           inputStyle={styles.searchInput}
         />
         <FilterTabs
-          selectedType={selectedType}
-          onTypeChange={setSelectedType}
+          selectedSort={selectedSort}
+          onSortChange={setSelectedSort}
         />
         <View style={styles.sectionHeader}>
           <Text variant="labelMedium" style={styles.sectionTitle}>

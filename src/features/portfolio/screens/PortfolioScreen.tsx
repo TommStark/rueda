@@ -113,14 +113,12 @@ export default function PortfolioScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <AppHeader screenName="Portfolio" />
       <ScrollView
         style={styles.container}
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 0 }}
       >
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
@@ -181,8 +179,6 @@ export default function PortfolioScreen() {
             />
           ))}
         </View>
-
-        <View style={styles.bottomSpacer} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -282,9 +278,7 @@ const styles = StyleSheet.create({
   assetsList: {
     gap: 0,
   },
-  bottomSpacer: {
-    height: 24,
-  },
+
   loadingText: {
     marginTop: 8,
     color: "#666",

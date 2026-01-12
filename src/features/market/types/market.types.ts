@@ -1,10 +1,12 @@
-export type AssetType = "ALL" | "STOCK" | "CRYPTO" | "GAINER";
+export type AssetType = "ACCIONES" | "MONEDA";
+export type SortType = "ALL" | "GAINERS" | "LOSERS" | "A-Z" | "PRICE";
 
-export const ASSET_TYPE = {
-  ALL: "ALL" as AssetType,
-  STOCK: "STOCK" as AssetType,
-  CRYPTO: "CRYPTO" as AssetType,
-  GAINER: "GAINER" as AssetType,
+export const SORT_TYPE = {
+  ALL: "ALL" as SortType,
+  GAINERS: "GAINERS" as SortType,
+  LOSERS: "LOSERS" as SortType,
+  A_Z: "A-Z" as SortType,
+  PRICE: "PRICE" as SortType,
 };
 
 export interface MarketAsset {
