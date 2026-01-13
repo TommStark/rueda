@@ -16,9 +16,7 @@ export default {
   tabs: {
     home: "Inicio",
     market: "Mercado",
-    search: "Buscar",
     portfolio: "Portafolio",
-    orders: "Órdenes",
   },
   home: {
     greeting: {
@@ -49,21 +47,5 @@ export default {
     },
     emptyState: "No se encontraron activos",
     errorState: "Error al cargar los activos",
-  },
-  orders: {
-    new: "Nueva Orden",
-    type: {
-      market: "Mercado",
-      limit: "Límite",
-    },
-    action: {
-      buy: "Comprar",
-      sell: "Vender",
-    },
-    amount: "Cantidad",
-    price: "Precio",
-    total: "Total",
-    submit: "Enviar Orden",
-    swipeToConfirm: "Desliza para confirmar",
   },
 };
