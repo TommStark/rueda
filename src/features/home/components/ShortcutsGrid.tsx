@@ -38,37 +38,31 @@ export default function ShortcutsGrid() {
       id: "1",
       label: "Recargar SUBE",
       icon: "card",
-      onPress: () => console.log("Recargar SUBE"),
     },
     {
       id: "2",
       label: "Pagar servicios",
       icon: "receipt",
-      onPress: () => console.log("Pagar servicios"),
     },
     {
       id: "3",
       label: "Recargar celular",
       icon: "phone-portrait",
-      onPress: () => console.log("Recargar celular"),
     },
     {
       id: "4",
       label: "Solicitar préstamo",
       icon: "cash",
-      onPress: () => console.log("Solicitar préstamo"),
     },
     {
       id: "5",
       label: "Ayuda",
       icon: "help-circle",
-      onPress: () => console.log("Ayuda"),
     },
     {
       id: "6",
       label: "Más opciones",
       icon: "ellipsis-horizontal",
-      onPress: () => console.log("Más opciones"),
     },
   ];
 

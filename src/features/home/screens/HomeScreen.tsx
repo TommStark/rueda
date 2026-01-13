@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import TopMoverCard from "../components/TopMoverCard";
 import ActivityItem from "../components/ActivityItem";
 import PromoBanner from "../components/PromoBanner";
+import HomeScreenSkeleton from "../components/HomeScreenSkeleton";
 import AppHeader from "../../../shared/components/AppHeader";
 import {
   getTickerIcon,
@@ -89,9 +90,7 @@ export default function HomeScreen() {
     return (
       <SafeAreaView style={styles.container} edges={["top"]}>
         <AppHeader screenName="Home" />
-        <View style={styles.centerContainer}>
-          <Text>{t("loading")}</Text>
-        </View>
+        <HomeScreenSkeleton />
       </SafeAreaView>
     );
   }

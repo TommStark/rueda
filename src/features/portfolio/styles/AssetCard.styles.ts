@@ -30,9 +30,9 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   iconImage: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   colorPlaceholder: {
     fontSize: 14,

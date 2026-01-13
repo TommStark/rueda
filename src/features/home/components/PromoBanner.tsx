@@ -78,7 +78,6 @@ export default function PromoBanner() {
             subtitle={banner.subtitle}
             icon={banner.icon}
             backgroundColor={banner.backgroundColor}
-            onPress={() => console.log(`Banner ${banner.id} pressed`)}
           />
         ))}
       </ScrollView>
