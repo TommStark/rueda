@@ -13,12 +13,10 @@ export default function TopMoverCard({ mover }: TopMoverCardProps) {
   const isPositive = mover.changePercentage >= 0;
   const tickerIcon = (mover as any).tickerIcon as ImageSourcePropType | null;
   const hasIcon = (mover as any).hasTickerIcon as boolean;
-  const backgroundColor =
-    (mover as any).color?.background || colors.primaryLight;
 
   return (
     <View style={styles.container}>
-      <View style={[styles.iconContainer, { backgroundColor }]}>
+      <View style={styles.iconContainer}>
         {hasIcon && tickerIcon ? (
           <Image source={tickerIcon} style={styles.iconImage} />
         ) : (

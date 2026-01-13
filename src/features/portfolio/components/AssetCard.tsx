@@ -1,11 +1,7 @@
 import { View, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { PortfolioPosition } from "../types/portfolio.types";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import { styles } from "../styles/AssetCard.styles";
 
 interface AssetCardProps {
@@ -39,23 +35,13 @@ export default function AssetCard({ position }: AssetCardProps) {
 
   const tickerIcon = getTickerIcon(position.ticker);
   const hasIcon = hasTickerIcon(position.ticker);
-  const tickerColor = getTickerColor(position.ticker);
 
   return (
     <View style={styles.card}>
       <View style={styles.leftSection}>
-        <View
-          style={[
-            styles.iconContainer,
-            tickerColor && { backgroundColor: tickerColor },
-          ]}
-        >
+        <View style={styles.iconContainer}>
           {hasIcon && tickerIcon ? (
             <Image source={tickerIcon} style={styles.iconImage} />
-          ) : tickerColor ? (
-            <Text style={styles.colorPlaceholder}>
-              {position.ticker.substring(0, 2).toUpperCase()}
-            </Text>
           ) : (
             <Text style={styles.icon}>{getAssetIcon(position.ticker)}</Text>
           )}

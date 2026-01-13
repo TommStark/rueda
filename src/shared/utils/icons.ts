@@ -1,7 +1,7 @@
 import { ImageSourcePropType } from "react-native";
-import { colors } from "../theme/colors";
 
 const TICKER_ICONS: Record<string, ImageSourcePropType> = {
+  ars: require("../assets/icons/ars.png"),
   bbar: require("../assets/icons/bbar.png"),
   bpat: require("../assets/icons/bpat.png"),
   capx: require("../assets/icons/capx.png"),
@@ -9,13 +9,16 @@ const TICKER_ICONS: Record<string, ImageSourcePropType> = {
   celu: require("../assets/icons/celu.png"),
   cvh: require("../assets/icons/cvh.png"),
   dome: require("../assets/icons/dome.png"),
+  dyca: require("../assets/icons/dyca.png"),
   ferr: require("../assets/icons/ferr.png"),
   fipl: require("../assets/icons/fipl.png"),
   gami: require("../assets/icons/gami.png"),
+  garo: require("../assets/icons/garo.png"),
   harg: require("../assets/icons/harg.png"),
   intr: require("../assets/icons/intr.png"),
+  ircp: require("../assets/icons/ircp.png"),
   lede: require("../assets/icons/lede.png"),
-  mirg: require("../assets/icons/MIRG.png"),
+  mirg: require("../assets/icons/mirg.png"),
   mola: require("../assets/icons/mola.png"),
   mtr: require("../assets/icons/mtr.png"),
   pata: require("../assets/icons/pata.png"),
@@ -26,13 +29,6 @@ const TICKER_ICONS: Record<string, ImageSourcePropType> = {
   teco2: require("../assets/icons/teco2.png"),
 };
 
-const TICKER_COLORS: Record<string, string> = {
-  dyca: colors.ticker.dyca,
-  ircp: colors.ticker.ircp,
-  garo: colors.ticker.garo,
-  ars: colors.ticker.ars,
-};
-
 export function getTickerIcon(ticker: string): ImageSourcePropType | null {
   const normalizedTicker = ticker.toLowerCase().trim();
   return TICKER_ICONS[normalizedTicker] || null;
@@ -41,14 +37,4 @@ export function getTickerIcon(ticker: string): ImageSourcePropType | null {
 export function hasTickerIcon(ticker: string): boolean {
   const normalizedTicker = ticker.toLowerCase().trim();
   return normalizedTicker in TICKER_ICONS;
-}
-
-export function getTickerColor(ticker: string): string | null {
-  const normalizedTicker = ticker.toLowerCase().trim();
-  return TICKER_COLORS[normalizedTicker] || null;
-}
-
-export function hasTickerColor(ticker: string): boolean {
-  const normalizedTicker = ticker.toLowerCase().trim();
-  return normalizedTicker in TICKER_COLORS;
 }

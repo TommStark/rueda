@@ -12,11 +12,7 @@ import ActivityItem from "../components/ActivityItem";
 import PromoBanner from "../components/PromoBanner";
 import HomeScreenSkeleton from "../components/HomeScreenSkeleton";
 import AppHeader from "../../../shared/components/AppHeader";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import { usePortfolio } from "../../portfolio/hooks/usePortfolio";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
 import { useMarket } from "../../market/hooks/useMarket";
@@ -54,7 +50,6 @@ export default function HomeScreen() {
     instruments
       ?.map((inst) => {
         const tickerIcon = getTickerIcon(inst.ticker);
-        const tickerColor = getTickerColor(inst.ticker);
         const hasIcon = hasTickerIcon(inst.ticker);
 
         return {
@@ -66,7 +61,6 @@ export default function HomeScreen() {
           icon: "📈",
           tickerIcon,
           hasTickerIcon: hasIcon,
-          color: { icon: tickerIcon, background: tickerColor || "#f0f0f0" },
         };
       })
       .sort((a, b) => b.changePercentage - a.changePercentage)

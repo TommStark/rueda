@@ -3,11 +3,7 @@ import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { OrderHistoryItem } from "../types/history.types";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import { styles } from "../styles/HistoryCard.styles";
 
 interface HistoryCardProps {
@@ -68,7 +64,6 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
 
   const localIcon = getTickerIcon(order.ticker);
   const hasLocalIcon = hasTickerIcon(order.ticker);
-  const tickerColor = getTickerColor(order.ticker);
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
@@ -76,12 +71,6 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
         <View style={styles.logoContainer}>
           {hasLocalIcon && localIcon ? (
             <Image source={localIcon} style={styles.logo} />
-          ) : tickerColor ? (
-            <View style={[styles.logo, { backgroundColor: tickerColor }]}>
-              <Text style={styles.colorPlaceholderText}>
-                {order.ticker.substring(0, 2).toUpperCase()}
-              </Text>
-            </View>
           ) : (
             <View style={[styles.logo, styles.placeholderLogo]}>
               <Text style={styles.placeholderText}>

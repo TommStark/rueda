@@ -19,11 +19,7 @@ import {
   OrderType,
   OrderStatus,
 } from "../../history/types/history.types";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import SwipeButton from "rn-swipe-button";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
 import { useFavorites } from "../../../shared/context/FavoritesContext";
@@ -50,7 +46,6 @@ export default function NewOrderScreen() {
 
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
-  const tickerColor = getTickerColor(asset.ticker);
 
   const priceChange =
     ((asset.last_price - asset.close_price) / asset.close_price) * 100;
@@ -180,14 +175,6 @@ export default function NewOrderScreen() {
           <View style={styles.assetIconContainer}>
             {hasIcon && tickerIcon ? (
               <Image source={tickerIcon} style={styles.assetIcon} />
-            ) : tickerColor ? (
-              <View
-                style={[styles.assetIcon, { backgroundColor: tickerColor }]}
-              >
-                <Text style={styles.assetIconText}>
-                  {asset.ticker.substring(0, 2).toUpperCase()}
-                </Text>
-              </View>
             ) : (
               <View style={[styles.assetIcon, styles.assetIconPlaceholder]}>
                 <Text style={styles.assetIconText}>

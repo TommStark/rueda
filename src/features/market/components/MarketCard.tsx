@@ -4,11 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { MarketAsset } from "../types/market.types";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import { styles } from "../styles/MarketCard.styles";
 
 interface MarketCardProps {
@@ -23,7 +19,6 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
 
   const localIcon = getTickerIcon(asset.ticker);
   const hasLocalIcon = hasTickerIcon(asset.ticker);
-  const tickerColor = getTickerColor(asset.ticker);
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.7}>
@@ -34,12 +29,6 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
               <Image source={localIcon} style={styles.logo} />
             ) : asset.logo ? (
               <Image source={{ uri: asset.logo }} style={styles.logo} />
-            ) : tickerColor ? (
-              <View style={[styles.logo, { backgroundColor: tickerColor }]}>
-                <Text style={styles.colorPlaceholderText}>
-                  {asset.ticker.substring(0, 2).toUpperCase()}
-                </Text>
-              </View>
             ) : (
               <View style={[styles.logo, styles.placeholderLogo]}>
                 <Text style={styles.placeholderText}>

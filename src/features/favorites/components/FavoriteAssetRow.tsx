@@ -3,11 +3,7 @@ import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { MarketAsset } from "../../market/types/market.types";
-import {
-  getTickerIcon,
-  hasTickerIcon,
-  getTickerColor,
-} from "../../../shared/utils/icons";
+import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import { useFavorites } from "../../../shared/context/FavoritesContext";
 import MiniTrendChart from "./MiniTrendChart";
 import { styles } from "../styles/FavoriteAssetRow.styles";
@@ -24,7 +20,6 @@ export default function FavoriteAssetRow({
   const { toggleFavorite } = useFavorites();
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
-  const tickerColor = getTickerColor(asset.ticker);
 
   const priceChange =
     ((asset.last_price - asset.close_price) / asset.close_price) * 100;
@@ -41,12 +36,6 @@ export default function FavoriteAssetRow({
         <View style={styles.logoContainer}>
           {hasIcon && tickerIcon ? (
             <Image source={tickerIcon} style={styles.logo} />
-          ) : tickerColor ? (
-            <View style={[styles.logo, { backgroundColor: tickerColor }]}>
-              <Text style={styles.logoText}>
-                {asset.ticker.substring(0, 2).toUpperCase()}
-              </Text>
-            </View>
           ) : (
             <View style={[styles.logo, styles.placeholderLogo]}>
               <Text style={styles.logoTextPlaceholder}>

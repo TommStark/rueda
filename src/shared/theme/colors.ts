@@ -84,14 +84,6 @@ export const colors = {
     },
   },
 
-  // Ticker Colors (for icons without images)
-  ticker: {
-    dyca: "#FF6B6B",
-    ircp: "#4ECDC4",
-    garo: "#95E1D3",
-    ars: "#7aebffff",
-  },
-
   // Activity Types (Consolidados con colores del sistema)
   activity: {
     buy: {
