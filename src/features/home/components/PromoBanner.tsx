@@ -51,7 +51,7 @@ export default function PromoBanner() {
     {
       id: "2",
       title: "¿Te gustó esta App?",
-      subtitle: "Contratá al dev que la hizo 🚀",
+      subtitle: "Contratá al dev que la hizo",
       icon: "person-add" as const,
       backgroundColor: "#4caf50",
     },

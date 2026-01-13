@@ -23,6 +23,8 @@ import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import SwipeButton from "rn-swipe-button";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
 import { useFavorites } from "../../../shared/context/FavoritesContext";
+import { usePortfolio } from "../../portfolio/hooks/usePortfolio";
+import { createOrder } from "../api/orders.api";
 import { styles } from "../styles/NewOrderScreen.styles";
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
@@ -35,6 +37,7 @@ export default function NewOrderScreen() {
   const { asset } = route.params;
   const { addOrder } = useOrderHistory();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { data: portfolioData } = usePortfolio();
 
   const [side, setSide] = useState<OrderSide>("BUY");
   const [orderType, setOrderType] = useState<OrderType>("MARKET");
@@ -51,7 +54,13 @@ export default function NewOrderScreen() {
     ((asset.last_price - asset.close_price) / asset.close_price) * 100;
   const isPositive = priceChange >= 0;
 
-  const availableBalance = 5420.5;
+  const totalPortfolioValue =
+    portfolioData?.reduce(
+      (sum, pos) => sum + pos.quantity * pos.last_price,
+      0
+    ) || 0;
+
+  const availableBalance = totalPortfolioValue;
 
   const getCurrentPrice = () => {
     return orderType === "LIMIT" && limitPrice
@@ -106,11 +115,37 @@ export default function NewOrderScreen() {
       return;
     }
 
+    const estimatedTotal = getEstimatedTotal();
+    if (side === "BUY" && estimatedTotal > availableBalance) {
+      alert(
+        `${t("validation.insufficientFunds")}${availableBalance.toLocaleString(
+          "es-AR",
+          {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }
+        )}`
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const orderRequest = {
+        instrument_id: asset.id,
+        side,
+        type: orderType,
+        quantity: quantity,
+        ...(orderType === "LIMIT" && limitPrice
+          ? { price: parseFloat(limitPrice) }
+          : {}),
+      };
+
+      const result = await createOrder(orderRequest);
+
       const orderHistoryItem = {
-        id: `order_${Date.now()}`,
+        id: result.id,
         ticker: asset.ticker,
         instrumentId: asset.id,
         side,
@@ -119,7 +154,7 @@ export default function NewOrderScreen() {
         price: orderType === "LIMIT" ? parseFloat(limitPrice) : undefined,
         executedPrice: asset.last_price,
         timestamp: Date.now(),
-        status: "FILLED" as OrderStatus,
+        status: result.status,
         assetName: asset.name,
       };
 
@@ -184,6 +219,7 @@ export default function NewOrderScreen() {
             )}
           </View>
           <Text style={styles.assetTicker}>{asset.ticker}</Text>
+          <Text style={styles.assetName}>{asset.name}</Text>
           <View style={styles.assetPriceRow}>
             <Text style={styles.assetPrice}>
               ${asset.last_price.toFixed(2)}
@@ -396,47 +432,61 @@ export default function NewOrderScreen() {
                 })}
               </Text>
             </View>
+            {side === "BUY" && getEstimatedTotal() > availableBalance && (
+              <View style={styles.errorContainer}>
+                <Ionicons
+                  name="alert-circle"
+                  size={16}
+                  color={colors.negative}
+                />
+                <Text style={styles.errorText}>
+                  {t("validation.insufficientFundsWarning")}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
-
-        <View style={styles.swipeButtonContainer}>
-          <SwipeButton
-            disabled={isSubmitting || quantity <= 0}
-            disableResetOnTap={true}
-            height={48}
-            onSwipeSuccess={handleSubmitOrder}
-            railBackgroundColor={
-              isSubmitting || quantity <= 0
-                ? colors.border.medium
-                : colors.primary
-            }
-            railBorderColor={
-              isSubmitting || quantity <= 0
-                ? colors.border.medium
-                : colors.primary
-            }
-            railFillBackgroundColor={colors.primaryLight}
-            railFillBorderColor={colors.primaryLight}
-            shouldResetAfterSuccess={false}
-            swipeSuccessThreshold={70}
-            thumbIconBackgroundColor={
-              isSubmitting || quantity <= 0
-                ? colors.background.secondary
-                : colors.primaryLight
-            }
-            thumbIconBorderColor="transparent"
-            title={t("newOrder.swipeToConfirm")}
-            titleColor={colors.text.inverse}
-            titleFontSize={15}
-            width="100%"
-            thumbIconStyles={{
-              borderRadius: 24,
-              width: 44,
-              height: 44,
-            }}
-          />
-        </View>
       </ScrollView>
+
+      <View style={styles.swipeButtonContainer}>
+        <SwipeButton
+          disabled={
+            isSubmitting ||
+            quantity <= 0 ||
+            (side === "BUY" && getEstimatedTotal() > availableBalance)
+          }
+          disableResetOnTap={true}
+          height={30}
+          onSwipeSuccess={handleSubmitOrder}
+          railBackgroundColor={
+            isSubmitting ||
+            quantity <= 0 ||
+            (side === "BUY" && getEstimatedTotal() > availableBalance)
+              ? colors.border.medium
+              : colors.primary
+          }
+          railBorderColor={
+            isSubmitting ||
+            quantity <= 0 ||
+            (side === "BUY" && getEstimatedTotal() > availableBalance)
+              ? colors.border.medium
+              : colors.primary
+          }
+          railFillBackgroundColor={colors.primaryLight}
+          railFillBorderColor={colors.primaryLight}
+          shouldResetAfterSuccess={false}
+          swipeSuccessThreshold={90}
+          thumbIconBackgroundColor={
+            isSubmitting || quantity <= 0
+              ? colors.background.secondary
+              : colors.primaryLight
+          }
+          thumbIconBorderColor="transparent"
+          title={t("newOrder.swipeToConfirm")}
+          titleColor={colors.text.inverse}
+          titleFontSize={13}
+        />
+      </View>
     </SafeAreaView>
   );
 }

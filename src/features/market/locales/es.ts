@@ -42,5 +42,7 @@ export default {
     invalidQuantity: "Cantidad inválida",
     invalidPrice: "Precio inválido",
     orderFailed: "Error al procesar la orden",
+    insufficientFunds: "Fondos insuficientes. Balance disponible: $",
+    insufficientFundsWarning: "Fondos insuficientes para esta operación",
   },
 };

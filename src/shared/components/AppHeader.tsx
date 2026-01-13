@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
@@ -27,9 +27,7 @@ export default function AppHeader({
           sound.unloadAsync();
         }
       });
-    } catch (error) {
-      // Silently fail if sound file doesn't exist
-    }
+    } catch (error) {}
   };
 
   const handleNotificationPress = async () => {
@@ -40,7 +38,10 @@ export default function AppHeader({
   return (
     <View style={styles.header}>
       <TouchableOpacity style={styles.avatar} onPress={onAvatarPress}>
-        <Text style={styles.avatarText}>🙂</Text>
+        <Image
+          source={require("../assets/images/avatar.png")}
+          style={styles.avatarImage}
+        />
       </TouchableOpacity>
       <Text style={styles.screenName}>{screenName}</Text>
       <TouchableOpacity
@@ -49,7 +50,7 @@ export default function AppHeader({
       >
         <Ionicons
           name="notifications-outline"
-          size={24}
+          size={20}
           color={colors.text.secondary}
         />
       </TouchableOpacity>

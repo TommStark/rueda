@@ -7,4 +7,5 @@ export const API_ENDPOINTS = {
   MARKET: "/instruments",
   MARKET_SEARCH: "/search",
   PORTFOLIO: "/portfolio",
+  ORDERS: "/orders",
 } as const;

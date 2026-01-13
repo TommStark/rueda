@@ -70,4 +70,10 @@ export const styles = StyleSheet.create({
     color: colors.text.quaternary,
     textAlign: "center",
   },
+  emptyFilterText: {
+    color: colors.text.tertiary,
+    textAlign: "center",
+    fontSize: 14,
+    marginTop: 12,
+  },
 });

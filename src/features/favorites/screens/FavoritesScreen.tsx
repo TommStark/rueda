@@ -1,5 +1,6 @@
 import { View, FlatList, TouchableOpacity } from "react-native";
 import { Text } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "../../../shared/hooks/useTranslation";
@@ -9,6 +10,7 @@ import { useFavorites } from "../../../shared/context/FavoritesContext";
 import { useMarket } from "../../market/hooks/useMarket";
 import FavoriteAssetRow from "../components/FavoriteAssetRow";
 import { MarketAsset } from "../../market/types/market.types";
+import { colors } from "../../../shared/theme/colors";
 import { styles } from "../styles/FavoritesScreen.styles";
 
 type FavoritesNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -29,6 +31,7 @@ export default function FavoritesScreen() {
 
   const renderEmptyState = () => (
     <View style={styles.emptyContainer}>
+      <Ionicons name="star-outline" size={64} color={colors.text.quaternary} />
       <Text style={styles.emptyTitle}>{t("empty.title")}</Text>
       <Text style={styles.emptySubtitle}>{t("empty.subtitle")}</Text>
     </View>

@@ -1,10 +1,10 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { View, FlatList, ScrollView } from "react-native";
 import { Text, Button, Chip } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useOrderHistory } from "../context/OrderHistoryContext";
@@ -24,6 +24,14 @@ export default function HistoryScreen() {
   const navigation = useNavigation<HistoryScreenNavigationProp>();
   const { orders, clearHistory, isLoading } = useOrderHistory();
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setSelectedFilter("ALL");
+      };
+    }, [])
+  );
 
   const filteredOrders = useMemo(() => {
     if (selectedFilter === "ALL") return orders;
@@ -155,31 +163,57 @@ export default function HistoryScreen() {
     );
   }
 
+  const getEmptyFilterMessage = () => {
+    switch (selectedFilter) {
+      case "FILLED":
+        return t("emptyFilters.filled");
+      case "PENDING":
+        return t("emptyFilters.pending");
+      case "REJECTED":
+        return t("emptyFilters.rejected");
+      default:
+        return t("empty.subtitle");
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
       <AppHeader screenName={t("title")} />
       <View style={styles.container}>
         {renderFilters()}
-        <ScrollView
-          style={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 0 }}
-        >
-          {Object.entries(groupedOrders).map(([monthYear, monthOrders]) => (
-            <View key={monthYear}>
-              <Text variant="labelMedium" style={styles.monthHeader}>
-                {monthYear}
-              </Text>
-              {monthOrders.map((order) => (
-                <HistoryCard
-                  key={order.id}
-                  order={order}
-                  onPress={() => handleOrderPress(order)}
-                />
-              ))}
-            </View>
-          ))}
-        </ScrollView>
+        {filteredOrders.length === 0 ? (
+          <View style={styles.centerContainer}>
+            <MaterialCommunityIcons
+              name="filter-off-outline"
+              size={48}
+              color={colors.border.dark}
+            />
+            <Text variant="bodyMedium" style={styles.emptyFilterText}>
+              {getEmptyFilterMessage()}
+            </Text>
+          </View>
+        ) : (
+          <ScrollView
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 0 }}
+          >
+            {Object.entries(groupedOrders).map(([monthYear, monthOrders]) => (
+              <View key={monthYear}>
+                <Text variant="labelMedium" style={styles.monthHeader}>
+                  {monthYear}
+                </Text>
+                {monthOrders.map((order) => (
+                  <HistoryCard
+                    key={order.id}
+                    order={order}
+                    onPress={() => handleOrderPress(order)}
+                  />
+                ))}
+              </View>
+            ))}
+          </ScrollView>
+        )}
       </View>
     </SafeAreaView>
   );

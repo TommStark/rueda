@@ -105,7 +105,7 @@ export const colors = {
   },
 
   // Favorites
-  favorite: "#ff9800", // Usa warning color para consistencia
+  favorite: "#6200ee", // Usa primary color (morado)
 } as const;
 
 // Type helper para autocompletado
