@@ -8,7 +8,6 @@ export const useTranslation = (
     | "portfolio"
     | "favorites"
     | "history"
-    | "orders"
     | "navigation"
 ) => {
   return useI18nTranslation(namespace);

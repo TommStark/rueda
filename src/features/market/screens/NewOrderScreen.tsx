@@ -18,8 +18,7 @@ import {
   OrderSide,
   OrderType,
   OrderStatus,
-} from "../../orders/types/orders.types";
-import { createOrder } from "../../orders/api/orders.api";
+} from "../../history/types/history.types";
 import {
   getTickerIcon,
   hasTickerIcon,
@@ -34,7 +33,7 @@ type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
 type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function NewOrderScreen() {
-  const { t } = useTranslation("orders");
+  const { t } = useTranslation("market");
   const navigation = useNavigation<NewOrderNavigationProp>();
   const route = useRoute<NewOrderRouteProp>();
   const { asset } = route.params;
@@ -115,18 +114,8 @@ export default function NewOrderScreen() {
     setIsSubmitting(true);
 
     try {
-      const orderData = {
-        instrument_id: asset.id,
-        side,
-        type: orderType,
-        quantity: quantity,
-        ...(orderType === "LIMIT" && { price: parseFloat(limitPrice) }),
-      };
-
-      const result = await createOrder(orderData);
-
       const orderHistoryItem = {
-        id: result.id,
+        id: `order_${Date.now()}`,
         ticker: asset.ticker,
         instrumentId: asset.id,
         side,
@@ -135,7 +124,7 @@ export default function NewOrderScreen() {
         price: orderType === "LIMIT" ? parseFloat(limitPrice) : undefined,
         executedPrice: asset.last_price,
         timestamp: Date.now(),
-        status: result.status,
+        status: "FILLED" as OrderStatus,
         assetName: asset.name,
       };
 
@@ -143,7 +132,7 @@ export default function NewOrderScreen() {
 
       navigation.replace("OrderReceipt", { order: orderHistoryItem });
     } catch (error: any) {
-      alert(error?.response?.data?.message || t("validation.orderFailed"));
+      alert(t("validation.orderFailed"));
     } finally {
       setIsSubmitting(false);
     }
