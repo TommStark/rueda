@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, ViewStyle, DimensionValue } from 'react-native';
 import { colors } from '../../../shared/theme/colors';
 import { styles } from '../styles/HomeScreenSkeleton.styles';
 
@@ -7,9 +7,9 @@ function SkeletonBox({
   height,
   style,
 }: {
-  width: number | string;
+  width: DimensionValue;
   height: number;
-  style?: any;
+  style?: ViewStyle;
 }) {
   return (
     <View

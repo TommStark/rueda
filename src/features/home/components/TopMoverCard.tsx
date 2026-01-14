@@ -1,4 +1,4 @@
-import { View, Image, ImageSourcePropType } from 'react-native';
+import { View, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../shared/theme/colors';
@@ -11,8 +11,8 @@ interface TopMoverCardProps {
 
 export default function TopMoverCard({ mover }: TopMoverCardProps) {
   const isPositive = mover.changePercentage >= 0;
-  const tickerIcon = (mover as any).tickerIcon as ImageSourcePropType | null;
-  const hasIcon = (mover as any).hasTickerIcon as boolean;
+  const tickerIcon = mover.tickerIcon;
+  const hasIcon = mover.hasTickerIcon ?? false;
 
   return (
     <View style={styles.container}>

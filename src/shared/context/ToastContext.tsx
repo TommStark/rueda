@@ -10,7 +10,7 @@ import {
 export type ToastType = 'success' | 'error' | 'info';
 
 interface ToastContextValue {
-  showToast: (msg: string, toastType?: ToastType, duration?: number) => void;
+  showToast: (message: string, type?: ToastType, duration?: number) => void;
   hideToast: () => void;
   visible: boolean;
   message: string;

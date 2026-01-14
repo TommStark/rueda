@@ -22,12 +22,14 @@ export default function AppHeader({
         require('../assets/sounds/bell.mp3')
       );
       await sound.playAsync();
-      sound.setOnPlaybackStatusUpdate((status: any) => {
+      sound.setOnPlaybackStatusUpdate(status => {
         if (status.isLoaded && status.didJustFinish) {
           sound.unloadAsync();
         }
       });
-    } catch (error) {}
+    } catch {
+      // Silently fail if audio cannot be played
+    }
   };
 
   const handleNotificationPress = async () => {

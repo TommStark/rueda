@@ -45,7 +45,8 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
         const parsed = JSON.parse(stored);
         setFavorites(parsed);
       }
-    } catch (error) {
+    } catch {
+      // Silently fail - favorites are not critical for app functionality
     } finally {
       setIsLoading(false);
     }
@@ -73,8 +74,8 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
             wasAdded ? 'success' : 'info'
           );
         }, 100);
-      } catch (error) {
-        console.error('Error toggling favorite:', error);
+      } catch {
+        showToast('Error updating favorite', 'error');
       }
     },
     [showToast, t]
@@ -91,7 +92,9 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setFavorites([]);
-    } catch (error) {}
+    } catch {
+      // Silently fail - clearing is not critical
+    }
   }, []);
 
   return (

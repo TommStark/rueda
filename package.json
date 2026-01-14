@@ -16,6 +16,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "quality": "yarn lint:check && yarn format:check && yarn typecheck && yarn test",
+    "quality:fix": "yarn lint && yarn format && yarn typecheck && yarn test",
     "prepare": "husky install"
   },
   "dependencies": {

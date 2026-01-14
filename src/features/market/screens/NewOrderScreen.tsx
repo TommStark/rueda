@@ -162,7 +162,7 @@ export default function NewOrderScreen() {
       await addOrder(orderHistoryItem);
 
       navigation.replace('OrderReceipt', { order: orderHistoryItem });
-    } catch (error) {
+    } catch {
       alert(t('validation.orderFailed'));
     } finally {
       setIsSubmitting(false);

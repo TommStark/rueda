@@ -27,7 +27,8 @@ declare module 'rn-swipe-button' {
     thumbIconBackgroundColor?: string;
     thumbIconBorderColor?: string;
     thumbIconComponent?: React.ReactNode;
-    thumbIconImageSource?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    thumbIconImageSource?: any; // Third-party library type - keeping original signature
     thumbIconStyles?: ViewStyle;
     title?: string;
     titleColor?: string;

@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from 'react-native';
+
 export interface RecentActivity {
   id: string;
   type: 'buy' | 'sell' | 'deposit' | 'withdraw';
@@ -16,6 +18,6 @@ export interface TopMover {
   change: number;
   changePercentage: number;
   icon: string;
-  tickerIcon?: any;
+  tickerIcon?: ImageSourcePropType | null;
   hasTickerIcon?: boolean;
 }

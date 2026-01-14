@@ -102,11 +102,11 @@ export default function HomeScreen() {
   });
 
   const handleViewAllActivity = () => {
-    navigation.navigate('History' as any);
+    navigation.navigate('MainTabs', { screen: 'History' });
   };
 
   const handleViewAllFavorites = () => {
-    navigation.navigate('Favorites' as any);
+    navigation.navigate('MainTabs', { screen: 'Favorites' });
   };
 
   const handleFavoritePress = (ticker: string) => {
@@ -218,7 +218,9 @@ export default function HomeScreen() {
                 {t('topMovers.title')}
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate('Market' as any)}
+                onPress={() =>
+                  navigation.navigate('MainTabs', { screen: 'Market' })
+                }
               >
                 <Text variant="bodySmall" style={styles.seeAllButton}>
                   {t('topMovers.seeAll')}

@@ -41,29 +41,29 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
         const parsed = JSON.parse(stored);
         setOrders(parsed);
       }
-    } catch (error) {
-      console.error('Error loading order history:', error);
+    } catch {
+      // Silently fail - order history is not critical for app functionality
     } finally {
       setIsLoading(false);
     }
   };
 
   const addOrder = useCallback(async (order: OrderHistoryItem) => {
-    try {
-      setOrders(prev => {
-        const updated = [order, ...prev];
-        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        return updated;
+    setOrders(prev => {
+      const updated = [order, ...prev];
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated)).catch(() => {
+        // Silently ignore storage errors - order is still added to state
       });
-    } catch (error) {}
+      return updated;
+    });
   }, []);
 
   const clearHistory = useCallback(async () => {
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setOrders([]);
-    } catch (error) {
-      console.error('Error clearing history:', error);
+    } catch {
+      // Silently fail - clearing is not critical
     }
   }, []);
 

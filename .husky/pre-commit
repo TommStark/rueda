@@ -1,5 +1,2 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-echo "🔍 Running quality checks..."
-yarn quality
+echo "🔧 Running quality checks with auto-fix..."
+yarn quality:fix

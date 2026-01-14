@@ -25,7 +25,7 @@ export default function FavoriteAssetRow({
   const priceChange = calcInstrumentReturn(asset.last_price, asset.close_price);
   const isPositive = priceChange >= 0;
 
-  const handleStarPress = (e: any) => {
+  const handleStarPress = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
     toggleFavorite(asset.ticker);
   };

@@ -51,7 +51,7 @@ export default function ActivityItem({ activity }: ActivityItemProps) {
         ]}
       >
         <MaterialCommunityIcons
-          name={activity.icon as any}
+          name={activity.icon as keyof typeof MaterialCommunityIcons.glyphMap}
           size={24}
           color={getIconColor()}
         />

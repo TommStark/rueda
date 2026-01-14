@@ -6,7 +6,7 @@ import { styles } from '../styles/FilterTabs.styles';
 
 interface FilterTabsProps {
   selectedSort: SortType;
-  onSortChange: (sort: SortType) => void;
+  onSortChange: (sortType: SortType) => void;
 }
 
 export default function FilterTabs({
