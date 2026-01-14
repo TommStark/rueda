@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../shared/theme/colors';
 import { MarketAsset } from '../../market/types/market.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/FavoriteItemCompact.styles';
 
 interface FavoriteItemCompactProps {
@@ -18,8 +19,7 @@ export default function FavoriteItemCompact({
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
 
-  const priceChange =
-    ((asset.last_price - asset.close_price) / asset.close_price) * 100;
+  const priceChange = calcInstrumentReturn(asset.last_price, asset.close_price);
   const isPositive = priceChange >= 0;
 
   return (

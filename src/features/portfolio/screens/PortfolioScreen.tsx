@@ -15,6 +15,10 @@ import AppHeader from '../../../shared/components/AppHeader';
 import GreenStatusBar from '../../../shared/components/GreenStatusBar';
 import { PortfolioPosition } from '../types/portfolio.types';
 import { RootStackParamList } from '../../../navigation/types';
+import {
+  calcMarketValue,
+  calcCostBasis,
+} from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/PortfolioScreen.styles';
 
 export default function PortfolioScreen() {
@@ -25,12 +29,12 @@ export default function PortfolioScreen() {
   const apiError = usePortfolioError(error);
 
   const totalValue = data?.reduce(
-    (sum, pos) => sum + pos.quantity * pos.last_price,
+    (sum, pos) => sum + calcMarketValue(pos.quantity, pos.last_price),
     0
   );
 
   const totalCostValue = data?.reduce(
-    (sum, pos) => sum + pos.quantity * pos.avg_cost_price,
+    (sum, pos) => sum + calcCostBasis(pos.quantity, pos.avg_cost_price),
     0
   );
 

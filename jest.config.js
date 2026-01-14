@@ -1,9 +1,6 @@
 module.exports = {
-  preset: "react-native",
-  setupFilesAfterEnv: [
-    "<rootDir>/jest.setup.js",
-    "@testing-library/jest-native/extend-expect",
-  ],
+  preset: "ts-jest",
+  testEnvironment: "node",
   testMatch: ["**/__tests__/**/*.(ts|tsx|js)", "**/*.(test|spec).(ts|tsx|js)"],
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
@@ -15,10 +12,6 @@ module.exports = {
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov", "html"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
-  transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
-  },
-  testEnvironment: "jsdom",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },

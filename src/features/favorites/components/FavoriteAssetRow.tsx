@@ -5,6 +5,7 @@ import { colors } from '../../../shared/theme/colors';
 import { MarketAsset } from '../../market/types/market.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import MiniTrendChart from './MiniTrendChart';
 import { styles } from '../styles/FavoriteAssetRow.styles';
 
@@ -21,8 +22,7 @@ export default function FavoriteAssetRow({
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
 
-  const priceChange =
-    ((asset.last_price - asset.close_price) / asset.close_price) * 100;
+  const priceChange = calcInstrumentReturn(asset.last_price, asset.close_price);
   const isPositive = priceChange >= 0;
 
   const handleStarPress = (e: any) => {

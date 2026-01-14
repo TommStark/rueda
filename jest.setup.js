@@ -1,5 +1,11 @@
 // Jest setup file
-import 'react-native-gesture-handler/jestSetup';
+
+// Only setup React Native mocks if running component tests
+const isComponentTest = process.env.JEST_TEST_TYPE === 'component';
+
+if (isComponentTest) {
+  require('react-native-gesture-handler/jestSetup');
+}
 
 // Mock react-native modules
 jest.mock('react-native-reanimated', () => {

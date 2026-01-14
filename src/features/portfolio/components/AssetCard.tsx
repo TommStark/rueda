@@ -2,6 +2,11 @@ import { View, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { PortfolioPosition } from '../types/portfolio.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import {
+  calcMarketValue,
+  calcGain,
+  calcTotalReturnPct,
+} from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/AssetCard.styles';
 
 interface AssetCardProps {
@@ -24,13 +29,17 @@ const getAssetIcon = (ticker: string): string => {
 };
 
 export default function AssetCard({ position }: AssetCardProps) {
-  const currentValue = position.quantity * position.last_price;
-  const totalGain =
-    (position.last_price - position.avg_cost_price) * position.quantity;
-  const totalReturn =
-    ((position.last_price - position.avg_cost_price) /
-      position.avg_cost_price) *
-    100;
+  const currentValue = calcMarketValue(position.quantity, position.last_price);
+  const totalGain = calcGain(
+    position.quantity,
+    position.last_price,
+    position.avg_cost_price
+  );
+  const totalReturn = calcTotalReturnPct(
+    position.quantity,
+    position.last_price,
+    position.avg_cost_price
+  );
   const isPositive = totalGain >= 0;
 
   const tickerIcon = getTickerIcon(position.ticker);

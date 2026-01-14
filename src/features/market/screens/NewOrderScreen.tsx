@@ -22,6 +22,11 @@ import { useOrderHistory } from '../../history/context/OrderHistoryContext';
 import { useFavorites } from '../../../shared/context/FavoritesContext';
 import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
 import { createOrder } from '../api/orders.api';
+import {
+  calcInstrumentReturn,
+  calcMarketValue,
+  calcQtyFromAmount,
+} from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/NewOrderScreen.styles';
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, 'NewOrder'>;
@@ -47,13 +52,12 @@ export default function NewOrderScreen() {
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
 
-  const priceChange =
-    ((asset.last_price - asset.close_price) / asset.close_price) * 100;
+  const priceChange = calcInstrumentReturn(asset.last_price, asset.close_price);
   const isPositive = priceChange >= 0;
 
   const totalPortfolioValue =
     portfolioData?.reduce(
-      (sum, pos) => sum + pos.quantity * pos.last_price,
+      (sum, pos) => sum + calcMarketValue(pos.quantity, pos.last_price),
       0
     ) || 0;
 
@@ -75,7 +79,7 @@ export default function NewOrderScreen() {
     setInvestmentAmount(amount);
     const amountNum = parseFloat(amount);
     if (!isNaN(amountNum) && amountNum > 0) {
-      const calculatedQty = Math.floor(amountNum / getCurrentPrice());
+      const calculatedQty = calcQtyFromAmount(amountNum, getCurrentPrice());
       setQuantity(calculatedQty);
     } else {
       setQuantity(0);

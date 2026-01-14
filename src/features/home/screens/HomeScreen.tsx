@@ -23,6 +23,11 @@ import { useMarket } from '../../market/hooks/useMarket';
 import { useFavorites } from '../../../shared/context/FavoritesContext';
 import { useDebugClear } from '../components/DebugClearButton';
 import { RootStackParamList } from '../../../navigation/types';
+import {
+  calcInstrumentReturn,
+  calcMarketValue,
+  calcCostBasis,
+} from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/HomeScreen.styles';
 
 export default function HomeScreen() {
@@ -41,13 +46,13 @@ export default function HomeScreen() {
 
   const totalValue =
     portfolioData?.reduce(
-      (sum, pos) => sum + pos.quantity * pos.last_price,
+      (sum, pos) => sum + calcMarketValue(pos.quantity, pos.last_price),
       0
     ) || 0;
 
   const totalCostValue =
     portfolioData?.reduce(
-      (sum, pos) => sum + pos.quantity * pos.avg_cost_price,
+      (sum, pos) => sum + calcCostBasis(pos.quantity, pos.avg_cost_price),
       0
     ) || 0;
 
@@ -67,8 +72,10 @@ export default function HomeScreen() {
           name: inst.name,
           price: inst.last_price,
           change: inst.last_price - inst.close_price,
-          changePercentage:
-            ((inst.last_price - inst.close_price) / inst.close_price) * 100,
+          changePercentage: calcInstrumentReturn(
+            inst.last_price,
+            inst.close_price
+          ),
           icon: '📈',
           tickerIcon,
           hasTickerIcon: hasIcon,

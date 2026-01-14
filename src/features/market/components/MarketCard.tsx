@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../../shared/theme/colors';
 import { MarketAsset } from '../types/market.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/MarketCard.styles';
 
 interface MarketCardProps {
@@ -13,8 +14,7 @@ interface MarketCardProps {
 }
 
 export default function MarketCard({ asset, onPress }: MarketCardProps) {
-  const priceChange =
-    ((asset.last_price - asset.close_price) / asset.close_price) * 100;
+  const priceChange = calcInstrumentReturn(asset.last_price, asset.close_price);
   const isPositive = priceChange >= 0;
 
   const localIcon = getTickerIcon(asset.ticker);

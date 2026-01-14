@@ -16,6 +16,7 @@ import GreenStatusBar from '../../../shared/components/GreenStatusBar';
 import { MarketAsset, SortType, SORT_TYPE } from '../types/market.types';
 import { useDebouncedValue } from '../../../shared/hooks/useDebouncedValue';
 import { RootStackParamList } from '../../../navigation/types';
+import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/MarketScreen.styles';
 
 type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -50,18 +51,14 @@ export default function MarketScreen() {
     switch (sortType) {
       case SORT_TYPE.GAINERS:
         return sorted.sort((a, b) => {
-          const changeA =
-            ((a.last_price - a.close_price) / a.close_price) * 100;
-          const changeB =
-            ((b.last_price - b.close_price) / b.close_price) * 100;
+          const changeA = calcInstrumentReturn(a.last_price, a.close_price);
+          const changeB = calcInstrumentReturn(b.last_price, b.close_price);
           return changeB - changeA;
         });
       case SORT_TYPE.LOSERS:
         return sorted.sort((a, b) => {
-          const changeA =
-            ((a.last_price - a.close_price) / a.close_price) * 100;
-          const changeB =
-            ((b.last_price - b.close_price) / b.close_price) * 100;
+          const changeA = calcInstrumentReturn(a.last_price, a.close_price);
+          const changeB = calcInstrumentReturn(b.last_price, b.close_price);
           return changeA - changeB;
         });
       case SORT_TYPE.A_Z:
