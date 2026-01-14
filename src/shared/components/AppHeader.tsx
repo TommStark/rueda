@@ -1,7 +1,6 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { Audio } from 'expo-av';
 import { colors } from '../theme/colors';
 import { styles } from './styles/AppHeader.styles';
 
@@ -16,24 +15,7 @@ export default function AppHeader({
   onNotificationPress,
   onAvatarPress,
 }: AppHeaderProps) {
-  const playBellSound = async () => {
-    try {
-      const { sound } = await Audio.Sound.createAsync(
-        require('../assets/sounds/bell.mp3')
-      );
-      await sound.playAsync();
-      sound.setOnPlaybackStatusUpdate(status => {
-        if (status.isLoaded && status.didJustFinish) {
-          sound.unloadAsync();
-        }
-      });
-    } catch {
-      // Silently fail if audio cannot be played
-    }
-  };
-
-  const handleNotificationPress = async () => {
-    await playBellSound();
+  const handleNotificationPress = () => {
     onNotificationPress?.();
   };
 

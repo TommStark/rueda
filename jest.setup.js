@@ -15,22 +15,6 @@ jest.mock('react-native-reanimated', () => {
 });
 
 // Mock expo modules
-jest.mock('expo-av', () => ({
-  Audio: {
-    Sound: {
-      createAsync: jest.fn(() =>
-        Promise.resolve({
-          sound: {
-            playAsync: jest.fn(),
-            unloadAsync: jest.fn(),
-            setOnPlaybackStatusUpdate: jest.fn(),
-          },
-        })
-      ),
-    },
-  },
-}));
-
 jest.mock('expo-linear-gradient', () => ({
   LinearGradient: 'LinearGradient',
 }));
