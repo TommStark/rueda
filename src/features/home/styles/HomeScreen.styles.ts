@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
   },
   centerContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   balanceCard: {
     backgroundColor: colors.background.card,
@@ -28,19 +28,19 @@ export const styles = StyleSheet.create({
     elevation: 3,
   },
   balanceHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 8,
   },
   balanceLabelRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   availableBadge: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: colors.primaryLight,
     paddingHorizontal: 6,
     paddingVertical: 2,
@@ -49,27 +49,27 @@ export const styles = StyleSheet.create({
   },
   availableText: {
     fontSize: 10,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.white,
   },
   balanceLabel: {
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.tertiary,
     letterSpacing: 0.5,
     marginBottom: 8,
   },
   balanceAmount: {
     fontSize: 40,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 8,
     letterSpacing: -1.5,
   },
   changeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 12,
   },
   currencyBadge: {
@@ -80,17 +80,17 @@ export const styles = StyleSheet.create({
   },
   currencyText: {
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.tertiary,
   },
   changeRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
   },
   changeText: {
     fontSize: 13,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   positive: {
     color: colors.positive,
@@ -102,19 +102,19 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     marginBottom: 16,
   },
   sectionTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.text.secondary,
   },
   seeAllButton: {
     color: colors.primary,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   topMoversContainer: {
     paddingHorizontal: 20,
@@ -124,7 +124,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.card,
     marginHorizontal: 20,
     borderRadius: 16,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   clearButton: {
     backgroundColor: colors.negative,
@@ -132,15 +132,15 @@ export const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 12,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 8,
   },
   clearButtonText: {
     color: colors.text.inverse,
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   emptyActivityContainer: {
     backgroundColor: colors.background.card,
@@ -148,24 +148,24 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     paddingVertical: 48,
     paddingHorizontal: 24,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emptyActivityTitle: {
     color: colors.text.secondary,
-    fontWeight: "600",
+    fontWeight: '600',
     marginTop: 16,
     marginBottom: 8,
   },
   emptyActivityMessage: {
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
   },
   favoritesContainer: {
     backgroundColor: colors.background.card,
     marginHorizontal: 20,
     borderRadius: 16,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   emptyFavoritesContainer: {
     backgroundColor: colors.background.card,
@@ -173,24 +173,24 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     paddingVertical: 32,
     paddingHorizontal: 24,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emptyFavoritesTitle: {
     color: colors.text.secondary,
-    fontWeight: "600",
+    fontWeight: '600',
     marginTop: 12,
     marginBottom: 4,
   },
   emptyFavoritesMessage: {
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 12,
   },
   protectionSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: 12,
     marginBottom: 32,
@@ -203,7 +203,7 @@ export const styles = StyleSheet.create({
   protectionText: {
     fontSize: 11,
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
     flex: 1,
   },
 });

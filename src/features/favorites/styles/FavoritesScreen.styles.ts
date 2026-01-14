@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,12 +14,12 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     letterSpacing: -0.5,
   },
   tableHeader: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 20,
     paddingVertical: 12,
     backgroundColor: colors.background.secondary,
@@ -29,22 +29,22 @@ export const styles = StyleSheet.create({
   columnHeader: {
     flex: 1,
     fontSize: 11,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.quaternary,
     letterSpacing: 0.5,
   },
   columnHeaderRight: {
     width: 80,
     fontSize: 11,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.quaternary,
     letterSpacing: 0.5,
-    textAlign: "right",
+    textAlign: 'right',
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   loadingText: {
     fontSize: 14,
@@ -52,8 +52,8 @@ export const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 40,
   },
   emptyListContent: {
@@ -61,14 +61,14 @@ export const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 20,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 8,
   },
   emptySubtitle: {
     fontSize: 14,
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
     lineHeight: 20,
   },
 });

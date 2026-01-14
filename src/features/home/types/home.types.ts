@@ -1,6 +1,6 @@
 export interface RecentActivity {
   id: string;
-  type: "buy" | "sell" | "deposit" | "withdraw";
+  type: 'buy' | 'sell' | 'deposit' | 'withdraw';
   ticker?: string;
   amount: number;
   date: string;

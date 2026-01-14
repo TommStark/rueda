@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   safeArea: {
@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
   },
   centerContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 16,
     padding: 16,
   },
@@ -23,26 +23,26 @@ export const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 32,
     padding: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   balanceLabel: {
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.tertiary,
     letterSpacing: 0.5,
     marginBottom: 8,
   },
   balanceAmount: {
     fontSize: 40,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 8,
     letterSpacing: -1.5,
   },
   changeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 12,
   },
   currencyBadge: {
@@ -53,35 +53,35 @@ export const styles = StyleSheet.create({
   },
   currencyText: {
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.tertiary,
   },
   changeRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
   },
   changeText: {
     fontSize: 13,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   assetsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     marginBottom: 16,
   },
   assetsTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     letterSpacing: -0.3,
   },
   seeAllText: {
     fontSize: 13,
     color: colors.primary,
-    fontWeight: "700",
+    fontWeight: '700',
     letterSpacing: 0.5,
   },
   assetsList: {
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
   },
   errorMessage: {
     color: colors.text.tertiary,
-    textAlign: "center",
+    textAlign: 'center',
   },
   subtitle: {
     color: colors.text.tertiary,

@@ -1,19 +1,19 @@
-import { Snackbar } from "react-native-paper";
-import { StyleSheet } from "react-native";
-import { useMemo } from "react";
-import { useToast } from "../context/ToastContext";
-import { colors } from "../theme/colors";
+import { Snackbar } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { useMemo } from 'react';
+import { useToast } from '../context/ToastContext';
+import { colors } from '../theme/colors';
 
 export default function Toast() {
   const { visible, message, type, hideToast } = useToast();
 
   const backgroundColor = useMemo(() => {
     switch (type) {
-      case "success":
+      case 'success':
         return colors.positive;
-      case "error":
+      case 'error':
         return colors.negative;
-      case "info":
+      case 'info':
       default:
         return colors.text.primary;
     }
@@ -26,7 +26,7 @@ export default function Toast() {
       duration={2000}
       style={[styles.snackbar, { backgroundColor }]}
       action={{
-        label: "",
+        label: '',
         onPress: hideToast,
       }}
     >

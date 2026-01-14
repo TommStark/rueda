@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -15,18 +15,18 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
   },
   balanceHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 8,
   },
   changeRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   bannersContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 20,
     marginVertical: 16,
   },
@@ -34,14 +34,14 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     marginBottom: 16,
   },
   topMoversRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 20,
     gap: 12,
   },
@@ -52,31 +52,31 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: colors.border.light,
-    alignItems: "center",
+    alignItems: 'center',
   },
   activityContainer: {
     backgroundColor: colors.background.card,
     marginHorizontal: 20,
     borderRadius: 16,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   activityItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: colors.border.light,
   },
   activityLeft: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   activityInfo: {
     gap: 4,
   },
   activityRight: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
 });

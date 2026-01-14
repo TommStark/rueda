@@ -1,13 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 import {
   Animated,
   StyleSheet,
   View,
   ViewStyle,
   DimensionValue,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { colors } from "../theme/colors";
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { colors } from '../theme/colors';
 
 interface SkeletonProps {
   width?: DimensionValue;
@@ -17,7 +17,7 @@ interface SkeletonProps {
 }
 
 export default function Skeleton({
-  width = "100%",
+  width = '100%',
   height = 20,
   borderRadius = 4,
   style,
@@ -54,7 +54,7 @@ export default function Skeleton({
           width,
           height,
           borderRadius,
-          overflow: "hidden" as const,
+          overflow: 'hidden' as const,
         },
         style,
       ]}

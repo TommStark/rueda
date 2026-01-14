@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   safeArea: {
@@ -11,8 +11,8 @@ export const styles = StyleSheet.create({
   },
   centerContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 16,
     padding: 16,
   },
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   filtersContainer: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    alignItems: "center",
+    alignItems: 'center',
   },
   filterChip: {
     marginRight: 8,
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   },
   filterChipTextSelected: {
     color: colors.text.inverse,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   scrollView: {
     flex: 1,
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     color: colors.text.quaternary,
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: '600',
     letterSpacing: 0.5,
   },
   emptyTitle: {
@@ -68,11 +68,11 @@ export const styles = StyleSheet.create({
   },
   emptySubtitle: {
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
   },
   emptyFilterText: {
     color: colors.text.tertiary,
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 14,
     marginTop: 12,
   },

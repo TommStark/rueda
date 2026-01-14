@@ -1,6 +1,6 @@
-import apiClient from "../../../shared/api/client";
-import { API_ENDPOINTS } from "../../../shared/constants/api";
-import { MarketAsset } from "../types/market.types";
+import apiClient from '../../../shared/api/client';
+import { API_ENDPOINTS } from '../../../shared/constants/api';
+import { MarketAsset } from '../types/market.types';
 
 export interface FetchMarketAssetsParams {
   search?: string;

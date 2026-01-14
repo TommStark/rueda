@@ -1,6 +1,6 @@
-import { View } from "react-native";
-import { colors } from "../../../shared/theme/colors";
-import { styles } from "../styles/HomeScreenSkeleton.styles";
+import { View } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
+import { styles } from '../styles/HomeScreenSkeleton.styles';
 
 function SkeletonBox({
   width,
@@ -61,7 +61,7 @@ export default function HomeScreenSkeleton() {
           <SkeletonBox width={60} height={16} />
         </View>
         <View style={styles.topMoversRow}>
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[1, 2, 3, 4, 5].map(i => (
             <View key={i} style={styles.topMoverCard}>
               <SkeletonBox
                 width={48}
@@ -83,7 +83,7 @@ export default function HomeScreenSkeleton() {
           <SkeletonBox width={80} height={16} />
         </View>
         <View style={styles.activityContainer}>
-          {[1, 2, 3, 4].map((i) => (
+          {[1, 2, 3, 4].map(i => (
             <View key={i} style={styles.activityItem}>
               <View style={styles.activityLeft}>
                 <SkeletonBox

@@ -1,27 +1,27 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { useNavigation } from "@react-navigation/native";
-import { useTranslation } from "../../../shared/hooks/useTranslation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { usePortfolio, usePortfolioError } from "../hooks/usePortfolio";
-import AssetCard from "../components/AssetCard";
-import AssetCardSkeleton from "../components/AssetCardSkeleton";
-import PortfolioBalanceSkeleton from "../components/PortfolioBalanceSkeleton";
-import SimpleBalanceChart from "../components/SimpleBalanceChart";
-import AppHeader from "../../../shared/components/AppHeader";
-import GreenStatusBar from "../../../shared/components/GreenStatusBar";
-import { PortfolioPosition } from "../types/portfolio.types";
-import { RootStackParamList } from "../../../navigation/types";
-import { styles } from "../styles/PortfolioScreen.styles";
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { usePortfolio, usePortfolioError } from '../hooks/usePortfolio';
+import AssetCard from '../components/AssetCard';
+import AssetCardSkeleton from '../components/AssetCardSkeleton';
+import PortfolioBalanceSkeleton from '../components/PortfolioBalanceSkeleton';
+import SimpleBalanceChart from '../components/SimpleBalanceChart';
+import AppHeader from '../../../shared/components/AppHeader';
+import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import { PortfolioPosition } from '../types/portfolio.types';
+import { RootStackParamList } from '../../../navigation/types';
+import { styles } from '../styles/PortfolioScreen.styles';
 
 export default function PortfolioScreen() {
-  const { t } = useTranslation("portfolio");
+  const { t } = useTranslation('portfolio');
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const { data, isLoading, error, refetch, isRefetching } = usePortfolio();
+  const { data, isLoading, error } = usePortfolio();
   const apiError = usePortfolioError(error);
 
   const totalValue = data?.reduce(
@@ -76,10 +76,10 @@ export default function PortfolioScreen() {
         <View style={styles.centerContainer}>
           <Ionicons name="alert-circle" size={48} color={colors.status.error} />
           <Text variant="headlineSmall" style={styles.errorTitle}>
-            {t("errors.title")}
+            {t('errors.title')}
           </Text>
           <Text variant="bodyMedium" style={styles.errorMessage}>
-            {apiError?.message || t("errors.loading")}
+            {apiError?.message || t('errors.loading')}
           </Text>
         </View>
       </SafeAreaView>
@@ -91,9 +91,9 @@ export default function PortfolioScreen() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.centerContainer}>
           <Ionicons name="briefcase-outline" size={48} color={colors.primary} />
-          <Text variant="headlineMedium">{t("empty.title")}</Text>
+          <Text variant="headlineMedium">{t('empty.title')}</Text>
           <Text variant="bodyMedium" style={styles.subtitle}>
-            {t("empty.subtitle")}
+            {t('empty.subtitle')}
           </Text>
         </View>
       </SafeAreaView>
@@ -101,7 +101,7 @@ export default function PortfolioScreen() {
   }
 
   const groupedData = data.reduce((acc, position) => {
-    const existing = acc.find((p) => p.ticker === position.ticker);
+    const existing = acc.find(p => p.ticker === position.ticker);
     if (existing) {
       existing.quantity += position.quantity;
     } else {
@@ -114,21 +114,21 @@ export default function PortfolioScreen() {
   const hasMoreAssets = groupedData.length > 3;
 
   const handleSeeAll = () => {
-    navigation.navigate("AllAssets", { assets: groupedData });
+    navigation.navigate('AllAssets', { assets: groupedData });
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <GreenStatusBar />
       <AppHeader screenName="Portfolio" />
       <View style={styles.container}>
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
-            {t("balance.label")}
+            {t('balance.label')}
           </Text>
           <Text style={styles.balanceAmount}>
             $
-            {totalValue?.toLocaleString("en-US", {
+            {totalValue?.toLocaleString('en-US', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
@@ -139,7 +139,7 @@ export default function PortfolioScreen() {
             </View>
             <View style={styles.changeRow}>
               <Ionicons
-                name={isPositive ? "trending-up" : "trending-down"}
+                name={isPositive ? 'trending-up' : 'trending-down'}
                 size={16}
                 color={isPositive ? colors.positive : colors.negative}
               />
@@ -149,11 +149,11 @@ export default function PortfolioScreen() {
                   isPositive ? styles.positive : styles.negative,
                 ]}
               >
-                {isPositive ? "+" : ""}$
-                {Math.abs(totalChange).toLocaleString("en-US", {
+                {isPositive ? '+' : ''}$
+                {Math.abs(totalChange).toLocaleString('en-US', {
                   minimumFractionDigits: 0,
-                })}{" "}
-                ({isPositive ? "+" : ""}
+                })}{' '}
+                ({isPositive ? '+' : ''}
                 {totalChangePercent.toFixed(1)}%)
               </Text>
             </View>
@@ -162,10 +162,10 @@ export default function PortfolioScreen() {
         </View>
 
         <View style={styles.assetsHeader}>
-          <Text style={styles.assetsTitle}>{t("assets.title")}</Text>
+          <Text style={styles.assetsTitle}>{t('assets.title')}</Text>
           {hasMoreAssets && (
             <TouchableOpacity onPress={handleSeeAll}>
-              <Text style={styles.seeAllText}>{t("assets.seeAll")}</Text>
+              <Text style={styles.seeAllText}>{t('assets.seeAll')}</Text>
             </TouchableOpacity>
           )}
         </View>

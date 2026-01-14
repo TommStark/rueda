@@ -1,6 +1,6 @@
-import { View, StyleSheet } from "react-native";
-import Skeleton from "../../../shared/components/Skeleton";
-import { colors } from "../../../shared/theme/colors";
+import { View, StyleSheet } from 'react-native';
+import Skeleton from '../../../shared/components/Skeleton';
+import { colors } from '../../../shared/theme/colors';
 
 export default function PortfolioBalanceSkeleton() {
   return (
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
   changeRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   currencyBadge: {
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     height: 16,
   },
   actionsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     paddingHorizontal: 20,
     marginBottom: 32,
   },

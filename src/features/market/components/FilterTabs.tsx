@@ -1,8 +1,8 @@
-import { View, ScrollView } from "react-native";
-import { Chip } from "react-native-paper";
-import { useTranslation } from "../../../shared/hooks/useTranslation";
-import { SortType, SORT_TYPE } from "../types/market.types";
-import { styles } from "../styles/FilterTabs.styles";
+import { View, ScrollView } from 'react-native';
+import { Chip } from 'react-native-paper';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { SortType, SORT_TYPE } from '../types/market.types';
+import { styles } from '../styles/FilterTabs.styles';
 
 interface FilterTabsProps {
   selectedSort: SortType;
@@ -13,14 +13,14 @@ export default function FilterTabs({
   selectedSort,
   onSortChange,
 }: FilterTabsProps) {
-  const { t } = useTranslation("market");
+  const { t } = useTranslation('market');
 
   const SORT_OPTIONS: { label: string; value: SortType }[] = [
-    { label: t("filters.all"), value: SORT_TYPE.ALL },
-    { label: t("filters.gainers"), value: SORT_TYPE.GAINERS },
-    { label: t("filters.losers"), value: SORT_TYPE.LOSERS },
-    { label: t("filters.az"), value: SORT_TYPE.A_Z },
-    { label: t("filters.price"), value: SORT_TYPE.PRICE },
+    { label: t('filters.all'), value: SORT_TYPE.ALL },
+    { label: t('filters.gainers'), value: SORT_TYPE.GAINERS },
+    { label: t('filters.losers'), value: SORT_TYPE.LOSERS },
+    { label: t('filters.az'), value: SORT_TYPE.A_Z },
+    { label: t('filters.price'), value: SORT_TYPE.PRICE },
   ];
   return (
     <View style={styles.container}>
@@ -29,7 +29,7 @@ export default function FilterTabs({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {SORT_OPTIONS.map((option) => (
+        {SORT_OPTIONS.map(option => (
           <Chip
             key={option.value}
             selected={selectedSort === option.value}
@@ -42,7 +42,7 @@ export default function FilterTabs({
               styles.chipText,
               selectedSort === option.value && styles.chipTextSelected,
             ]}
-            mode={selectedSort === option.value ? "flat" : "outlined"}
+            mode={selectedSort === option.value ? 'flat' : 'outlined'}
           >
             {option.label}
           </Chip>

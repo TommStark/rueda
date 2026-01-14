@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,16 +7,16 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.primary,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: colors.border.light,
   },
   headerTitle: {
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.quaternary,
     fontSize: 14,
   },
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingHorizontal: 24,
   },
   statusIconContainer: {
@@ -35,18 +35,18 @@ export const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 60,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   statusIconInnerCircle: {
     width: 75,
     height: 75,
     borderRadius: 60,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   statusTitle: {
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 12,
   },
@@ -59,26 +59,26 @@ export const styles = StyleSheet.create({
   statusBadgeText: {
     color: colors.text.inverse,
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     letterSpacing: 0.5,
   },
   statusMessage: {
-    textAlign: "center",
+    textAlign: 'center',
     color: colors.text.tertiary,
     marginBottom: 32,
     lineHeight: 22,
   },
   detailsCard: {
-    width: "100%",
+    width: '100%',
     backgroundColor: colors.background.secondary,
     borderRadius: 16,
     padding: 20,
     marginBottom: 24,
   },
   detailRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 12,
   },
   detailLabel: {
@@ -86,33 +86,33 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   detailValueContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   detailValue: {
     color: colors.text.primary,
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   detailValueBuy: {
     color: colors.status.success,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   detailValueSell: {
     color: colors.status.error,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   divider: {
     height: 1,
     backgroundColor: colors.border.medium,
   },
   totalContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 32,
   },
   totalAmount: {
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 4,
   },
@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
     color: colors.text.quaternary,
   },
   primaryButton: {
-    width: "100%",
+    width: '100%',
     borderRadius: 12,
     paddingVertical: 6,
     backgroundColor: colors.primary,
@@ -128,11 +128,11 @@ export const styles = StyleSheet.create({
   },
   primaryButtonLabel: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   linkText: {
     color: colors.primary,
     fontSize: 15,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });

@@ -1,35 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
   TextInput,
   ScrollView,
   Image,
-} from "react-native";
-import { Text } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import GreenStatusBar from "../../../shared/components/GreenStatusBar";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { useTranslation } from "../../../shared/hooks/useTranslation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../navigation/types";
-import { OrderSide, OrderType } from "../../history/types/history.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import SwipeButton from "rn-swipe-button";
-import { useOrderHistory } from "../../history/context/OrderHistoryContext";
-import { useFavorites } from "../../../shared/context/FavoritesContext";
-import { usePortfolio } from "../../portfolio/hooks/usePortfolio";
-import { createOrder } from "../api/orders.api";
-import { styles } from "../styles/NewOrderScreen.styles";
-import { Pressable } from "react-native";
+} from 'react-native';
+import { Text } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../../navigation/types';
+import { OrderSide, OrderType } from '../../history/types/history.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import SwipeButton from 'rn-swipe-button';
+import { useOrderHistory } from '../../history/context/OrderHistoryContext';
+import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
+import { createOrder } from '../api/orders.api';
+import { styles } from '../styles/NewOrderScreen.styles';
 
-type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
+type NewOrderRouteProp = RouteProp<RootStackParamList, 'NewOrder'>;
 type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function NewOrderScreen() {
-  const { t } = useTranslation("market");
+  const { t } = useTranslation('market');
   const navigation = useNavigation<NewOrderNavigationProp>();
   const route = useRoute<NewOrderRouteProp>();
   const { asset } = route.params;
@@ -37,11 +36,11 @@ export default function NewOrderScreen() {
   const { isFavorite, toggleFavorite } = useFavorites();
   const { data: portfolioData } = usePortfolio();
 
-  const [side, setSide] = useState<OrderSide>("BUY");
-  const [orderType, setOrderType] = useState<OrderType>("MARKET");
+  const [side, setSide] = useState<OrderSide>('BUY');
+  const [orderType, setOrderType] = useState<OrderType>('MARKET');
   const [quantity, setQuantity] = useState<number>(0);
-  const [investmentAmount, setInvestmentAmount] = useState<string>("");
-  const [limitPrice, setLimitPrice] = useState("");
+  const [investmentAmount, setInvestmentAmount] = useState<string>('');
+  const [limitPrice, setLimitPrice] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOrderTypeMenu, setShowOrderTypeMenu] = useState(false);
 
@@ -61,7 +60,7 @@ export default function NewOrderScreen() {
   const availableBalance = totalPortfolioValue;
 
   const getCurrentPrice = () => {
-    return orderType === "LIMIT" && limitPrice
+    return orderType === 'LIMIT' && limitPrice
       ? parseFloat(limitPrice)
       : asset.last_price;
   };
@@ -69,7 +68,7 @@ export default function NewOrderScreen() {
   const handleQuantityChange = (newQuantity: number) => {
     setQuantity(newQuantity);
     const total = newQuantity * getCurrentPrice();
-    setInvestmentAmount(total > 0 ? total.toFixed(2) : "");
+    setInvestmentAmount(total > 0 ? total.toFixed(2) : '');
   };
 
   const handleInvestmentAmountChange = (amount: string) => {
@@ -104,20 +103,20 @@ export default function NewOrderScreen() {
 
   const handleSubmitOrder = async () => {
     if (quantity <= 0) {
-      alert(t("validation.invalidQuantity"));
+      alert(t('validation.invalidQuantity'));
       return;
     }
 
-    if (orderType === "LIMIT" && !limitPrice) {
-      alert(t("validation.invalidPrice"));
+    if (orderType === 'LIMIT' && !limitPrice) {
+      alert(t('validation.invalidPrice'));
       return;
     }
 
     const estimatedTotal = getEstimatedTotal();
-    if (side === "BUY" && estimatedTotal > availableBalance) {
+    if (side === 'BUY' && estimatedTotal > availableBalance) {
       alert(
-        `${t("validation.insufficientFunds")}${availableBalance.toLocaleString(
-          "es-AR",
+        `${t('validation.insufficientFunds')}${availableBalance.toLocaleString(
+          'es-AR',
           {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -135,7 +134,7 @@ export default function NewOrderScreen() {
         side,
         type: orderType,
         quantity: quantity,
-        ...(orderType === "LIMIT" && limitPrice
+        ...(orderType === 'LIMIT' && limitPrice
           ? { price: parseFloat(limitPrice) }
           : {}),
       };
@@ -149,7 +148,7 @@ export default function NewOrderScreen() {
         side,
         type: orderType,
         quantity: quantity,
-        price: orderType === "LIMIT" ? parseFloat(limitPrice) : undefined,
+        price: orderType === 'LIMIT' ? parseFloat(limitPrice) : undefined,
         executedPrice: asset.last_price,
         timestamp: Date.now(),
         status: result.status,
@@ -158,9 +157,9 @@ export default function NewOrderScreen() {
 
       await addOrder(orderHistoryItem);
 
-      navigation.replace("OrderReceipt", { order: orderHistoryItem });
-    } catch (error: any) {
-      alert(t("validation.orderFailed"));
+      navigation.replace('OrderReceipt', { order: orderHistoryItem });
+    } catch (error) {
+      alert(t('validation.orderFailed'));
     } finally {
       setIsSubmitting(false);
     }
@@ -176,23 +175,23 @@ export default function NewOrderScreen() {
 
   useEffect(() => {
     setQuantity(0);
-    setInvestmentAmount("");
+    setInvestmentAmount('');
   }, [side]);
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <GreenStatusBar />
       <View style={styles.header}>
         <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{t("newOrder.title")}</Text>
+        <Text style={styles.headerTitle}>{t('newOrder.title')}</Text>
         <TouchableOpacity
           onPress={handleToggleFavorite}
           style={styles.favoriteButton}
         >
           <MaterialCommunityIcons
-            name={isFavorite(asset.ticker) ? "star" : "star-outline"}
+            name={isFavorite(asset.ticker) ? 'star' : 'star-outline'}
             size={24}
             color={colors.favorite}
           />
@@ -229,7 +228,7 @@ export default function NewOrderScreen() {
                 isPositive ? styles.changePositive : styles.changeNegative,
               ]}
             >
-              {isPositive ? "+" : ""}
+              {isPositive ? '+' : ''}
               {priceChange.toFixed(2)}%
             </Text>
           </View>
@@ -239,50 +238,50 @@ export default function NewOrderScreen() {
           <TouchableOpacity
             style={[
               styles.sideButton,
-              side === "BUY" && styles.sideButtonActiveBuy,
+              side === 'BUY' && styles.sideButtonActiveBuy,
             ]}
-            onPress={() => setSide("BUY")}
+            onPress={() => setSide('BUY')}
           >
             <Text
               style={[
                 styles.sideButtonText,
-                side === "BUY" && styles.sideButtonTextActive,
+                side === 'BUY' && styles.sideButtonTextActive,
               ]}
             >
-              {t("newOrder.buy")}
+              {t('newOrder.buy')}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.sideButton,
-              side === "SELL" && styles.sideButtonActiveSell,
+              side === 'SELL' && styles.sideButtonActiveSell,
             ]}
-            onPress={() => setSide("SELL")}
+            onPress={() => setSide('SELL')}
           >
             <Text
               style={[
                 styles.sideButtonText,
-                side === "SELL" && styles.sideButtonTextActive,
+                side === 'SELL' && styles.sideButtonTextActive,
               ]}
             >
-              {t("newOrder.sell")}
+              {t('newOrder.sell')}
             </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionLabel}>{t("newOrder.orderType")}</Text>
+          <Text style={styles.sectionLabel}>{t('newOrder.orderType')}</Text>
           <TouchableOpacity
             style={styles.dropdown}
             onPress={() => setShowOrderTypeMenu(!showOrderTypeMenu)}
           >
             <Text style={styles.dropdownText}>
-              {orderType === "MARKET"
-                ? t("newOrder.marketOrder")
-                : t("newOrder.limitOrder")}
+              {orderType === 'MARKET'
+                ? t('newOrder.marketOrder')
+                : t('newOrder.limitOrder')}
             </Text>
             <Ionicons
-              name={showOrderTypeMenu ? "chevron-up" : "chevron-down"}
+              name={showOrderTypeMenu ? 'chevron-up' : 'chevron-down'}
               size={20}
               color={colors.text.quaternary}
             />
@@ -292,45 +291,45 @@ export default function NewOrderScreen() {
               <TouchableOpacity
                 style={[
                   styles.dropdownItem,
-                  orderType === "MARKET" && styles.dropdownItemActive,
+                  orderType === 'MARKET' && styles.dropdownItemActive,
                 ]}
                 onPress={() => {
-                  setOrderType("MARKET");
+                  setOrderType('MARKET');
                   setShowOrderTypeMenu(false);
-                  setLimitPrice("");
+                  setLimitPrice('');
                 }}
               >
                 <Text
                   style={[
                     styles.dropdownItemText,
-                    orderType === "MARKET" && styles.dropdownItemTextActive,
+                    orderType === 'MARKET' && styles.dropdownItemTextActive,
                   ]}
                 >
-                  {t("newOrder.marketOrder")}
+                  {t('newOrder.marketOrder')}
                 </Text>
-                {orderType === "MARKET" && (
+                {orderType === 'MARKET' && (
                   <Ionicons name="checkmark" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
                   styles.dropdownItem,
-                  orderType === "LIMIT" && styles.dropdownItemActive,
+                  orderType === 'LIMIT' && styles.dropdownItemActive,
                 ]}
                 onPress={() => {
-                  setOrderType("LIMIT");
+                  setOrderType('LIMIT');
                   setShowOrderTypeMenu(false);
                 }}
               >
                 <Text
                   style={[
                     styles.dropdownItemText,
-                    orderType === "LIMIT" && styles.dropdownItemTextActive,
+                    orderType === 'LIMIT' && styles.dropdownItemTextActive,
                   ]}
                 >
-                  {t("newOrder.limitOrder")}
+                  {t('newOrder.limitOrder')}
                 </Text>
-                {orderType === "LIMIT" && (
+                {orderType === 'LIMIT' && (
                   <Ionicons name="checkmark" size={20} color={colors.primary} />
                 )}
               </TouchableOpacity>
@@ -338,15 +337,13 @@ export default function NewOrderScreen() {
           )}
         </View>
 
-        {orderType === "LIMIT" && (
+        {orderType === 'LIMIT' && (
           <View style={styles.limitPriceSection}>
-            <Text style={styles.inputLabel}>{t("newOrder.limitPrice")}</Text>
+            <Text style={styles.inputLabel}>{t('newOrder.limitPrice')}</Text>
             <TextInput
               style={styles.limitPriceInput}
               value={limitPrice}
-              onChangeText={(text) =>
-                setLimitPrice(text.replace(/[^0-9.]/g, ""))
-              }
+              onChangeText={text => setLimitPrice(text.replace(/[^0-9.]/g, ''))}
               placeholder="$0.00"
               keyboardType="numeric"
             />
@@ -355,7 +352,7 @@ export default function NewOrderScreen() {
         )}
 
         <View style={styles.inputSection}>
-          <Text style={styles.inputLabel}>{t("newOrder.quantity")}</Text>
+          <Text style={styles.inputLabel}>{t('newOrder.quantity')}</Text>
           <View style={styles.quantityInputContainer}>
             <TouchableOpacity
               style={styles.quantityButton}
@@ -366,8 +363,8 @@ export default function NewOrderScreen() {
             <TextInput
               style={styles.quantityInput}
               value={quantity.toString()}
-              onChangeText={(text) => {
-                const num = parseInt(text.replace(/[^0-9]/g, "")) || 0;
+              onChangeText={text => {
+                const num = parseInt(text.replace(/[^0-9]/g, '')) || 0;
                 handleQuantityChange(num);
               }}
               placeholder="0"
@@ -384,21 +381,21 @@ export default function NewOrderScreen() {
 
         <View style={styles.inputSection}>
           <Text style={styles.inputLabel}>
-            {side === "SELL" ? t("newOrder.totalToSell") : t("newOrder.total")}
+            {side === 'SELL' ? t('newOrder.totalToSell') : t('newOrder.total')}
           </Text>
           <View style={styles.amountInputContainer}>
             <TextInput
               style={[
                 styles.amountInput,
-                side === "SELL" && styles.amountInputDisabled,
+                side === 'SELL' && styles.amountInputDisabled,
               ]}
               value={investmentAmount}
               onChangeText={handleInvestmentAmountChange}
               placeholder="$0"
               keyboardType="numeric"
-              editable={side === "BUY"}
+              editable={side === 'BUY'}
             />
-            {side === "BUY" && (
+            {side === 'BUY' && (
               <View style={styles.percentageChips}>
                 <TouchableOpacity
                   style={styles.percentageChip}
@@ -422,16 +419,16 @@ export default function NewOrderScreen() {
             )}
             <View style={styles.availableBalanceRow}>
               <Text style={styles.availableBalanceLabel}>
-                {t("newOrder.availableBalance")}
+                {t('newOrder.availableBalance')}
               </Text>
               <Text style={styles.availableBalanceAmount}>
                 $
-                {availableBalance.toLocaleString("en-US", {
+                {availableBalance.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
                 })}
               </Text>
             </View>
-            {side === "BUY" && getEstimatedTotal() > availableBalance && (
+            {side === 'BUY' && getEstimatedTotal() > availableBalance && (
               <View style={styles.errorContainer}>
                 <Ionicons
                   name="alert-circle"
@@ -439,7 +436,7 @@ export default function NewOrderScreen() {
                   color={colors.negative}
                 />
                 <Text style={styles.errorText}>
-                  {t("validation.insufficientFundsWarning")}
+                  {t('validation.insufficientFundsWarning')}
                 </Text>
               </View>
             )}
@@ -452,7 +449,7 @@ export default function NewOrderScreen() {
           disabled={
             isSubmitting ||
             quantity <= 0 ||
-            (side === "BUY" && getEstimatedTotal() > availableBalance)
+            (side === 'BUY' && getEstimatedTotal() > availableBalance)
           }
           disableResetOnTap={true}
           height={30}
@@ -460,14 +457,14 @@ export default function NewOrderScreen() {
           railBackgroundColor={
             isSubmitting ||
             quantity <= 0 ||
-            (side === "BUY" && getEstimatedTotal() > availableBalance)
+            (side === 'BUY' && getEstimatedTotal() > availableBalance)
               ? colors.border.medium
               : colors.primary
           }
           railBorderColor={
             isSubmitting ||
             quantity <= 0 ||
-            (side === "BUY" && getEstimatedTotal() > availableBalance)
+            (side === 'BUY' && getEstimatedTotal() > availableBalance)
               ? colors.border.medium
               : colors.primary
           }
@@ -481,7 +478,7 @@ export default function NewOrderScreen() {
               : colors.primaryLight
           }
           thumbIconBorderColor="transparent"
-          title={t("newOrder.swipeToConfirm")}
+          title={t('newOrder.swipeToConfirm')}
           titleColor={colors.text.inverse}
           titleFontSize={13}
         />

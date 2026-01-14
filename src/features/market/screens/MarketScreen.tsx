@@ -1,36 +1,36 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
-import { View, FlatList } from "react-native";
-import { Text, Searchbar } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useTranslation } from "../../../shared/hooks/useTranslation";
-import { useMarket, useMarketError } from "../hooks/useMarket";
-import MarketCard from "../components/MarketCard";
-import MarketCardSkeleton from "../components/MarketCardSkeleton";
-import FilterTabs from "../components/FilterTabs";
-import AppHeader from "../../../shared/components/AppHeader";
-import GreenStatusBar from "../../../shared/components/GreenStatusBar";
-import { MarketAsset, SortType, SORT_TYPE } from "../types/market.types";
-import { useDebouncedValue } from "../../../shared/hooks/useDebouncedValue";
-import { RootStackParamList } from "../../../navigation/types";
-import { styles } from "../styles/MarketScreen.styles";
+import { useState, useCallback, useMemo } from 'react';
+import { View, FlatList } from 'react-native';
+import { Text, Searchbar } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { useMarket, useMarketError } from '../hooks/useMarket';
+import MarketCard from '../components/MarketCard';
+import MarketCardSkeleton from '../components/MarketCardSkeleton';
+import FilterTabs from '../components/FilterTabs';
+import AppHeader from '../../../shared/components/AppHeader';
+import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import { MarketAsset, SortType, SORT_TYPE } from '../types/market.types';
+import { useDebouncedValue } from '../../../shared/hooks/useDebouncedValue';
+import { RootStackParamList } from '../../../navigation/types';
+import { styles } from '../styles/MarketScreen.styles';
 
 type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function MarketScreen() {
-  const { t } = useTranslation("market");
+  const { t } = useTranslation('market');
   const navigation = useNavigation<MarketScreenNavigationProp>();
   const [selectedSort, setSelectedSort] = useState<SortType>(SORT_TYPE.ALL);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
 
   useFocusEffect(
     useCallback(() => {
       return () => {
-        setSearchQuery("");
+        setSearchQuery('');
         setSelectedSort(SORT_TYPE.ALL);
       };
     }, [])
@@ -98,7 +98,7 @@ export default function MarketScreen() {
             color={colors.status.error}
           />
           <Text variant="bodyMedium" style={styles.errorMessage}>
-            {apiError?.message || t("errors.loading")}
+            {apiError?.message || t('errors.loading')}
           </Text>
         </View>
       );
@@ -113,7 +113,7 @@ export default function MarketScreen() {
             color={colors.text.quaternary}
           />
           <Text variant="bodyMedium" style={styles.emptyText}>
-            {t("errors.notFound")}
+            {t('errors.notFound')}
           </Text>
         </View>
       );
@@ -126,7 +126,7 @@ export default function MarketScreen() {
         renderItem={({ item }) => (
           <MarketCard
             asset={item}
-            onPress={() => navigation.navigate("NewOrder", { asset: item })}
+            onPress={() => navigation.navigate('NewOrder', { asset: item })}
           />
         )}
         onRefresh={refetch}
@@ -137,12 +137,12 @@ export default function MarketScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <GreenStatusBar />
       <AppHeader screenName="Market" />
       <View style={styles.headerContainer}>
         <Searchbar
-          placeholder={t("search.placeholder")}
+          placeholder={t('search.placeholder')}
           onChangeText={setSearchQuery}
           value={searchQuery}
           style={styles.searchbar}
@@ -154,10 +154,10 @@ export default function MarketScreen() {
         />
         <View style={styles.sectionHeader}>
           <Text variant="labelMedium" style={styles.sectionTitle}>
-            {t("section.trending")}
+            {t('section.trending')}
           </Text>
           <Text variant="labelSmall" style={styles.sectionSubtitle}>
-            {t("section.last24h")}
+            {t('section.last24h')}
           </Text>
         </View>
       </View>

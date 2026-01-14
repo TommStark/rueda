@@ -5,18 +5,12 @@ import {
   ReactNode,
   useCallback,
   useRef,
-} from "react";
+} from 'react';
 
-export type ToastType = "success" | "error" | "info";
-
-interface ToastMessage {
-  message: string;
-  type: ToastType;
-  duration?: number;
-}
+export type ToastType = 'success' | 'error' | 'info';
 
 interface ToastContextValue {
-  showToast: (message: string, type?: ToastType, duration?: number) => void;
+  showToast: (msg: string, toastType?: ToastType, duration?: number) => void;
   hideToast: () => void;
   visible: boolean;
   message: string;
@@ -31,12 +25,12 @@ interface ToastProviderProps {
 
 export function ToastProvider({ children }: ToastProviderProps) {
   const [visible, setVisible] = useState(false);
-  const [message, setMessage] = useState("");
-  const [type, setType] = useState<ToastType>("info");
+  const [message, setMessage] = useState('');
+  const [type, setType] = useState<ToastType>('info');
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const showToast = useCallback(
-    (msg: string, toastType: ToastType = "info", duration: number = 2000) => {
+    (msg: string, toastType: ToastType = 'info', duration: number = 2000) => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -79,7 +73,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
 export function useToast() {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error("useToast must be used within ToastProvider");
+    throw new Error('useToast must be used within ToastProvider');
   }
   return context;
 }

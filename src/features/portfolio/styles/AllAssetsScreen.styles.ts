@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.secondary,
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 16,
     backgroundColor: colors.background.secondary,
@@ -17,12 +17,12 @@ export const styles = StyleSheet.create({
   backButton: {
     width: 40,
     height: 40,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     letterSpacing: -0.3,
   },

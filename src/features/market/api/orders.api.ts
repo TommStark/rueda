@@ -1,11 +1,11 @@
-import apiClient from "../../../shared/api/client";
-import { API_ENDPOINTS } from "../../../shared/constants/api";
-import { OrderStatus } from "../../history/types/history.types";
+import apiClient from '../../../shared/api/client';
+import { API_ENDPOINTS } from '../../../shared/constants/api';
+import { OrderStatus } from '../../history/types/history.types';
 
 export interface CreateOrderRequest {
   instrument_id: number;
-  side: "BUY" | "SELL";
-  type: "MARKET" | "LIMIT";
+  side: 'BUY' | 'SELL';
+  type: 'MARKET' | 'LIMIT';
   quantity: number;
   price?: number;
 }

@@ -1,15 +1,15 @@
-import { View, TouchableOpacity, ScrollView } from "react-native";
-import { Text, Button } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import GreenStatusBar from "./GreenStatusBar";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import { colors } from "../theme/colors";
-import { styles } from "./styles/OrderReceipt.styles";
-import { useNavigation } from "@react-navigation/native";
-import { useTranslation } from "../hooks/useTranslation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { OrderHistoryItem } from "../../features/history/types/history.types";
-import { RootStackParamList } from "../../navigation/types";
+import { View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, Button } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import GreenStatusBar from './GreenStatusBar';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { colors } from '../theme/colors';
+import { styles } from './styles/OrderReceipt.styles';
+import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from '../hooks/useTranslation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { OrderHistoryItem } from '../../features/history/types/history.types';
+import { RootStackParamList } from '../../navigation/types';
 
 interface OrderReceiptProps {
   order: OrderHistoryItem;
@@ -18,29 +18,29 @@ interface OrderReceiptProps {
 type OrderReceiptNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export default function OrderReceipt({ order }: OrderReceiptProps) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const navigation = useNavigation<OrderReceiptNavigationProp>();
 
   const getStatusIcon = () => {
     switch (order.status) {
-      case "FILLED":
-        return "check-circle";
-      case "REJECTED":
-        return "close-circle";
-      case "PENDING":
-        return "clock-outline";
+      case 'FILLED':
+        return 'check-circle';
+      case 'REJECTED':
+        return 'close-circle';
+      case 'PENDING':
+        return 'clock-outline';
       default:
-        return "help-circle";
+        return 'help-circle';
     }
   };
 
   const getStatusColor = () => {
     switch (order.status) {
-      case "FILLED":
+      case 'FILLED':
         return colors.status.success;
-      case "REJECTED":
+      case 'REJECTED':
         return colors.status.error;
-      case "PENDING":
+      case 'PENDING':
         return colors.status.warning;
       default:
         return colors.text.quaternary;
@@ -49,27 +49,27 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
   const getStatusTitle = () => {
     switch (order.status) {
-      case "FILLED":
-        return t("orderReceipt.status.filled");
-      case "REJECTED":
-        return t("orderReceipt.status.rejected");
-      case "PENDING":
-        return t("orderReceipt.status.pending");
+      case 'FILLED':
+        return t('orderReceipt.status.filled');
+      case 'REJECTED':
+        return t('orderReceipt.status.rejected');
+      case 'PENDING':
+        return t('orderReceipt.status.pending');
       default:
-        return t("orderReceipt.status.default");
+        return t('orderReceipt.status.default');
     }
   };
 
   const getStatusBadge = () => {
     switch (order.status) {
-      case "FILLED":
-        return t("orderReceipt.badge.confirmed");
-      case "REJECTED":
-        return t("orderReceipt.badge.failed");
-      case "PENDING":
-        return t("orderReceipt.badge.processing");
+      case 'FILLED':
+        return t('orderReceipt.badge.confirmed');
+      case 'REJECTED':
+        return t('orderReceipt.badge.failed');
+      case 'PENDING':
+        return t('orderReceipt.badge.processing');
       default:
-        return "";
+        return '';
     }
   };
 
@@ -79,14 +79,14 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
     const ticker = order.ticker;
 
     switch (order.status) {
-      case "FILLED":
+      case 'FILLED':
         return `Tu orden ${type} para ${side} ${ticker} ha sido ejecutada completamente.`;
-      case "REJECTED":
+      case 'REJECTED':
         return `Tu orden ${type} para ${side} ${ticker} fue rechazada.`;
-      case "PENDING":
+      case 'PENDING':
         return `Tu orden ${type} para ${side} ${ticker} está siendo procesada.`;
       default:
-        return "";
+        return '';
     }
   };
 
@@ -101,16 +101,16 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   };
 
   const handleViewPortfolio = () => {
-    navigation.navigate("MainTabs", { screen: "Portfolio" });
+    navigation.navigate('MainTabs', { screen: 'Portfolio' });
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={["top"]}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <GreenStatusBar />
       <View style={styles.header}>
         <View style={{ width: 24 }} />
         <Text variant="titleMedium" style={styles.headerTitle}>
-          {t("orderReceipt.title")}
+          {t('orderReceipt.title')}
         </Text>
         <TouchableOpacity onPress={handleClose}>
           <Ionicons name="close" size={24} color={colors.text.tertiary} />
@@ -126,7 +126,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
           <View
             style={[
               styles.statusIconOuterCircle,
-              { backgroundColor: getStatusColor() + "17" },
+              { backgroundColor: getStatusColor() + '17' },
             ]}
           >
             <View
@@ -161,7 +161,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
         <View style={styles.detailsCard}>
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.orderId")}
+              {t('orderReceipt.details.orderId')}
             </Text>
             <View style={styles.detailValueContainer}>
               <Text variant="bodyMedium" style={styles.detailValue}>
@@ -179,7 +179,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.assetPair")}
+              {t('orderReceipt.details.assetPair')}
             </Text>
             <View style={styles.detailValueContainer}>
               <MaterialCommunityIcons
@@ -198,13 +198,13 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.side")}
+              {t('orderReceipt.details.side')}
             </Text>
             <Text
               variant="bodyMedium"
               style={[
                 styles.detailValue,
-                order.side === "BUY"
+                order.side === 'BUY'
                   ? styles.detailValueBuy
                   : styles.detailValueSell,
               ]}
@@ -217,10 +217,10 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.type")}
+              {t('orderReceipt.details.type')}
             </Text>
             <Text variant="bodyMedium" style={styles.detailValue}>
-              {order.type} {t("orderReceipt.details.order")}
+              {order.type} {t('orderReceipt.details.order')}
             </Text>
           </View>
 
@@ -228,13 +228,13 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.quantity")}
+              {t('orderReceipt.details.quantity')}
             </Text>
             <Text variant="bodyMedium" style={styles.detailValue}>
-              {order.quantity}{" "}
-              {order.ticker.includes("/")
-                ? order.ticker.split("/")[0]
-                : t("orderReceipt.details.shares")}
+              {order.quantity}{' '}
+              {order.ticker.includes('/')
+                ? order.ticker.split('/')[0]
+                : t('orderReceipt.details.shares')}
             </Text>
           </View>
 
@@ -242,11 +242,11 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.detailLabel}>
-              {t("orderReceipt.details.avgPrice")}
+              {t('orderReceipt.details.avgPrice')}
             </Text>
             <Text variant="bodyMedium" style={styles.detailValue}>
               $
-              {order.executedPrice.toLocaleString("en-US", {
+              {order.executedPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
@@ -257,13 +257,13 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
         <View style={styles.totalContainer}>
           <Text variant="headlineLarge" style={styles.totalAmount}>
             $
-            {totalSpent.toLocaleString("en-US", {
+            {totalSpent.toLocaleString('en-US', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </Text>
           <Text variant="bodySmall" style={styles.totalLabel}>
-            {t("orderReceipt.totalSpent")}
+            {t('orderReceipt.totalSpent')}
           </Text>
         </View>
 
@@ -273,11 +273,11 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
           style={styles.primaryButton}
           labelStyle={styles.primaryButtonLabel}
         >
-          {t("orderReceipt.backToMarkets")}
+          {t('orderReceipt.backToMarkets')}
         </Button>
 
         <TouchableOpacity onPress={handleViewPortfolio}>
-          <Text style={styles.linkText}>{t("orderReceipt.viewPortfolio")}</Text>
+          <Text style={styles.linkText}>{t('orderReceipt.viewPortfolio')}</Text>
         </TouchableOpacity>
 
         <View style={{ height: 40 }} />

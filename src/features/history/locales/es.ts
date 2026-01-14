@@ -1,19 +1,19 @@
 export default {
-  title: "Historial de Órdenes",
-  loading: "Cargando historial...",
+  title: 'Historial de Órdenes',
+  loading: 'Cargando historial...',
   filters: {
-    all: "Todas",
-    filled: "Ejecutadas",
-    pending: "Pendientes",
-    rejected: "Rechazadas",
+    all: 'Todas',
+    filled: 'Ejecutadas',
+    pending: 'Pendientes',
+    rejected: 'Rechazadas',
   },
   empty: {
-    title: "Sin Historial",
-    subtitle: "Tus órdenes ejecutadas aparecerán aquí",
+    title: 'Sin Historial',
+    subtitle: 'Tus órdenes ejecutadas aparecerán aquí',
   },
   emptyFilters: {
-    filled: "No hay órdenes ejecutadas",
-    pending: "No hay órdenes pendientes",
-    rejected: "No hay órdenes rechazadas",
+    filled: 'No hay órdenes ejecutadas',
+    pending: 'No hay órdenes pendientes',
+    rejected: 'No hay órdenes rechazadas',
   },
 };

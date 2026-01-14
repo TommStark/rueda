@@ -1,16 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchMarketAssets } from "../api/market.api";
-import { normalizeApiError } from "../../../shared/utils/errors";
-import { useMemo } from "react";
+import { useQuery } from '@tanstack/react-query';
+import { fetchMarketAssets } from '../api/market.api';
+import { normalizeApiError } from '../../../shared/utils/errors';
+import { useMemo } from 'react';
 
-export const MARKET_QUERY_KEY = ["market"] as const;
+export const MARKET_QUERY_KEY = ['market'] as const;
 
-export const useMarket = (search: string = "") => {
+export const useMarket = (search: string = '') => {
   const allDataQuery = useQuery({
     queryKey: MARKET_QUERY_KEY,
     queryFn: ({ signal }) => fetchMarketAssets({}, signal),
     meta: {
-      errorMessage: "Error al cargar market",
+      errorMessage: 'Error al cargar market',
     },
     throwOnError: false,
   });
@@ -24,7 +24,7 @@ export const useMarket = (search: string = "") => {
 
     const searchTerm = search.trim().toUpperCase();
     return allDataQuery.data.filter(
-      (asset) =>
+      asset =>
         asset.ticker.toUpperCase().includes(searchTerm) ||
         asset.name.toUpperCase().includes(searchTerm)
     );

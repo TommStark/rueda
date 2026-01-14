@@ -1,6 +1,6 @@
-import { View, StyleSheet } from "react-native";
-import Skeleton from "../../../shared/components/Skeleton";
-import { colors } from "../../../shared/theme/colors";
+import { View, StyleSheet } from 'react-native';
+import Skeleton from '../../../shared/components/Skeleton';
+import { colors } from '../../../shared/theme/colors';
 
 export default function AssetCardSkeleton() {
   return (
@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   content: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   leftSection: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   iconContainer: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     height: 14,
   },
   rightSection: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     gap: 6,
   },
   value: {

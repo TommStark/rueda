@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -20,9 +20,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
   },
   sectionHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
   sectionTitle: {
     color: colors.text.tertiary,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   sectionSubtitle: {
     color: colors.text.quaternary,
@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
   },
   loadingContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 32,
     gap: 12,
   },
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   },
   errorMessage: {
     color: colors.text.tertiary,
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 8,
   },
   emptyText: {

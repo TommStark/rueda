@@ -1,20 +1,20 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View } from "react-native";
-import { useTranslation } from "../shared/hooks/useTranslation";
-import { colors } from "../shared/theme/colors";
-import HomeScreen from "../features/home/screens/HomeScreen";
-import MarketScreen from "../features/market/screens/MarketScreen";
-import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
-import FavoritesScreen from "../features/favorites/screens/FavoritesScreen";
-import HistoryScreen from "../features/history/screens/HistoryScreen";
-import { BottomTabParamList } from "./types";
-import { styles } from "./styles/BottomTabNavigator.styles";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import { useTranslation } from '../shared/hooks/useTranslation';
+import { colors } from '../shared/theme/colors';
+import HomeScreen from '../features/home/screens/HomeScreen';
+import MarketScreen from '../features/market/screens/MarketScreen';
+import PortfolioScreen from '../features/portfolio/screens/PortfolioScreen';
+import FavoritesScreen from '../features/favorites/screens/FavoritesScreen';
+import HistoryScreen from '../features/history/screens/HistoryScreen';
+import { BottomTabParamList } from './types';
+import { styles } from './styles/BottomTabNavigator.styles';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
-  const { t } = useTranslation("navigation");
+  const { t } = useTranslation('navigation');
 
   return (
     <Tab.Navigator
@@ -32,9 +32,9 @@ export default function BottomTabNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: t("tabs.home"),
+          title: t('tabs.home'),
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="home-outline"
               size={22}
@@ -47,9 +47,9 @@ export default function BottomTabNavigator() {
         name="Market"
         component={MarketScreen}
         options={{
-          title: t("tabs.market"),
+          title: t('tabs.market'),
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="chart-line-variant"
               size={22}
@@ -62,9 +62,9 @@ export default function BottomTabNavigator() {
         name="Favorites"
         component={FavoritesScreen}
         options={{
-          title: t("tabs.favorites"),
+          title: t('tabs.favorites'),
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: () => (
             <View style={styles.centralButtonContainer}>
               <View style={styles.centralButtonOuter}>
                 <View style={styles.centralButton}>
@@ -84,9 +84,9 @@ export default function BottomTabNavigator() {
         name="Portfolio"
         component={PortfolioScreen}
         options={{
-          title: t("tabs.portfolio"),
+          title: t('tabs.portfolio'),
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="briefcase-outline"
               size={22}
@@ -99,9 +99,9 @@ export default function BottomTabNavigator() {
         name="History"
         component={HistoryScreen}
         options={{
-          title: t("tabs.history"),
+          title: t('tabs.history'),
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="history" size={22} color={color} />
           ),
         }}

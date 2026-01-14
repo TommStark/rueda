@@ -1,12 +1,12 @@
-import { View, TouchableOpacity, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { MarketAsset } from "../../market/types/market.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import { useFavorites } from "../../../shared/context/FavoritesContext";
-import MiniTrendChart from "./MiniTrendChart";
-import { styles } from "../styles/FavoriteAssetRow.styles";
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { MarketAsset } from '../../market/types/market.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { useFavorites } from '../../../shared/context/FavoritesContext';
+import MiniTrendChart from './MiniTrendChart';
+import { styles } from '../styles/FavoriteAssetRow.styles';
 
 interface FavoriteAssetRowProps {
   asset: MarketAsset;
@@ -60,7 +60,7 @@ export default function FavoriteAssetRow({
             isPositive ? styles.changePositive : styles.changeNegative,
           ]}
         >
-          {isPositive ? "+" : ""}
+          {isPositive ? '+' : ''}
           {priceChange.toFixed(1)}%
         </Text>
       </View>
@@ -68,7 +68,7 @@ export default function FavoriteAssetRow({
       <View style={styles.priceSection}>
         <Text style={styles.price}>
           $
-          {asset.last_price.toLocaleString("en-US", {
+          {asset.last_price.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}

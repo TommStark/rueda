@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: colors.background.card,
     marginHorizontal: 16,
     marginVertical: 6,
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   logoWrapper: {
-    position: "relative",
+    position: 'relative',
     width: 48,
     height: 48,
   },
@@ -22,38 +22,38 @@ export const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   logo: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   placeholderLogo: {
     backgroundColor: colors.border.medium,
   },
   placeholderText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.text.tertiary,
   },
   colorPlaceholderText: {
     fontSize: 16,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   statusBadge: {
-    position: "absolute",
+    position: 'absolute',
     bottom: -2,
     right: -2,
     width: 22,
     height: 22,
     borderRadius: 11,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 2,
     borderColor: colors.background.primary,
   },
@@ -61,19 +61,19 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   leftSection: {
     flex: 1,
     gap: 2,
   },
   rightSection: {
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   ticker: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 16,
     color: colors.text.primary,
   },
@@ -86,14 +86,14 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
   quantity: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 15,
     color: colors.text.primary,
   },
   status: {
     fontSize: 12,
-    fontWeight: "600",
-    textTransform: "uppercase",
+    fontWeight: '600',
+    textTransform: 'uppercase',
   },
   arrow: {
     marginLeft: 4,

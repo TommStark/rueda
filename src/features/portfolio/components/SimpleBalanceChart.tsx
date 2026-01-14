@@ -1,6 +1,6 @@
-import { View } from "react-native";
-import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
-import { colors } from "../../../shared/theme/colors";
+import { View } from 'react-native';
+import Svg, { Path, Defs, LinearGradient, Stop } from 'react-native-svg';
+import { colors } from '../../../shared/theme/colors';
 
 interface SimpleBalanceChartProps {
   width?: number;
@@ -24,7 +24,7 @@ export default function SimpleBalanceChart({
   ];
 
   const createSmoothPath = (points: { x: number; y: number }[]) => {
-    if (points.length < 2) return "";
+    if (points.length < 2) return '';
 
     let path = `M ${points[0].x} ${points[0].y}`;
 

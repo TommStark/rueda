@@ -1,7 +1,7 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PortfolioScreen from "../screens/PortfolioScreen";
-import AllAssetsScreen from "../screens/AllAssetsScreen";
-import { PortfolioPosition } from "../types/portfolio.types";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import PortfolioScreen from '../screens/PortfolioScreen';
+import AllAssetsScreen from '../screens/AllAssetsScreen';
+import { PortfolioPosition } from '../types/portfolio.types';
 
 export type PortfolioStackParamList = {
   PortfolioMain: undefined;

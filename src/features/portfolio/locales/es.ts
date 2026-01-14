@@ -1,18 +1,18 @@
 export default {
   balance: {
-    label: "SALDO TOTAL",
+    label: 'SALDO TOTAL',
   },
   assets: {
-    title: "Tus Activos",
-    seeAll: "Ver todo",
-    shares: "shares",
+    title: 'Tus Activos',
+    seeAll: 'Ver todo',
+    shares: 'shares',
   },
   empty: {
-    title: "Portfolio Vacío",
-    subtitle: "No tienes posiciones abiertas",
+    title: 'Portfolio Vacío',
+    subtitle: 'No tienes posiciones abiertas',
   },
   errors: {
-    title: "Error",
-    loading: "Error al cargar portfolio",
+    title: 'Error',
+    loading: 'Error al cargar portfolio',
   },
 };

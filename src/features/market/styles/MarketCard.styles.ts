@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   card: {
@@ -10,14 +10,14 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.card,
   },
   content: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     gap: 12,
   },
   leftSection: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     flex: 1,
   },
   logoContainer: {
@@ -27,22 +27,22 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   placeholderLogo: {
     backgroundColor: colors.border.medium,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   placeholderText: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.text.tertiary,
   },
   colorPlaceholderText: {
     fontSize: 14,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.inverse,
     letterSpacing: -0.5,
   },
@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   ticker: {
     fontSize: 17,
-    fontWeight: "800",
+    fontWeight: '800',
     marginBottom: 3,
     letterSpacing: -0.3,
     color: colors.text.primary,
@@ -59,30 +59,30 @@ export const styles = StyleSheet.create({
   name: {
     color: colors.text.tertiary,
     fontSize: 13,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   rightSection: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     marginRight: 8,
   },
   chevronContainer: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   price: {
     fontSize: 17,
-    fontWeight: "800",
+    fontWeight: '800',
     marginBottom: 4,
     letterSpacing: -0.3,
     color: colors.text.primary,
   },
   changeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 4,
   },
   change: {
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 13,
   },
   positive: {

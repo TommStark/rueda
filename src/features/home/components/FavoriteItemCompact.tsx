@@ -1,10 +1,10 @@
-import { View, TouchableOpacity, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { MarketAsset } from "../../market/types/market.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import { styles } from "../styles/FavoriteItemCompact.styles";
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { MarketAsset } from '../../market/types/market.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { styles } from '../styles/FavoriteItemCompact.styles';
 
 interface FavoriteItemCompactProps {
   asset: MarketAsset;
@@ -43,14 +43,14 @@ export default function FavoriteItemCompact({
       <View style={styles.rightSection}>
         <Text variant="bodyMedium" style={styles.price}>
           $
-          {asset.last_price.toLocaleString("en-US", {
+          {asset.last_price.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           })}
         </Text>
         <View style={styles.changeContainer}>
           <MaterialCommunityIcons
-            name={isPositive ? "trending-up" : "trending-down"}
+            name={isPositive ? 'trending-up' : 'trending-down'}
             size={14}
             color={isPositive ? colors.positive : colors.negative}
           />
@@ -61,7 +61,7 @@ export default function FavoriteItemCompact({
               isPositive ? styles.positive : styles.negative,
             ]}
           >
-            {isPositive ? "+" : ""}
+            {isPositive ? '+' : ''}
             {priceChange.toFixed(2)}%
           </Text>
         </View>

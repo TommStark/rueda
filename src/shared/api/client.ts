@@ -2,20 +2,20 @@ import axios, {
   AxiosError,
   AxiosInstance,
   InternalAxiosRequestConfig,
-} from "axios";
-import { API_BASE_URL } from "../constants/api";
+} from 'axios';
+import { API_BASE_URL } from '../constants/api';
 import {
   HTTP_STATUS,
   MAX_RETRIES,
   BASE_DELAY_MS,
   REQUEST_TIMEOUT_MS,
-} from "../constants/http";
+} from '../constants/http';
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: REQUEST_TIMEOUT_MS,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -29,7 +29,7 @@ apiClient.interceptors.request.use(
 );
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  response => response,
   async (error: AxiosError) => {
     const config = error.config as InternalAxiosRequestConfig & {
       _retryCount?: number;
@@ -54,7 +54,7 @@ apiClient.interceptors.response.use(
       config._retryCount = retryCount + 1;
       const delay = BASE_DELAY_MS * Math.pow(2, retryCount);
 
-      await new Promise((resolve) => setTimeout(resolve, delay));
+      await new Promise(resolve => setTimeout(resolve, delay));
 
       return apiClient(config);
     }

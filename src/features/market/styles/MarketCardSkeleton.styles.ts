@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   card: {
@@ -10,13 +10,13 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.card,
   },
   content: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   leftSection: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     flex: 1,
   },
   logo: {
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     height: 14,
   },
   rightSection: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   price: {
     width: 80,

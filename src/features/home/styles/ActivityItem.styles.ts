@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
@@ -14,15 +14,15 @@ export const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 12,
   },
   infoContainer: {
     flex: 1,
   },
   title: {
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.secondary,
     marginBottom: 2,
   },
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     fontSize: 12,
   },
   amount: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   positive: {
     color: colors.positive,

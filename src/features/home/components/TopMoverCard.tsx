@@ -1,9 +1,9 @@
-import { View, Image, ImageSourcePropType } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { TopMover } from "../types/home.types";
-import { styles } from "../styles/TopMoverCard.styles";
+import { View, Image, ImageSourcePropType } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { TopMover } from '../types/home.types';
+import { styles } from '../styles/TopMoverCard.styles';
 
 interface TopMoverCardProps {
   mover: TopMover;
@@ -32,11 +32,11 @@ export default function TopMoverCard({ mover }: TopMoverCardProps) {
         {mover.name}
       </Text>
       <Text variant="titleMedium" style={styles.price}>
-        ${mover.price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+        ${mover.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
       </Text>
       <View style={styles.changeContainer}>
         <MaterialCommunityIcons
-          name={isPositive ? "trending-up" : "trending-down"}
+          name={isPositive ? 'trending-up' : 'trending-down'}
           size={14}
           color={isPositive ? colors.positive : colors.negative}
         />
@@ -47,7 +47,7 @@ export default function TopMoverCard({ mover }: TopMoverCardProps) {
             isPositive ? styles.positive : styles.negative,
           ]}
         >
-          {isPositive ? "+" : ""}
+          {isPositive ? '+' : ''}
           {mover.changePercentage.toFixed(1)}%
         </Text>
       </View>

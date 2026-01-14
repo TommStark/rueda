@@ -1,9 +1,9 @@
-import { View, TouchableOpacity, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
-import { Audio } from "expo-av";
-import { colors } from "../theme/colors";
-import { styles } from "./styles/AppHeader.styles";
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
+import { Audio } from 'expo-av';
+import { colors } from '../theme/colors';
+import { styles } from './styles/AppHeader.styles';
 
 interface AppHeaderProps {
   screenName: string;
@@ -19,7 +19,7 @@ export default function AppHeader({
   const playBellSound = async () => {
     try {
       const { sound } = await Audio.Sound.createAsync(
-        require("../assets/sounds/bell.mp3")
+        require('../assets/sounds/bell.mp3')
       );
       await sound.playAsync();
       sound.setOnPlaybackStatusUpdate((status: any) => {
@@ -39,7 +39,7 @@ export default function AppHeader({
     <View style={styles.header}>
       <TouchableOpacity style={styles.avatar} onPress={onAvatarPress}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={require('../assets/images/logo.png')}
           style={styles.avatarImage}
         />
       </TouchableOpacity>

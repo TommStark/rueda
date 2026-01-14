@@ -1,6 +1,6 @@
-export type OrderSide = "BUY" | "SELL";
-export type OrderType = "MARKET" | "LIMIT";
-export type OrderStatus = "FILLED" | "REJECTED" | "PENDING";
+export type OrderSide = 'BUY' | 'SELL';
+export type OrderType = 'MARKET' | 'LIMIT';
+export type OrderStatus = 'FILLED' | 'REJECTED' | 'PENDING';
 
 export interface OrderHistoryItem {
   id: string;

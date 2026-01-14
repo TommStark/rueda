@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: colors.background.card,
     paddingVertical: 16,
     paddingHorizontal: 16,
@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
   },
   leftSection: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
   },
   iconContainer: {
@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: colors.border.medium,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     fontSize: 24,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   },
   colorPlaceholder: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.inverse,
     letterSpacing: -0.3,
   },
@@ -45,27 +45,27 @@ export const styles = StyleSheet.create({
   },
   ticker: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     letterSpacing: -0.2,
   },
   quantity: {
     fontSize: 12,
     color: colors.text.tertiary,
-    fontWeight: "400",
+    fontWeight: '400',
   },
   rightSection: {
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     gap: 4,
   },
   value: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     letterSpacing: -0.2,
   },
   change: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 12,
   },
   positive: {

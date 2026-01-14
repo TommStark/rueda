@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,15 +9,15 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     borderWidth: 1,
     borderColor: colors.border.light,
-    alignItems: "center",
+    alignItems: 'center',
     gap: 6,
   },
   iconContainer: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 12,
   },
   iconImage: {
@@ -27,30 +27,30 @@ export const styles = StyleSheet.create({
   },
   iconText: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.inverse,
   },
   ticker: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.text.secondary,
   },
   name: {
     fontSize: 10,
     color: colors.text.quaternary,
-    textAlign: "center",
+    textAlign: 'center',
   },
   price: {
-    fontWeight: "600",
+    fontWeight: '600',
     marginTop: 4,
   },
   changeContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 2,
   },
   change: {
     fontSize: 11,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   positive: {
     color: colors.positive,

@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { Card, Text } from "react-native-paper";
-import { PortfolioPosition } from "../types/portfolio.types";
-import { styles } from "../styles/PositionCard.styles";
+import { View } from 'react-native';
+import { Card, Text } from 'react-native-paper';
+import { PortfolioPosition } from '../types/portfolio.types';
+import { styles } from '../styles/PositionCard.styles';
 
 interface PositionCardProps {
   position: PortfolioPosition;
@@ -57,8 +57,8 @@ export default function PositionCard({ position }: PositionCardProps) {
                 isPositive ? styles.positive : styles.negative,
               ]}
             >
-              {isPositive ? "+" : ""}${profitLoss.toFixed(2)} (
-              {isPositive ? "+" : ""}
+              {isPositive ? '+' : ''}${profitLoss.toFixed(2)} (
+              {isPositive ? '+' : ''}
               {profitLossPercent.toFixed(2)}%)
             </Text>
           </View>

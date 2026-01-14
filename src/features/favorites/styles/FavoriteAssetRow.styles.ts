@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   row: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
   },
   assetSection: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   logoContainer: {
     marginRight: 12,
@@ -23,21 +23,21 @@ export const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   placeholderLogo: {
     backgroundColor: colors.border.medium,
   },
   logoText: {
     fontSize: 14,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.inverse,
     letterSpacing: -0.5,
   },
   logoTextPlaceholder: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: colors.text.tertiary,
   },
   assetInfo: {
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   ticker: {
     fontSize: 16,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     marginBottom: 2,
     letterSpacing: -0.3,
@@ -53,18 +53,18 @@ export const styles = StyleSheet.create({
   assetName: {
     fontSize: 12,
     color: colors.text.quaternary,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   trendSection: {
     width: 70,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: 4,
     paddingLeft: 17,
   },
   changeText: {
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   changePositive: {
     color: colors.positive,
@@ -74,12 +74,12 @@ export const styles = StyleSheet.create({
   },
   priceSection: {
     width: 100,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
     gap: 4,
   },
   price: {
     fontSize: 14,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     letterSpacing: -0.3,
   },
@@ -88,6 +88,6 @@ export const styles = StyleSheet.create({
   },
   starSection: {
     marginLeft: 8,
-    alignItems: "center",
+    alignItems: 'center',
   },
 });

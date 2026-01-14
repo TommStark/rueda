@@ -1,11 +1,11 @@
-import { View, TouchableOpacity, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { MarketAsset } from "../types/market.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import { styles } from "../styles/MarketCard.styles";
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { MarketAsset } from '../types/market.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { styles } from '../styles/MarketCard.styles';
 
 interface MarketCardProps {
   asset: MarketAsset;
@@ -52,14 +52,14 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
         <View style={styles.rightSection}>
           <Text variant="titleMedium" style={styles.price}>
             $
-            {asset.last_price.toLocaleString("en-US", {
+            {asset.last_price.toLocaleString('en-US', {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </Text>
           <View style={styles.changeContainer}>
             <MaterialCommunityIcons
-              name={isPositive ? "trending-up" : "trending-down"}
+              name={isPositive ? 'trending-up' : 'trending-down'}
               size={16}
               color={isPositive ? colors.positive : colors.negative}
             />
@@ -70,7 +70,7 @@ export default function MarketCard({ asset, onPress }: MarketCardProps) {
                 isPositive ? styles.positive : styles.negative,
               ]}
             >
-              {isPositive ? "+" : ""}
+              {isPositive ? '+' : ''}
               {priceChange.toFixed(2)}%
             </Text>
           </View>

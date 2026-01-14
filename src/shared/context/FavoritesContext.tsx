@@ -5,12 +5,12 @@ import {
   useEffect,
   ReactNode,
   useCallback,
-} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useToast } from "./ToastContext";
-import { useTranslation } from "../hooks/useTranslation";
+} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useToast } from './ToastContext';
+import { useTranslation } from '../hooks/useTranslation';
 
-const STORAGE_KEY = "@rueda:favorites";
+const STORAGE_KEY = '@rueda:favorites';
 
 interface FavoritesContextValue {
   favorites: string[];
@@ -32,7 +32,7 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { showToast } = useToast();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     loadFavorites();
@@ -46,7 +46,6 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
         setFavorites(parsed);
       }
     } catch (error) {
-      console.error("Error loading favorites:", error);
     } finally {
       setIsLoading(false);
     }
@@ -56,12 +55,12 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
     async (ticker: string) => {
       try {
         let wasAdded = false;
-        setFavorites((prev) => {
+        setFavorites(prev => {
           const normalizedTicker = ticker.toUpperCase();
           const isFav = prev.includes(normalizedTicker);
           wasAdded = !isFav;
           const updated = isFav
-            ? prev.filter((t) => t !== normalizedTicker)
+            ? prev.filter(t => t !== normalizedTicker)
             : [...prev, normalizedTicker];
 
           AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
@@ -70,12 +69,12 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
 
         setTimeout(() => {
           showToast(
-            wasAdded ? t("toast.favoriteAdded") : t("toast.favoriteRemoved"),
-            wasAdded ? "success" : "info"
+            wasAdded ? t('toast.favoriteAdded') : t('toast.favoriteRemoved'),
+            wasAdded ? 'success' : 'info'
           );
         }, 100);
       } catch (error) {
-        console.error("Error toggling favorite:", error);
+        console.error('Error toggling favorite:', error);
       }
     },
     [showToast, t]
@@ -92,9 +91,7 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setFavorites([]);
-    } catch (error) {
-      console.error("Error clearing favorites:", error);
-    }
+    } catch (error) {}
   }, []);
 
   return (
@@ -115,7 +112,7 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
 export function useFavorites() {
   const context = useContext(FavoritesContext);
   if (!context) {
-    throw new Error("useFavorites must be used within FavoritesProvider");
+    throw new Error('useFavorites must be used within FavoritesProvider');
   }
   return context;
 }

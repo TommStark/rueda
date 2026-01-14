@@ -1,6 +1,6 @@
-declare module "rn-swipe-button" {
-  import { Component } from "react";
-  import { ViewStyle, TextStyle } from "react-native";
+declare module 'rn-swipe-button' {
+  import { Component } from 'react';
+  import { ViewStyle, TextStyle } from 'react-native';
 
   interface SwipeButtonProps {
     containerStyles?: ViewStyle;

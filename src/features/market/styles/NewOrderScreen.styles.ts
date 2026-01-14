@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { colors } from "../../../shared/theme/colors";
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../shared/theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.primary,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
   },
   favoriteButton: {
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   assetHeader: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 24,
   },
   assetIconContainer: {
@@ -41,20 +41,20 @@ export const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   assetIconPlaceholder: {
     backgroundColor: colors.border.medium,
   },
   assetIconText: {
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.inverse,
   },
   assetTicker: {
     fontSize: 24,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     marginBottom: 2,
     letterSpacing: -0.5,
@@ -65,18 +65,18 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   assetPriceRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   assetPrice: {
     fontSize: 17,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.primary,
   },
   assetChange: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   changePositive: {
     color: colors.positive,
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
     color: colors.negative,
   },
   sideToggle: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 24,
     gap: 12,
   },
@@ -93,10 +93,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 14,
     borderRadius: 12,
-    alignItems: "center",
+    alignItems: 'center',
     backgroundColor: colors.background.secondary,
     borderWidth: 1,
-    borderColor: "transparent",
+    borderColor: 'transparent',
   },
   sideButtonActiveBuy: {
     backgroundColor: colors.positiveLight,
@@ -108,7 +108,7 @@ export const styles = StyleSheet.create({
   },
   sideButtonText: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.tertiary,
   },
   sideButtonTextActive: {
@@ -119,15 +119,15 @@ export const styles = StyleSheet.create({
   },
   sectionLabel: {
     fontSize: 11,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.quaternary,
     marginBottom: 8,
     letterSpacing: 0.5,
   },
   dropdown: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 14,
     paddingHorizontal: 16,
     backgroundColor: colors.background.secondary,
@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
   },
   dropdownText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.primary,
   },
   dropdownMenu: {
@@ -146,12 +146,12 @@ export const styles = StyleSheet.create({
     marginTop: 8,
     borderWidth: 1,
     borderColor: colors.border.medium,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   dropdownItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 14,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
@@ -162,7 +162,7 @@ export const styles = StyleSheet.create({
   },
   dropdownItemText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
     color: colors.text.tertiary,
   },
   dropdownItemTextActive: {
@@ -173,14 +173,14 @@ export const styles = StyleSheet.create({
   },
   inputLabel: {
     fontSize: 11,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.quaternary,
     marginBottom: 8,
     letterSpacing: 0.5,
   },
   quantityInputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 12,
     marginBottom: 20,
   },
@@ -193,9 +193,9 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
-    textAlign: "center",
+    textAlign: 'center',
   },
   quantityButton: {
     width: 48,
@@ -204,12 +204,12 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.secondary,
     borderWidth: 1,
     borderColor: colors.border.medium,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   quantityButtonText: {
     fontSize: 24,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
   },
   amountInputContainer: {
@@ -223,7 +223,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
     marginBottom: 12,
   },
@@ -232,9 +232,9 @@ export const styles = StyleSheet.create({
     opacity: 0.6,
   },
   percentageChips: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 8,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
   percentageChip: {
     paddingHorizontal: 16,
@@ -246,23 +246,23 @@ export const styles = StyleSheet.create({
   },
   percentageChipText: {
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.tertiary,
   },
   availableBalanceRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: 8,
   },
   availableBalanceLabel: {
     fontSize: 12,
     color: colors.text.quaternary,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   availableBalanceAmount: {
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.positive,
   },
   limitPriceSection: {
@@ -276,13 +276,13 @@ export const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     fontSize: 18,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
   },
   inputHint: {
     fontSize: 12,
     color: colors.text.quaternary,
-    fontWeight: "500",
+    fontWeight: '500',
     marginTop: 6,
   },
   totalSection: {
@@ -292,27 +292,27 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   totalHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 6,
     marginBottom: 8,
   },
   totalLabel: {
     fontSize: 11,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.quaternary,
     letterSpacing: 0.5,
   },
   totalAmount: {
     fontSize: 32,
-    fontWeight: "800",
+    fontWeight: '800',
     color: colors.text.primary,
     marginBottom: 16,
     letterSpacing: -1,
   },
   balanceRow: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 8,
   },
   balanceDot: {
@@ -324,17 +324,17 @@ export const styles = StyleSheet.create({
   balanceLabel: {
     fontSize: 13,
     color: colors.text.tertiary,
-    fontWeight: "500",
+    fontWeight: '500',
     flex: 1,
   },
   balanceAmount: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: '700',
     color: colors.text.primary,
   },
   errorContainer: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     gap: 6,
     marginTop: 12,
     paddingHorizontal: 12,
@@ -345,7 +345,7 @@ export const styles = StyleSheet.create({
   errorText: {
     fontSize: 13,
     color: colors.negative,
-    fontWeight: "600",
+    fontWeight: '600',
     flex: 1,
   },
   swipeButtonContainer: {

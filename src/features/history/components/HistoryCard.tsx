@@ -1,10 +1,10 @@
-import { View, TouchableOpacity, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { OrderHistoryItem } from "../types/history.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import { styles } from "../styles/HistoryCard.styles";
+import { View, TouchableOpacity, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { OrderHistoryItem } from '../types/history.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { styles } from '../styles/HistoryCard.styles';
 
 interface HistoryCardProps {
   order: OrderHistoryItem;
@@ -14,11 +14,11 @@ interface HistoryCardProps {
 export default function HistoryCard({ order, onPress }: HistoryCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "FILLED":
+      case 'FILLED':
         return colors.status.success;
-      case "REJECTED":
+      case 'REJECTED':
         return colors.status.error;
-      case "PENDING":
+      case 'PENDING':
         return colors.status.warning;
       default:
         return colors.text.tertiary;
@@ -27,37 +27,37 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "FILLED":
-        return "check-circle";
-      case "REJECTED":
-        return "close-circle";
-      case "PENDING":
-        return "clock-outline";
+      case 'FILLED':
+        return 'check-circle';
+      case 'REJECTED':
+        return 'close-circle';
+      case 'PENDING':
+        return 'clock-outline';
       default:
-        return "help-circle";
+        return 'help-circle';
     }
   };
 
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp);
-    return date.toLocaleString("en-US", {
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
+    return date.toLocaleString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
       hour12: false,
     });
   };
 
   const getOrderTypeLabel = () => {
-    return `${order.side === "BUY" ? "Buy" : "Sell"} ${
-      order.type === "MARKET" ? "Market" : "Limit"
+    return `${order.side === 'BUY' ? 'Buy' : 'Sell'} ${
+      order.type === 'MARKET' ? 'Market' : 'Limit'
     }`;
   };
 
   const getQuantityLabel = () => {
-    if (order.ticker.includes("/")) {
-      return `${order.quantity} ${order.ticker.split("/")[0]}`;
+    if (order.ticker.includes('/')) {
+      return `${order.quantity} ${order.ticker.split('/')[0]}`;
     }
     return `${order.quantity} Shares`;
   };

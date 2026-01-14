@@ -1,6 +1,6 @@
-import { View } from "react-native";
-import Skeleton from "../../../shared/components/Skeleton";
-import { styles } from "../styles/MarketCardSkeleton.styles";
+import { View } from 'react-native';
+import Skeleton from '../../../shared/components/Skeleton';
+import { styles } from '../styles/MarketCardSkeleton.styles';
 
 export default function MarketCardSkeleton() {
   return (

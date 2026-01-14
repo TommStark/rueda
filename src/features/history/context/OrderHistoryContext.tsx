@@ -5,11 +5,11 @@ import {
   useEffect,
   ReactNode,
   useCallback,
-} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { OrderHistoryItem } from "../types/history.types";
+} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { OrderHistoryItem } from '../types/history.types';
 
-const STORAGE_KEY = "@rueda:order_history";
+const STORAGE_KEY = '@rueda:order_history';
 
 interface OrderHistoryContextValue {
   orders: OrderHistoryItem[];
@@ -42,7 +42,7 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
         setOrders(parsed);
       }
     } catch (error) {
-      console.error("Error loading order history:", error);
+      console.error('Error loading order history:', error);
     } finally {
       setIsLoading(false);
     }
@@ -50,14 +50,12 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
 
   const addOrder = useCallback(async (order: OrderHistoryItem) => {
     try {
-      setOrders((prev) => {
+      setOrders(prev => {
         const updated = [order, ...prev];
         AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
         return updated;
       });
-    } catch (error) {
-      console.error("Error saving order:", error);
-    }
+    } catch (error) {}
   }, []);
 
   const clearHistory = useCallback(async () => {
@@ -65,7 +63,7 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setOrders([]);
     } catch (error) {
-      console.error("Error clearing history:", error);
+      console.error('Error clearing history:', error);
     }
   }, []);
 
@@ -81,7 +79,7 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
 export function useOrderHistory() {
   const context = useContext(OrderHistoryContext);
   if (!context) {
-    throw new Error("useOrderHistory must be used within OrderHistoryProvider");
+    throw new Error('useOrderHistory must be used within OrderHistoryProvider');
   }
   return context;
 }

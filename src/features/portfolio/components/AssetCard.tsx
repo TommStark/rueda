@@ -1,8 +1,8 @@
-import { View, Image } from "react-native";
-import { Text } from "react-native-paper";
-import { PortfolioPosition } from "../types/portfolio.types";
-import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
-import { styles } from "../styles/AssetCard.styles";
+import { View, Image } from 'react-native';
+import { Text } from 'react-native-paper';
+import { PortfolioPosition } from '../types/portfolio.types';
+import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { styles } from '../styles/AssetCard.styles';
 
 interface AssetCardProps {
   position: PortfolioPosition;
@@ -10,17 +10,17 @@ interface AssetCardProps {
 
 const getAssetIcon = (ticker: string): string => {
   const iconMap: Record<string, string> = {
-    AAPL: "🍎",
-    BTC: "₿",
-    MELI: "💛",
-    KO: "🥤",
-    TSLA: "🚗",
-    NVDA: "💚",
-    MSFT: "🪟",
-    GOOGL: "🔍",
-    AMZN: "📦",
+    AAPL: '🍎',
+    BTC: '₿',
+    MELI: '💛',
+    KO: '🥤',
+    TSLA: '🚗',
+    NVDA: '💚',
+    MSFT: '🪟',
+    GOOGL: '🔍',
+    AMZN: '📦',
   };
-  return iconMap[ticker] || "📊";
+  return iconMap[ticker] || '📊';
 };
 
 export default function AssetCard({ position }: AssetCardProps) {
@@ -58,7 +58,7 @@ export default function AssetCard({ position }: AssetCardProps) {
       <View style={styles.rightSection}>
         <Text style={styles.value}>
           $
-          {currentValue.toLocaleString("en-US", {
+          {currentValue.toLocaleString('en-US', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0,
           })}
@@ -69,12 +69,12 @@ export default function AssetCard({ position }: AssetCardProps) {
             isPositive ? styles.positive : styles.negative,
           ]}
         >
-          {isPositive ? "+" : ""}$
-          {Math.abs(totalGain).toLocaleString("en-US", {
+          {isPositive ? '+' : ''}$
+          {Math.abs(totalGain).toLocaleString('en-US', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0,
-          })}{" "}
-          ({isPositive ? "+" : ""}
+          })}{' '}
+          ({isPositive ? '+' : ''}
           {totalReturn.toFixed(1)}%)
         </Text>
       </View>

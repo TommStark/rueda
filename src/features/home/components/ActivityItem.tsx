@@ -1,9 +1,9 @@
-import { View } from "react-native";
-import { Text } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { RecentActivity } from "../types/home.types";
-import { styles } from "../styles/ActivityItem.styles";
-import { colors } from "../../../shared/theme/colors";
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { RecentActivity } from '../types/home.types';
+import { styles } from '../styles/ActivityItem.styles';
+import { colors } from '../../../shared/theme/colors';
 
 interface ActivityItemProps {
   activity: RecentActivity;
@@ -14,13 +14,13 @@ export default function ActivityItem({ activity }: ActivityItemProps) {
 
   const getIconBackgroundColor = () => {
     switch (activity.type) {
-      case "buy":
+      case 'buy':
         return colors.activity.buy.background;
-      case "sell":
+      case 'sell':
         return colors.activity.sell.background;
-      case "deposit":
+      case 'deposit':
         return colors.activity.deposit.background;
-      case "withdraw":
+      case 'withdraw':
         return colors.activity.withdraw.background;
       default:
         return colors.background.secondary;
@@ -29,13 +29,13 @@ export default function ActivityItem({ activity }: ActivityItemProps) {
 
   const getIconColor = () => {
     switch (activity.type) {
-      case "buy":
+      case 'buy':
         return colors.activity.buy.icon;
-      case "sell":
+      case 'sell':
         return colors.activity.sell.icon;
-      case "deposit":
+      case 'deposit':
         return colors.activity.deposit.icon;
-      case "withdraw":
+      case 'withdraw':
         return colors.activity.withdraw.icon;
       default:
         return colors.text.tertiary;
@@ -68,7 +68,7 @@ export default function ActivityItem({ activity }: ActivityItemProps) {
         variant="titleSmall"
         style={[styles.amount, isPositive ? styles.positive : styles.negative]}
       >
-        {isPositive ? "+" : ""}${Math.abs(activity.amount).toFixed(2)}
+        {isPositive ? '+' : ''}${Math.abs(activity.amount).toFixed(2)}
       </Text>
     </View>
   );

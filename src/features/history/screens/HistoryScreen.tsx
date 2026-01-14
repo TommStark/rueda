@@ -1,52 +1,52 @@
-import React, { useState, useMemo } from "react";
-import { View, FlatList, ScrollView } from "react-native";
-import { Text, Button, Chip } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { useTranslation } from "../../../shared/hooks/useTranslation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useOrderHistory } from "../context/OrderHistoryContext";
-import HistoryCard from "../components/HistoryCard";
-import AppHeader from "../../../shared/components/AppHeader";
-import GreenStatusBar from "../../../shared/components/GreenStatusBar";
-import { OrderHistoryItem, OrderStatus } from "../types/history.types";
-import { RootStackParamList } from "../../../navigation/types";
-import { styles } from "../styles/HistoryScreen.styles";
+import React, { useState, useMemo } from 'react';
+import { View, ScrollView } from 'react-native';
+import { Text, Chip } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useOrderHistory } from '../context/OrderHistoryContext';
+import HistoryCard from '../components/HistoryCard';
+import AppHeader from '../../../shared/components/AppHeader';
+import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import { OrderHistoryItem, OrderStatus } from '../types/history.types';
+import { RootStackParamList } from '../../../navigation/types';
+import { styles } from '../styles/HistoryScreen.styles';
 
 type HistoryScreenNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
-type FilterType = "ALL" | OrderStatus;
+type FilterType = 'ALL' | OrderStatus;
 
 export default function HistoryScreen() {
-  const { t } = useTranslation("history");
+  const { t } = useTranslation('history');
   const navigation = useNavigation<HistoryScreenNavigationProp>();
-  const { orders, clearHistory, isLoading } = useOrderHistory();
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("ALL");
+  const { orders, isLoading } = useOrderHistory();
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>('ALL');
 
   useFocusEffect(
     React.useCallback(() => {
       return () => {
-        setSelectedFilter("ALL");
+        setSelectedFilter('ALL');
       };
     }, [])
   );
 
   const filteredOrders = useMemo(() => {
-    if (selectedFilter === "ALL") return orders;
-    return orders.filter((order) => order.status === selectedFilter);
+    if (selectedFilter === 'ALL') return orders;
+    return orders.filter(order => order.status === selectedFilter);
   }, [orders, selectedFilter]);
 
   const groupedOrders = useMemo(() => {
     const groups: { [key: string]: OrderHistoryItem[] } = {};
-    filteredOrders.forEach((order) => {
+    filteredOrders.forEach(order => {
       const date = new Date(order.timestamp);
       const monthYear = date
-        .toLocaleDateString("en-US", {
-          month: "long",
-          year: "numeric",
+        .toLocaleDateString('en-US', {
+          month: 'long',
+          year: 'numeric',
         })
         .toUpperCase();
       if (!groups[monthYear]) {
@@ -58,15 +58,15 @@ export default function HistoryScreen() {
   }, [filteredOrders]);
 
   const handleOrderPress = (order: OrderHistoryItem) => {
-    navigation.navigate("OrderReceipt", { order });
+    navigation.navigate('OrderReceipt', { order });
   };
 
   if (isLoading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <AppHeader screenName={t("title")} />
+        <AppHeader screenName={t('title')} />
         <View style={styles.centerContainer}>
-          <Text variant="bodyMedium">{t("loading")}</Text>
+          <Text variant="bodyMedium">{t('loading')}</Text>
         </View>
       </SafeAreaView>
     );
@@ -80,64 +80,64 @@ export default function HistoryScreen() {
         contentContainerStyle={styles.filtersContainer}
       >
         <Chip
-          selected={selectedFilter === "ALL"}
-          onPress={() => setSelectedFilter("ALL")}
+          selected={selectedFilter === 'ALL'}
+          onPress={() => setSelectedFilter('ALL')}
           style={[
             styles.filterChip,
-            selectedFilter === "ALL" && styles.filterChipSelectedAll,
+            selectedFilter === 'ALL' && styles.filterChipSelectedAll,
           ]}
           textStyle={[
             styles.filterChipText,
-            selectedFilter === "ALL" && styles.filterChipTextSelected,
+            selectedFilter === 'ALL' && styles.filterChipTextSelected,
           ]}
-          mode={selectedFilter === "ALL" ? "flat" : "outlined"}
+          mode={selectedFilter === 'ALL' ? 'flat' : 'outlined'}
         >
-          {t("filters.all")}
+          {t('filters.all')}
         </Chip>
         <Chip
-          selected={selectedFilter === "FILLED"}
-          onPress={() => setSelectedFilter("FILLED")}
+          selected={selectedFilter === 'FILLED'}
+          onPress={() => setSelectedFilter('FILLED')}
           style={[
             styles.filterChip,
-            selectedFilter === "FILLED" && styles.filterChipSelectedFilled,
+            selectedFilter === 'FILLED' && styles.filterChipSelectedFilled,
           ]}
           textStyle={[
             styles.filterChipText,
-            selectedFilter === "FILLED" && styles.filterChipTextSelected,
+            selectedFilter === 'FILLED' && styles.filterChipTextSelected,
           ]}
-          mode={selectedFilter === "FILLED" ? "flat" : "outlined"}
+          mode={selectedFilter === 'FILLED' ? 'flat' : 'outlined'}
         >
-          {t("filters.filled")}
+          {t('filters.filled')}
         </Chip>
         <Chip
-          selected={selectedFilter === "PENDING"}
-          onPress={() => setSelectedFilter("PENDING")}
+          selected={selectedFilter === 'PENDING'}
+          onPress={() => setSelectedFilter('PENDING')}
           style={[
             styles.filterChip,
-            selectedFilter === "PENDING" && styles.filterChipSelectedPending,
+            selectedFilter === 'PENDING' && styles.filterChipSelectedPending,
           ]}
           textStyle={[
             styles.filterChipText,
-            selectedFilter === "PENDING" && styles.filterChipTextSelected,
+            selectedFilter === 'PENDING' && styles.filterChipTextSelected,
           ]}
-          mode={selectedFilter === "PENDING" ? "flat" : "outlined"}
+          mode={selectedFilter === 'PENDING' ? 'flat' : 'outlined'}
         >
-          {t("filters.pending")}
+          {t('filters.pending')}
         </Chip>
         <Chip
-          selected={selectedFilter === "REJECTED"}
-          onPress={() => setSelectedFilter("REJECTED")}
+          selected={selectedFilter === 'REJECTED'}
+          onPress={() => setSelectedFilter('REJECTED')}
           style={[
             styles.filterChip,
-            selectedFilter === "REJECTED" && styles.filterChipSelectedRejected,
+            selectedFilter === 'REJECTED' && styles.filterChipSelectedRejected,
           ]}
           textStyle={[
             styles.filterChipText,
-            selectedFilter === "REJECTED" && styles.filterChipTextSelected,
+            selectedFilter === 'REJECTED' && styles.filterChipTextSelected,
           ]}
-          mode={selectedFilter === "REJECTED" ? "flat" : "outlined"}
+          mode={selectedFilter === 'REJECTED' ? 'flat' : 'outlined'}
         >
-          {t("filters.rejected")}
+          {t('filters.rejected')}
         </Chip>
       </ScrollView>
     </View>
@@ -147,7 +147,7 @@ export default function HistoryScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <GreenStatusBar />
-        <AppHeader screenName={t("title")} />
+        <AppHeader screenName={t('title')} />
         <View style={styles.centerContainer}>
           <MaterialCommunityIcons
             name="history"
@@ -155,10 +155,10 @@ export default function HistoryScreen() {
             color={colors.border.dark}
           />
           <Text variant="headlineMedium" style={styles.emptyTitle}>
-            {t("empty.title")}
+            {t('empty.title')}
           </Text>
           <Text variant="bodyMedium" style={styles.emptySubtitle}>
-            {t("empty.subtitle")}
+            {t('empty.subtitle')}
           </Text>
         </View>
       </SafeAreaView>
@@ -167,21 +167,21 @@ export default function HistoryScreen() {
 
   const getEmptyFilterMessage = () => {
     switch (selectedFilter) {
-      case "FILLED":
-        return t("emptyFilters.filled");
-      case "PENDING":
-        return t("emptyFilters.pending");
-      case "REJECTED":
-        return t("emptyFilters.rejected");
+      case 'FILLED':
+        return t('emptyFilters.filled');
+      case 'PENDING':
+        return t('emptyFilters.pending');
+      case 'REJECTED':
+        return t('emptyFilters.rejected');
       default:
-        return t("empty.subtitle");
+        return t('empty.subtitle');
     }
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       <GreenStatusBar />
-      <AppHeader screenName={t("title")} />
+      <AppHeader screenName={t('title')} />
       <View style={styles.container}>
         {renderFilters()}
         {filteredOrders.length === 0 ? (
@@ -206,7 +206,7 @@ export default function HistoryScreen() {
                 <Text variant="labelMedium" style={styles.monthHeader}>
                   {monthYear}
                 </Text>
-                {monthOrders.map((order) => (
+                {monthOrders.map(order => (
                   <HistoryCard
                     key={order.id}
                     order={order}

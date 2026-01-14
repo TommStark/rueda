@@ -1,8 +1,8 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
-import { Text } from "react-native-paper";
-import { Ionicons } from "@expo/vector-icons";
-import { colors } from "../../../shared/theme/colors";
-import { styles } from "../styles/PromoBanner.styles";
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-paper';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../../../shared/theme/colors';
+import { styles } from '../styles/PromoBanner.styles';
 
 interface PromoBannerProps {
   title: string;
@@ -46,24 +46,24 @@ function PromoBannerCard({
 export default function PromoBanner() {
   const banners = [
     {
-      id: "1",
-      title: "Invertí en Fondos",
-      subtitle: "Rendimiento del 30% anual",
-      icon: "trending-up" as const,
+      id: '1',
+      title: 'Invertí en Fondos',
+      subtitle: 'Rendimiento del 30% anual',
+      icon: 'trending-up' as const,
       backgroundColor: colors.primary,
     },
     {
-      id: "2",
-      title: "Stop Loss Automático",
-      subtitle: "Protegé tus inversiones",
-      icon: "shield-checkmark" as const,
+      id: '2',
+      title: 'Stop Loss Automático',
+      subtitle: 'Protegé tus inversiones',
+      icon: 'shield-checkmark' as const,
       backgroundColor: colors.positive,
     },
     {
-      id: "3",
-      title: "¿Te gustó esta App?",
-      subtitle: "Contratá al dev que la hizo (:",
-      icon: "person-add" as const,
+      id: '3',
+      title: '¿Te gustó esta App?',
+      subtitle: 'Contratá al dev que la hizo (:',
+      icon: 'person-add' as const,
       backgroundColor: colors.status.warning,
     },
   ];
@@ -75,7 +75,7 @@ export default function PromoBanner() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {banners.map((banner) => (
+        {banners.map(banner => (
           <PromoBannerCard
             key={banner.id}
             title={banner.title}
