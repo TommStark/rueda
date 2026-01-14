@@ -146,6 +146,7 @@ export default function HistoryScreen() {
   if (orders.length === 0) {
     return (
       <SafeAreaView style={styles.safeArea}>
+        <GreenStatusBar />
         <AppHeader screenName={t("title")} />
         <View style={styles.centerContainer}>
           <MaterialCommunityIcons

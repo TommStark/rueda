@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   availableText: {
     fontSize: 10,
     fontWeight: "700",
-    color: colors.primary,
+    color: colors.white,
   },
   balanceLabel: {
     fontSize: 11,

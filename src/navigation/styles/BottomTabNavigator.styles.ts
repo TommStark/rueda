@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: colors.primaryLight,
+    backgroundColor: colors.primaryLightAlpha,
     justifyContent: "center",
     alignItems: "center",
   },

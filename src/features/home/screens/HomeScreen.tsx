@@ -148,11 +148,7 @@ export default function HomeScreen() {
                   {t("balance.label")}
                 </Text>
                 <View style={styles.availableBadge}>
-                  <Ionicons
-                    name="trending-up"
-                    size={12}
-                    color={colors.primary}
-                  />
+                  <Ionicons name="trending-up" size={12} color={colors.white} />
                   {hideBalance ? (
                     <Text style={styles.availableText}>••••••</Text>
                   ) : (

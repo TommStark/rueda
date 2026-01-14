@@ -6,50 +6,51 @@
  */
 
 export const colors = {
-  // Primary Colors
-  primary: "#00A86B",
-  primaryLight: "#e6f7f0",
-  primaryDark: "#008558",
+  primary: "#123A5E", // azul principal (header / splash)
+  primaryLight: "#1e4e79ff", // hover, gradientes, fondos suaves
+  primaryLightAlpha: "rgba(30, 78, 121, 0.3)", // hover, gradientes, fondos suaves
+  primaryDark: "#0B2A44", // estados pressed / contraste
+  white: "#ffffff",
 
-  // Secondary Colors
-  secondary: "#FF6B35",
-  secondaryLight: "#fff3e0",
+  // Secondary Colors (Acción / Ganancia)
+  secondary: "#00A86B",
+  secondaryLight: "#e6f7f0",
+  secondaryDark: "#008558",
 
-  // Gradients
   gradient: {
-    primary: ["#00C896", "#00A86B"],
-    header: ["#00A86B", "#00A86B"],
-    homeBackground: ["#00A86B", "#f5f5f5"],
+    primary: ["#1E4E79", "#123A5E"],
+    header: ["#123A5E", "#123A5E"],
+    homeBackground: ["#123A5E", "#f5f5f5"],
   },
 
   // Background Colors
   background: {
-    primary: "#fff",
+    primary: "#ffffff",
     secondary: "#fafafa",
     tertiary: "#f5f5f5",
-    card: "#fff",
+    card: "#ffffff",
   },
 
   // Text Colors
   text: {
-    primary: "#1a1a1a",
-    secondary: "#333",
-    tertiary: "#666",
-    quaternary: "#999",
-    inverse: "#fff",
+    primary: "#0B1F33",
+    secondary: "#333333",
+    tertiary: "#666666",
+    quaternary: "#999999",
+    inverse: "#ffffff",
   },
 
   // Border Colors
   border: {
     light: "#f0f0f0",
     medium: "#e0e0e0",
-    dark: "#ccc",
+    dark: "#cccccc",
   },
 
   // Status Colors
   status: {
-    success: "#4caf50",
-    successLight: "#e8f5e9",
+    success: "#00A86B",
+    successLight: "#e6f7f0",
     error: "#f44336",
     errorLight: "#ffebee",
     warning: "#ff9800",
@@ -59,20 +60,20 @@ export const colors = {
   },
 
   // Semantic Colors
-  positive: "#4caf50",
-  positiveLight: "#e8f5e9",
+  positive: "#00A86B",
+  positiveLight: "#e6f7f0",
   negative: "#f44336",
   negativeLight: "#ffebee",
 
   // Shadow
   shadow: {
-    color: "#000",
+    color: "#000000",
     light: "rgba(0, 0, 0, 0.05)",
     medium: "rgba(0, 0, 0, 0.08)",
   },
 
   // Special Colors
-  avatar: "#ffe4d6",
+  avatar: "#fbcf30ff", // dorado moneda
   skeleton: "#E1E9EE",
   skeletonGradient: ["#E1E9EE", "#F2F8FC", "#E1E9EE"],
 
@@ -87,8 +88,8 @@ export const colors = {
       background: "#fff3e0",
     },
     deposit: {
-      icon: "#4caf50",
-      background: "#e8f5e9",
+      icon: "#00A86B",
+      background: "#e6f7f0",
     },
     withdraw: {
       icon: "#f44336",
@@ -97,7 +98,7 @@ export const colors = {
   },
 
   // Favorites
-  favorite: "#FF6B35",
+  favorite: "#00A86B",
 } as const;
 
 export type Colors = typeof colors;

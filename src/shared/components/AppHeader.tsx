@@ -39,7 +39,7 @@ export default function AppHeader({
     <View style={styles.header}>
       <TouchableOpacity style={styles.avatar} onPress={onAvatarPress}>
         <Image
-          source={require("../assets/images/avatar.png")}
+          source={require("../assets/images/logo.png")}
           style={styles.avatarImage}
         />
       </TouchableOpacity>
