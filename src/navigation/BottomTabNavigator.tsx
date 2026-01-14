@@ -2,12 +2,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { useTranslation } from '../shared/hooks/useTranslation';
-import { colors } from '../shared/theme/colors';
+import { colors } from '../theme/colors';
 import HomeScreen from '../features/home/screens/HomeScreen';
 import MarketScreen from '../features/market/screens/MarketScreen';
 import PortfolioScreen from '../features/portfolio/screens/PortfolioScreen';
 import FavoritesScreen from '../features/favorites/screens/FavoritesScreen';
-import HistoryScreen from '../features/history/screens/HistoryScreen';
+import HistoryScreen from '../features/orders/screens/HistoryScreen';
 import { BottomTabParamList } from './types';
 import { styles } from './styles/BottomTabNavigator.styles';
 

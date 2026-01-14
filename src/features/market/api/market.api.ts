@@ -1,5 +1,5 @@
-import apiClient from '../../../shared/api/client';
-import { API_ENDPOINTS } from '../../../shared/constants/api';
+import apiClient from '../../../api/client';
+import { API_ENDPOINTS } from '../../../api/constants/api';
 import { MarketAsset } from '../types/market.types';
 
 export interface FetchMarketAssetsParams {

@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import AssetCard from '../components/AssetCard';

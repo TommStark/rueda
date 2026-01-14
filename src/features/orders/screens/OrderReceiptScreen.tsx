@@ -1,6 +1,6 @@
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../../../navigation/types';
-import OrderReceipt from '../../../shared/components/OrderReceipt';
+import OrderReceipt from '../components/OrderReceipt';
 
 type OrderReceiptRouteProp = RouteProp<RootStackParamList, 'OrderReceipt'>;
 

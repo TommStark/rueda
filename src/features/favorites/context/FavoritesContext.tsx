@@ -7,8 +7,8 @@ import {
   useCallback,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useToast } from './ToastContext';
-import { useTranslation } from '../hooks/useTranslation';
+import { useToast } from '../../../shared/context/ToastContext';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 const STORAGE_KEY = '@rueda:favorites';
 

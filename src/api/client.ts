@@ -3,13 +3,13 @@ import axios, {
   AxiosInstance,
   InternalAxiosRequestConfig,
 } from 'axios';
-import { API_BASE_URL } from '../constants/api';
+import { API_BASE_URL } from './constants/api';
 import {
   HTTP_STATUS,
   MAX_RETRIES,
   BASE_DELAY_MS,
   REQUEST_TIMEOUT_MS,
-} from '../constants/http';
+} from './constants/http';
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,

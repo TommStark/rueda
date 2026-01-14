@@ -1,5 +1,5 @@
 import { View, ViewStyle, DimensionValue } from 'react-native';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { styles } from '../styles/HomeScreenSkeleton.styles';
 
 function SkeletonBox({

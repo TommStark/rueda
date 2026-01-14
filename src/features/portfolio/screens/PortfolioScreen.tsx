@@ -2,7 +2,7 @@ import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';

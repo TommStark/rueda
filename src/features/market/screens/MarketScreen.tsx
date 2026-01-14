@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import { Text, Searchbar } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from '../../../shared/hooks/useTranslation';

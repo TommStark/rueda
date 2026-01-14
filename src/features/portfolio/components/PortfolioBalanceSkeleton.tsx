@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import Skeleton from '../../../shared/components/Skeleton';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 
 export default function PortfolioBalanceSkeleton() {
   return (

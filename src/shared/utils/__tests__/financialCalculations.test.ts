@@ -5,7 +5,7 @@ import {
   calcGain,
   calcTotalReturnPct,
   calcQtyFromAmount,
-} from './financialCalculations';
+} from '../financialCalculations';
 
 describe('Financial Calculation Functions', () => {
   describe('calcInstrumentReturn', () => {

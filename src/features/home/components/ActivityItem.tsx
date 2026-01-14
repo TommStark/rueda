@@ -3,7 +3,7 @@ import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { RecentActivity } from '../types/home.types';
 import { styles } from '../styles/ActivityItem.styles';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 
 interface ActivityItemProps {
   activity: RecentActivity;

@@ -2,13 +2,13 @@ import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { colors } from '../theme/colors';
-import { styles } from './styles/OrderReceipt.styles';
+import { colors } from '../../../theme/colors';
+import { styles } from '../styles/OrderReceipt.styles';
 import { useNavigation } from '@react-navigation/native';
-import { useTranslation } from '../hooks/useTranslation';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { OrderHistoryItem } from '../../features/history/types/history.types';
-import { RootStackParamList } from '../../navigation/types';
+import { OrderHistoryItem } from '../types/history.types';
+import { RootStackParamList } from '../../../navigation/types';
 
 interface OrderReceiptProps {
   order: OrderHistoryItem;

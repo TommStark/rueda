@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { HTTP_STATUS } from '../constants/http';
+import { HTTP_STATUS } from './constants/http';
 
 export interface ApiError {
   message: string;

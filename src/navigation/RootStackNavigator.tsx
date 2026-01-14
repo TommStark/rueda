@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from './BottomTabNavigator';
 import AllAssetsScreen from '../features/portfolio/screens/AllAssetsScreen';
 import NewOrderScreen from '../features/market/screens/NewOrderScreen';
-import OrderReceiptScreen from '../features/history/screens/OrderReceiptScreen';
+import OrderReceiptScreen from '../features/orders/screens/OrderReceiptScreen';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

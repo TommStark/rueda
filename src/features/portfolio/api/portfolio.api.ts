@@ -1,5 +1,5 @@
-import apiClient from '../../../shared/api/client';
-import { API_ENDPOINTS } from '../../../shared/constants/api';
+import apiClient from '../../../api/client';
+import { API_ENDPOINTS } from '../../../api/constants/api';
 import { PortfolioPosition } from '../types/portfolio.types';
 
 export const fetchPortfolio = async (

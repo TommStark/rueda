@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop } from 'react-native-svg';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 
 interface SimpleBalanceChartProps {
   width?: number;

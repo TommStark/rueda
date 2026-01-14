@@ -9,16 +9,16 @@ import {
 import { Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/types';
-import { OrderSide, OrderType } from '../../history/types/history.types';
+import { OrderSide, OrderType } from '../../orders/types/history.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import SwipeButton from 'rn-swipe-button';
-import { useOrderHistory } from '../../history/context/OrderHistoryContext';
-import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { useOrderHistory } from '../../orders/context/OrderHistoryContext';
+import { useFavorites } from '../../favorites/context/FavoritesContext';
 import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
 import { createOrder } from '../api/orders.api';
 import {

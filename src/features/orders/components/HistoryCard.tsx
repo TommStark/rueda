@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { OrderHistoryItem } from '../types/history.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import { styles } from '../styles/HistoryCard.styles';

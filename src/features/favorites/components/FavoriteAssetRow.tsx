@@ -1,10 +1,10 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { MarketAsset } from '../../market/types/market.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
-import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { useFavorites } from '../context/FavoritesContext';
 import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import MiniTrendChart from './MiniTrendChart';
 import { styles } from '../styles/FavoriteAssetRow.styles';
