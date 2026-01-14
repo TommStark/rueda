@@ -10,16 +10,15 @@ import { Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/types';
 import { OrderSide, OrderType } from '../../orders/types/history.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import SwipeButton from 'rn-swipe-button';
 import { useOrderHistory } from '../../orders/context/OrderHistoryContext';
 import { useFavorites } from '../../favorites/context/FavoritesContext';
 import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
+import { useMarket } from '../hooks/useMarket';
 import { createOrder } from '../api/orders.api';
 import {
   calcInstrumentReturn,
@@ -28,14 +27,10 @@ import {
 } from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/NewOrderScreen.styles';
 
-type NewOrderRouteProp = RouteProp<RootStackParamList, 'NewOrder'>;
-type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 export default function NewOrderScreen() {
   const { t } = useTranslation('market');
-  const navigation = useNavigation<NewOrderNavigationProp>();
-  const route = useRoute<NewOrderRouteProp>();
-  const { asset } = route.params;
+  const { assetId } = useLocalSearchParams<{ assetId?: string | string[] }>();
+  const { data: marketAssets } = useMarket();
   const { addOrder } = useOrderHistory();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { data: portfolioData } = usePortfolio();
@@ -47,6 +42,35 @@ export default function NewOrderScreen() {
   const [limitPrice, setLimitPrice] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showOrderTypeMenu, setShowOrderTypeMenu] = useState(false);
+
+  const normalizedAssetId = Array.isArray(assetId) ? assetId[0] : assetId;
+  const assetIdNum = normalizedAssetId ? Number(normalizedAssetId) : NaN;
+  const asset = marketAssets?.find(a => a.id === assetIdNum);
+
+  useEffect(() => {
+    setQuantity(0);
+    setInvestmentAmount('');
+  }, [side]);
+
+  if (!asset) {
+    return (
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => router.back()}
+            style={styles.closeButton}
+          >
+            <Ionicons name="arrow-back" size={24} color={colors.text.primary} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>{t('newOrder.title')}</Text>
+          <View style={styles.favoriteButton} />
+        </View>
+        <View style={styles.content}>
+          <Text>{t('loading')}</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   const tickerIcon = getTickerIcon(asset.ticker);
   const hasIcon = hasTickerIcon(asset.ticker);
@@ -145,7 +169,7 @@ export default function NewOrderScreen() {
       const result = await createOrder(orderRequest);
 
       const orderHistoryItem = {
-        id: result.id,
+        id: String(result.id),
         ticker: asset.ticker,
         instrumentId: asset.id,
         side,
@@ -160,7 +184,10 @@ export default function NewOrderScreen() {
 
       await addOrder(orderHistoryItem);
 
-      navigation.replace('OrderReceipt', { order: orderHistoryItem });
+      router.replace({
+        pathname: '/order-receipt',
+        params: { orderId: orderHistoryItem.id },
+      });
     } catch {
       alert(t('validation.orderFailed'));
     } finally {
@@ -169,17 +196,12 @@ export default function NewOrderScreen() {
   };
 
   const handleClose = () => {
-    navigation.goBack();
+    router.back();
   };
 
   const handleToggleFavorite = () => {
     toggleFavorite(asset.ticker);
   };
-
-  useEffect(() => {
-    setQuantity(0);
-    setInvestmentAmount('');
-  }, [side]);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>

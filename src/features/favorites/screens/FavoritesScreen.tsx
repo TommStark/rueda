@@ -2,10 +2,8 @@ import { View, FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../navigation/types';
+import { router } from 'expo-router';
 import { useFavorites } from '../context/FavoritesContext';
 import { useMarket } from '../../market/hooks/useMarket';
 import FavoriteAssetRow from '../components/FavoriteAssetRow';
@@ -13,11 +11,8 @@ import { MarketAsset } from '../../market/types/market.types';
 import { colors } from '../../../theme/colors';
 import { styles } from '../styles/FavoritesScreen.styles';
 
-type FavoritesNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 export default function FavoritesScreen() {
   const { t } = useTranslation('favorites');
-  const navigation = useNavigation<FavoritesNavigationProp>();
   const { favorites } = useFavorites();
   const { data: marketAssets, isLoading } = useMarket();
 
@@ -26,7 +21,10 @@ export default function FavoritesScreen() {
   );
 
   const handleAssetPress = (asset: MarketAsset) => {
-    navigation.navigate('NewOrder', { asset });
+    router.push({
+      pathname: '/new-order',
+      params: { assetId: String(asset.id) },
+    });
   };
 
   const renderEmptyState = () => (

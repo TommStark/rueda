@@ -4,21 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
 import { styles } from '../styles/OrderReceipt.styles';
-import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { OrderHistoryItem } from '../types/history.types';
-import { RootStackParamList } from '../../../navigation/types';
 
 interface OrderReceiptProps {
   order: OrderHistoryItem;
 }
 
-type OrderReceiptNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 export default function OrderReceipt({ order }: OrderReceiptProps) {
   const { t } = useTranslation('common');
-  const navigation = useNavigation<OrderReceiptNavigationProp>();
 
   const getStatusIcon = () => {
     switch (order.status) {
@@ -92,15 +87,15 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   const totalSpent = order.executedPrice * order.quantity;
 
   const handleClose = () => {
-    navigation.goBack();
+    router.back();
   };
 
   const handleBackToMarkets = () => {
-    navigation.goBack();
+    router.back();
   };
 
   const handleViewPortfolio = () => {
-    navigation.navigate('MainTabs', { screen: 'Portfolio' });
+    router.navigate('/portfolio');
   };
 
   return (

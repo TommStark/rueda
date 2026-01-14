@@ -3,9 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
-import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { usePortfolio, usePortfolioError } from '../hooks/usePortfolio';
 import AssetCard from '../components/AssetCard';
 import AssetCardSkeleton from '../components/AssetCardSkeleton';
@@ -14,7 +13,6 @@ import SimpleBalanceChart from '../components/SimpleBalanceChart';
 import AppHeader from '../../../shared/components/AppHeader';
 import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { PortfolioPosition } from '../types/portfolio.types';
-import { RootStackParamList } from '../../../navigation/types';
 import {
   calcMarketValue,
   calcCostBasis,
@@ -23,8 +21,6 @@ import { styles } from '../styles/PortfolioScreen.styles';
 
 export default function PortfolioScreen() {
   const { t } = useTranslation('portfolio');
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { data, isLoading, error } = usePortfolio();
   const apiError = usePortfolioError(error);
 
@@ -118,7 +114,7 @@ export default function PortfolioScreen() {
   const hasMoreAssets = groupedData.length > 3;
 
   const handleSeeAll = () => {
-    navigation.navigate('AllAssets', { assets: groupedData });
+    router.push('/all-assets');
   };
 
   return (

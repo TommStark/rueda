@@ -4,25 +4,20 @@ import { Text, Chip } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+import { router } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useOrderHistory } from '../context/OrderHistoryContext';
 import HistoryCard from '../components/HistoryCard';
 import AppHeader from '../../../shared/components/AppHeader';
 import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { OrderHistoryItem, OrderStatus } from '../types/history.types';
-import { RootStackParamList } from '../../../navigation/types';
 import { styles } from '../styles/HistoryScreen.styles';
-
-type HistoryScreenNavigationProp =
-  NativeStackNavigationProp<RootStackParamList>;
 
 type FilterType = 'ALL' | OrderStatus;
 
 export default function HistoryScreen() {
   const { t } = useTranslation('history');
-  const navigation = useNavigation<HistoryScreenNavigationProp>();
   const { orders, isLoading } = useOrderHistory();
   const [selectedFilter, setSelectedFilter] = useState<FilterType>('ALL');
 
@@ -58,7 +53,10 @@ export default function HistoryScreen() {
   }, [filteredOrders]);
 
   const handleOrderPress = (order: OrderHistoryItem) => {
-    navigation.navigate('OrderReceipt', { order });
+    router.push({
+      pathname: '/order-receipt',
+      params: { orderId: order.id },
+    });
   };
 
   if (isLoading) {
