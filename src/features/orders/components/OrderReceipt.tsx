@@ -3,7 +3,7 @@ import { Text, Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
-import { styles } from '../../../shared/components/styles/OrderReceipt.styles';
+import { styles } from '../styles/OrderReceipt.styles';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
