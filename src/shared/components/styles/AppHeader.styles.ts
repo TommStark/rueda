@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 8,
-    backgroundColor: colors.background.secondary,
+    backgroundColor: colors.primary,
   },
   avatar: {
     width: 32,
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   screenName: {
     fontSize: 17,
     fontWeight: "700",
-    color: colors.text.primary,
+    color: colors.text.inverse,
     letterSpacing: -0.2,
   },
   notificationButton: {

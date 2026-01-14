@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     padding: 16,
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     marginTop: 16,
     marginBottom: 32,
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   currencyBadge: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: colors.border.light,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 4,

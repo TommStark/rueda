@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { RecentActivity } from "../../../shared/mocks/home.mock";
+import { RecentActivity } from "../types/home.types";
 import { styles } from "../styles/ActivityItem.styles";
 import { colors } from "../../../shared/theme/colors";
 

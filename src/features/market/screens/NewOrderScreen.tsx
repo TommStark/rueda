@@ -8,17 +8,14 @@ import {
 } from "react-native";
 import { Text } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
+import GreenStatusBar from "../../../shared/components/GreenStatusBar";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { useTranslation } from "../../../shared/hooks/useTranslation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
-import {
-  OrderSide,
-  OrderType,
-  OrderStatus,
-} from "../../history/types/history.types";
+import { OrderSide, OrderType } from "../../history/types/history.types";
 import { getTickerIcon, hasTickerIcon } from "../../../shared/utils/icons";
 import SwipeButton from "rn-swipe-button";
 import { useOrderHistory } from "../../history/context/OrderHistoryContext";
@@ -26,6 +23,7 @@ import { useFavorites } from "../../../shared/context/FavoritesContext";
 import { usePortfolio } from "../../portfolio/hooks/usePortfolio";
 import { createOrder } from "../api/orders.api";
 import { styles } from "../styles/NewOrderScreen.styles";
+import { Pressable } from "react-native";
 
 type NewOrderRouteProp = RouteProp<RootStackParamList, "NewOrder">;
 type NewOrderNavigationProp = NativeStackNavigationProp<RootStackParamList>;
@@ -183,6 +181,7 @@ export default function NewOrderScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
+      <GreenStatusBar />
       <View style={styles.header}>
         <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />

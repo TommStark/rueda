@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { useTranslation } from "../shared/hooks/useTranslation";
 import { colors } from "../shared/theme/colors";
 import HomeScreen from "../features/home/screens/HomeScreen";
@@ -9,6 +9,7 @@ import PortfolioScreen from "../features/portfolio/screens/PortfolioScreen";
 import FavoritesScreen from "../features/favorites/screens/FavoritesScreen";
 import HistoryScreen from "../features/history/screens/HistoryScreen";
 import { BottomTabParamList } from "./types";
+import { styles } from "./styles/BottomTabNavigator.styles";
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -108,28 +109,3 @@ export default function BottomTabNavigator() {
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  centralButtonContainer: {
-    position: "absolute",
-    bottom: -10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  centralButtonOuter: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "rgba(98, 0, 238, 0.15)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  centralButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 28,
-    backgroundColor: colors.primary,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});

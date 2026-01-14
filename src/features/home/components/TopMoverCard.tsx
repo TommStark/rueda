@@ -2,7 +2,7 @@ import { View, Image, ImageSourcePropType } from "react-native";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { colors } from "../../../shared/theme/colors";
-import { TopMover } from "../../../shared/mocks/home.mock";
+import { TopMover } from "../types/home.types";
 import { styles } from "../styles/TopMoverCard.styles";
 
 interface TopMoverCardProps {

@@ -16,7 +16,7 @@ export const fetchMarketAssets = async (
     const response = await apiClient.get<MarketAsset[]>(
       API_ENDPOINTS.MARKET_SEARCH,
       {
-        params: { query: search.trim() },
+        params: { query: search.trim().toUpperCase() },
         signal,
       }
     );

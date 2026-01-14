@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../../shared/theme/colors";
 
 export const styles = StyleSheet.create({
   container: {
     marginVertical: 16,
+    marginBottom: 36,
   },
   scrollContent: {
     paddingHorizontal: 20,
@@ -12,7 +14,7 @@ export const styles = StyleSheet.create({
     width: 280,
     borderRadius: 16,
     padding: 16,
-    shadowColor: "#000",
+    shadowColor: colors.shadow.color,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -39,7 +41,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     fontWeight: "700",
-    color: "#fff",
+    color: colors.text.inverse,
     marginBottom: 2,
   },
   subtitle: {

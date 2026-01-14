@@ -4,7 +4,10 @@ import { colors } from "../../../shared/theme/colors";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background.secondary,
+    backgroundColor: colors.primary,
+  },
+  gradientBackground: {
+    flex: 1,
   },
   centerContainer: {
     flex: 1,
@@ -12,12 +15,17 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     marginTop: 16,
     marginBottom: 16,
     padding: 20,
     borderRadius: 16,
+    shadowColor: colors.shadow.color,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 3,
   },
   balanceHeader: {
     flexDirection: "row",
@@ -33,7 +41,7 @@ export const styles = StyleSheet.create({
   availableBadge: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#e8f5e9",
+    backgroundColor: colors.primaryLight,
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 8,
@@ -42,7 +50,7 @@ export const styles = StyleSheet.create({
   availableText: {
     fontSize: 10,
     fontWeight: "700",
-    color: colors.positive,
+    color: colors.primary,
   },
   balanceLabel: {
     fontSize: 11,
@@ -65,7 +73,7 @@ export const styles = StyleSheet.create({
     gap: 12,
   },
   currencyBadge: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: colors.border.light,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 4,
@@ -130,7 +138,7 @@ export const styles = StyleSheet.create({
     gap: 8,
   },
   clearButtonText: {
-    color: "#fff",
+    color: colors.text.inverse,
     fontSize: 16,
     fontWeight: "600",
   },

@@ -27,13 +27,17 @@ function PromoBannerCard({
     >
       <View style={styles.content}>
         <View style={styles.iconContainer}>
-          <Ionicons name={icon} size={24} color="#fff" />
+          <Ionicons name={icon} size={24} color={colors.text.inverse} />
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-        <Ionicons name="chevron-forward" size={20} color="#fff" />
+        <Ionicons
+          name="chevron-forward"
+          size={20}
+          color={colors.text.inverse}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -50,17 +54,17 @@ export default function PromoBanner() {
     },
     {
       id: "2",
-      title: "¿Te gustó esta App?",
-      subtitle: "Contratá al dev que la hizo",
-      icon: "person-add" as const,
-      backgroundColor: "#4caf50",
-    },
-    {
-      id: "3",
       title: "Stop Loss Automático",
       subtitle: "Protegé tus inversiones",
       icon: "shield-checkmark" as const,
-      backgroundColor: "#ff9800",
+      backgroundColor: colors.positive,
+    },
+    {
+      id: "3",
+      title: "¿Te gustó esta App?",
+      subtitle: "Contratá al dev que la hizo (:",
+      icon: "person-add" as const,
+      backgroundColor: colors.status.warning,
     },
   ];
 

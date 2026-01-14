@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.background.secondary,
   },
   balanceCard: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     marginTop: 16,
     marginBottom: 16,
@@ -48,14 +48,14 @@ export const styles = StyleSheet.create({
   topMoverCard: {
     width: 100,
     padding: 12,
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     borderRadius: 16,
     borderWidth: 1,
     borderColor: colors.border.light,
     alignItems: "center",
   },
   activityContainer: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.background.card,
     marginHorizontal: 20,
     borderRadius: 16,
     overflow: "hidden",

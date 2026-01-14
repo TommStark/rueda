@@ -51,7 +51,7 @@ export default function AppHeader({
         <Ionicons
           name="notifications-outline"
           size={20}
-          color={colors.text.secondary}
+          color={colors.text.inverse}
         />
       </TouchableOpacity>
     </View>

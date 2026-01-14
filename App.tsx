@@ -9,6 +9,7 @@ import { OrderHistoryProvider } from "./src/features/history/context/OrderHistor
 import { FavoritesProvider } from "./src/shared/context/FavoritesContext";
 import { ToastProvider } from "./src/shared/context/ToastContext";
 import Toast from "./src/shared/components/Toast";
+import { colors } from "./src/shared/theme/colors";
 import "./src/shared/config/i18n";
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
               <PaperProvider>
                 <NavigationContainer>
                   <RootStackNavigator />
-                  <StatusBar style="auto" />
+                  <StatusBar style="dark" />
                 </NavigationContainer>
                 <Toast />
               </PaperProvider>

@@ -6,9 +6,21 @@
  */
 
 export const colors = {
-  // Primary Colors
-  primary: "#6200ee",
-  primaryLight: "#f0e6ff",
+  // Primary Colors (Verde Jade - Fintech)
+  primary: "#00A86B",
+  primaryLight: "#e6f7f0",
+  primaryDark: "#008558",
+
+  // Secondary Colors (Naranja Coral - Acentos)
+  secondary: "#FF6B35",
+  secondaryLight: "#fff3e0",
+
+  // Gradients
+  gradient: {
+    primary: ["#00C896", "#00A86B"],
+    header: ["#00A86B", "#00A86B"],
+    homeBackground: ["#00A86B", "#f5f5f5"],
+  },
 
   // Background Colors
   background: {
@@ -52,10 +64,6 @@ export const colors = {
   negative: "#f44336",
   negativeLight: "#ffebee",
 
-  // Trading Specific
-  buy: "#2196f3",
-  sell: "#f44336", // Rojo error para sell
-
   // Shadow
   shadow: {
     color: "#000",
@@ -68,45 +76,28 @@ export const colors = {
   skeleton: "#E1E9EE",
   skeletonGradient: ["#E1E9EE", "#F2F8FC", "#E1E9EE"],
 
-  // Brand Specific (Top Movers, etc)
-  brand: {
-    tesla: {
-      icon: "#e82127",
-      background: "#ffebee",
-    },
-    bitcoin: {
-      icon: "#f7931a",
-      background: "#fff3e0",
-    },
-    nvidia: {
-      icon: "#76b900",
-      background: "#e8f5e9",
-    },
-  },
-
-  // Activity Types (Consolidados con colores del sistema)
+  // Activity Types
   activity: {
     buy: {
-      icon: "#5e35b1", // Púrpura único para buy
-      background: "#e8eaf6",
+      icon: "#00A86B",
+      background: "#e6f7f0",
     },
     sell: {
-      icon: "#ff9800", // Naranja warning
+      icon: "#ff9800",
       background: "#fff3e0",
     },
     deposit: {
-      icon: "#4caf50", // Verde success
+      icon: "#4caf50",
       background: "#e8f5e9",
     },
     withdraw: {
-      icon: "#f44336", // Rojo error
+      icon: "#f44336",
       background: "#ffebee",
     },
   },
 
   // Favorites
-  favorite: "#6200ee", // Usa primary color (morado)
+  favorite: "#FF6B35",
 } as const;
 
-// Type helper para autocompletado
 export type Colors = typeof colors;

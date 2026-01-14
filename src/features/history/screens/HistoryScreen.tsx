@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useOrderHistory } from "../context/OrderHistoryContext";
 import HistoryCard from "../components/HistoryCard";
 import AppHeader from "../../../shared/components/AppHeader";
+import GreenStatusBar from "../../../shared/components/GreenStatusBar";
 import { OrderHistoryItem, OrderStatus } from "../types/history.types";
 import { RootStackParamList } from "../../../navigation/types";
 import { styles } from "../styles/HistoryScreen.styles";
@@ -177,7 +178,8 @@ export default function HistoryScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+      <GreenStatusBar />
       <AppHeader screenName={t("title")} />
       <View style={styles.container}>
         {renderFilters()}

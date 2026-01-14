@@ -104,7 +104,7 @@ export const styles = StyleSheet.create({
   },
   sideButtonActiveSell: {
     backgroundColor: colors.negativeLight,
-    borderColor: colors.sell,
+    borderColor: colors.negative,
   },
   sideButtonText: {
     fontSize: 16,
