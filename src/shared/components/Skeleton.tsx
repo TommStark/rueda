@@ -7,7 +7,7 @@ import {
   DimensionValue,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 
 interface SkeletonProps {
   width?: DimensionValue;

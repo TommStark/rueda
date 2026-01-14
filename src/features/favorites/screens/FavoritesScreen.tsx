@@ -6,11 +6,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../navigation/types';
-import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { useFavorites } from '../context/FavoritesContext';
 import { useMarket } from '../../market/hooks/useMarket';
 import FavoriteAssetRow from '../components/FavoriteAssetRow';
 import { MarketAsset } from '../../market/types/market.types';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { styles } from '../styles/FavoritesScreen.styles';
 
 type FavoritesNavigationProp = NativeStackNavigationProp<RootStackParamList>;

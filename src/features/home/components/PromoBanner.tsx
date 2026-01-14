@@ -1,7 +1,7 @@
 import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 import { styles } from '../styles/PromoBanner.styles';
 
 interface PromoBannerProps {

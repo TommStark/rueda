@@ -1,6 +1,6 @@
-import apiClient from '../../../shared/api/client';
-import { API_ENDPOINTS } from '../../../shared/constants/api';
-import { OrderStatus } from '../../history/types/history.types';
+import apiClient from '../../../api/client';
+import { API_ENDPOINTS } from '../../../api/constants/api';
+import { OrderStatus } from '../../orders/types/history.types';
 
 export interface CreateOrderRequest {
   instrument_id: number;

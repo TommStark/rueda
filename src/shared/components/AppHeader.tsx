@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '../theme/colors';
+import { colors } from '../../theme/colors';
 import { styles } from './styles/AppHeader.styles';
 
 interface AppHeaderProps {
@@ -23,7 +23,7 @@ export default function AppHeader({
     <View style={styles.header}>
       <TouchableOpacity style={styles.avatar} onPress={onAvatarPress}>
         <Image
-          source={require('../assets/images/logo.png')}
+          source={require('../../assets/images/logo.png')}
           style={styles.avatarImage}
         />
       </TouchableOpacity>

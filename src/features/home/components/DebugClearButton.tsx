@@ -1,6 +1,6 @@
 import React from 'react';
-import { useOrderHistory } from '../../history/context/OrderHistoryContext';
-import { useFavorites } from '../../../shared/context/FavoritesContext';
+import { useOrderHistory } from '../../orders/context/OrderHistoryContext';
+import { useFavorites } from '../../favorites/context/FavoritesContext';
 import { useDebugMode } from '../../../shared/hooks/useDebugMode';
 import { useToast } from '../../../shared/context/ToastContext';
 

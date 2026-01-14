@@ -1,7 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { PortfolioPosition } from '../features/portfolio/types/portfolio.types';
 import { MarketAsset } from '../features/market/types/market.types';
-import { OrderHistoryItem } from '../features/history/types/history.types';
+import { OrderHistoryItem } from '../features/orders/types/history.types';
 
 export type BottomTabParamList = {
   Home: undefined;

@@ -4,12 +4,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { QueryClientProvider } from '@tanstack/react-query';
 import RootStackNavigator from './src/navigation/RootStackNavigator';
-import { queryClient } from './src/shared/config/queryClient';
-import { OrderHistoryProvider } from './src/features/history/context/OrderHistoryContext';
-import { FavoritesProvider } from './src/shared/context/FavoritesContext';
+import { queryClient } from './src/api/config/queryClient';
+import { OrderHistoryProvider } from './src/features/orders/context/OrderHistoryContext';
+import { FavoritesProvider } from './src/features/favorites/context/FavoritesContext';
 import { ToastProvider } from './src/shared/context/ToastContext';
 import Toast from './src/shared/components/Toast';
-import './src/shared/config/i18n';
+import './src/config/i18n';
 
 export default function App() {
   return (

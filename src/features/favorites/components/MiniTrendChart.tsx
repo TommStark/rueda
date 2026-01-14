@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import Svg, { Polyline } from 'react-native-svg';
-import { colors } from '../../../shared/theme/colors';
+import { colors } from '../../../theme/colors';
 
 interface MiniTrendChartProps {
   isPositive: boolean;
