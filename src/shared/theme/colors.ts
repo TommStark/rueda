@@ -6,12 +6,12 @@
  */
 
 export const colors = {
-  // Primary Colors (Verde Jade - Fintech)
+  // Primary Colors
   primary: "#00A86B",
   primaryLight: "#e6f7f0",
   primaryDark: "#008558",
 
-  // Secondary Colors (Naranja Coral - Acentos)
+  // Secondary Colors
   secondary: "#FF6B35",
   secondaryLight: "#fff3e0",
 
