@@ -1,13 +1,9 @@
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../theme/colors';
 
-export default function GreenStatusBar() {
+export default function ColorStatusBar() {
   const insets = useSafeAreaInsets();
-
-  if (Platform.OS !== 'ios') {
-    return null;
-  }
 
   return (
     <View

@@ -12,7 +12,7 @@ import AssetCardSkeleton from '../components/AssetCardSkeleton';
 import PortfolioBalanceSkeleton from '../components/PortfolioBalanceSkeleton';
 import SimpleBalanceChart from '../components/SimpleBalanceChart';
 import AppHeader from '../../../shared/components/AppHeader';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { PortfolioPosition } from '../types/portfolio.types';
 import { RootStackParamList } from '../../../navigation/types';
 import {
@@ -123,7 +123,7 @@ export default function PortfolioScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
-      <GreenStatusBar />
+      <ColorStatusBar />
       <AppHeader screenName="Portfolio" />
       <View style={styles.container}>
         <View style={styles.balanceCard}>

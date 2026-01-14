@@ -8,7 +8,6 @@ export default function InfoBanner() {
         <Image
           source={require('../../../shared/assets/images/banner_cataratas.png')}
           style={styles.image}
-          resizeMode="none"
         />
       </View>
     </View>

@@ -15,7 +15,7 @@ import InfoBanner from '../components/InfoBanner';
 import HomeScreenSkeleton from '../components/HomeScreenSkeleton';
 import FavoriteItemCompact from '../components/FavoriteItemCompact';
 import AppHeader from '../../../shared/components/AppHeader';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
 import { useOrderHistory } from '../../history/context/OrderHistoryContext';
@@ -126,7 +126,7 @@ export default function HomeScreen() {
   if (portfolioLoading) {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
-        <GreenStatusBar />
+        <ColorStatusBar />
         <AppHeader screenName="Home" />
         <HomeScreenSkeleton />
       </SafeAreaView>
@@ -135,7 +135,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
+      <ColorStatusBar />
       <AppHeader screenName="" onNotificationPress={handleBellPress} />
       <ScrollView
         showsVerticalScrollIndicator={false}

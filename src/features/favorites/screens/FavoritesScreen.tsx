@@ -2,7 +2,6 @@ import { View, FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -40,7 +39,6 @@ export default function FavoritesScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
       <View style={styles.header}>
         <Text style={styles.headerTitle}>{t('title')}</Text>
       </View>

@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../shared/theme/colors';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
@@ -184,7 +183,6 @@ export default function NewOrderScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
       <View style={styles.header}>
         <TouchableOpacity onPress={handleClose} style={styles.closeButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text.primary} />

@@ -1,6 +1,6 @@
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../../shared/theme/colors';
@@ -18,7 +18,7 @@ export default function AllAssetsScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
+      <ColorStatusBar />
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}

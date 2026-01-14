@@ -1,7 +1,6 @@
 import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GreenStatusBar from './GreenStatusBar';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import { styles } from './styles/OrderReceipt.styles';
@@ -106,7 +105,6 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
       <View style={styles.header}>
         <View style={{ width: 24 }} />
         <Text variant="titleMedium" style={styles.headerTitle}>

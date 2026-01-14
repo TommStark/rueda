@@ -12,7 +12,7 @@ import MarketCard from '../components/MarketCard';
 import MarketCardSkeleton from '../components/MarketCardSkeleton';
 import FilterTabs from '../components/FilterTabs';
 import AppHeader from '../../../shared/components/AppHeader';
-import GreenStatusBar from '../../../shared/components/GreenStatusBar';
+import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { MarketAsset, SortType, SORT_TYPE } from '../types/market.types';
 import { useDebouncedValue } from '../../../shared/hooks/useDebouncedValue';
 import { RootStackParamList } from '../../../navigation/types';
@@ -135,7 +135,7 @@ export default function MarketScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <GreenStatusBar />
+      <ColorStatusBar />
       <AppHeader screenName="Market" />
       <View style={styles.headerContainer}>
         <Searchbar
