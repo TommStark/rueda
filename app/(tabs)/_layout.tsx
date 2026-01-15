@@ -1,23 +1,39 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Tabs } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { View } from 'react-native';
-import { useTranslation } from '../shared/hooks/useTranslation';
-import { colors } from '../theme/colors';
-import HomeScreen from '../features/home/screens/HomeScreen';
-import MarketScreen from '../features/market/screens/MarketScreen';
-import PortfolioScreen from '../features/portfolio/screens/PortfolioScreen';
-import FavoritesScreen from '../features/favorites/screens/FavoritesScreen';
-import HistoryScreen from '../features/orders/screens/HistoryScreen';
-import { BottomTabParamList } from './types';
-import { styles } from './styles/BottomTabNavigator.styles';
+import { StyleSheet, View } from 'react-native';
+import { useTranslation } from '../../src/shared/hooks/useTranslation';
+import { colors } from '../../src/theme/colors';
 
-const Tab = createBottomTabNavigator<BottomTabParamList>();
+const styles = StyleSheet.create({
+  centralButtonContainer: {
+    position: 'absolute',
+    bottom: -10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  centralButtonOuter: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: colors.primaryLightAlpha,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  centralButton: {
+    width: 48,
+    height: 48,
+    borderRadius: 28,
+    backgroundColor: colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
-export default function BottomTabNavigator() {
+export default function TabsLayout() {
   const { t } = useTranslation('navigation');
 
   return (
-    <Tab.Navigator
+    <Tabs
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.text.tertiary,
@@ -28,12 +44,10 @@ export default function BottomTabNavigator() {
         },
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+      <Tabs.Screen
+        name="index"
         options={{
           title: t('tabs.home'),
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="home-outline"
@@ -43,12 +57,10 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Market"
-        component={MarketScreen}
+      <Tabs.Screen
+        name="market"
         options={{
           title: t('tabs.market'),
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="chart-line-variant"
@@ -58,12 +70,10 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Favorites"
-        component={FavoritesScreen}
+      <Tabs.Screen
+        name="favorites"
         options={{
           title: t('tabs.favorites'),
-          headerShown: false,
           tabBarIcon: () => (
             <View style={styles.centralButtonContainer}>
               <View style={styles.centralButtonOuter}>
@@ -80,12 +90,10 @@ export default function BottomTabNavigator() {
           tabBarLabel: () => null,
         }}
       />
-      <Tab.Screen
-        name="Portfolio"
-        component={PortfolioScreen}
+      <Tabs.Screen
+        name="portfolio"
         options={{
           title: t('tabs.portfolio'),
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="briefcase-outline"
@@ -95,17 +103,15 @@ export default function BottomTabNavigator() {
           ),
         }}
       />
-      <Tab.Screen
-        name="History"
-        component={HistoryScreen}
+      <Tabs.Screen
+        name="history"
         options={{
           title: t('tabs.history'),
-          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="history" size={22} color={color} />
           ),
         }}
       />
-    </Tab.Navigator>
+    </Tabs>
   );
 }

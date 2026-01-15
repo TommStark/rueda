@@ -6,8 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '../../../theme/colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { router } from 'expo-router';
 import TopMoverCard from '../components/TopMoverCard';
 import ActivityItem from '../components/ActivityItem';
 import PromoBanner from '../components/PromoBanner';
@@ -22,7 +21,6 @@ import { useOrderHistory } from '../../orders/context/OrderHistoryContext';
 import { useMarket } from '../../market/hooks/useMarket';
 import { useFavorites } from '../../favorites/context/FavoritesContext';
 import { useDebugClear } from '../components/DebugClearButton';
-import { RootStackParamList } from '../../../navigation/types';
 import {
   calcInstrumentReturn,
   calcMarketValue,
@@ -32,8 +30,6 @@ import { styles } from '../styles/HomeScreen.styles';
 
 export default function HomeScreen() {
   const { t } = useTranslation('home');
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [hideBalance, setHideBalance] = React.useState(false);
 
   const { data: portfolioData, isLoading: portfolioLoading } = usePortfolio();
@@ -102,24 +98,30 @@ export default function HomeScreen() {
   });
 
   const handleViewAllActivity = () => {
-    navigation.navigate('MainTabs', { screen: 'History' });
+    router.navigate('/history');
   };
 
   const handleViewAllFavorites = () => {
-    navigation.navigate('MainTabs', { screen: 'Favorites' });
+    router.navigate('/favorites');
   };
 
   const handleFavoritePress = (ticker: string) => {
     const asset = instruments?.find(inst => inst.ticker === ticker);
     if (asset) {
-      navigation.navigate('NewOrder', { asset });
+      router.push({
+        pathname: '/new-order',
+        params: { assetId: String(asset.id) },
+      });
     }
   };
 
   const handleTopMoverPress = (ticker: string) => {
     const asset = instruments?.find(inst => inst.ticker === ticker);
     if (asset) {
-      navigation.navigate('NewOrder', { asset });
+      router.push({
+        pathname: '/new-order',
+        params: { assetId: String(asset.id) },
+      });
     }
   };
 
@@ -217,11 +219,7 @@ export default function HomeScreen() {
               <Text variant="titleMedium" style={styles.sectionTitle}>
                 {t('topMovers.title')}
               </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('MainTabs', { screen: 'Market' })
-                }
-              >
+              <TouchableOpacity onPress={() => router.navigate('/market')}>
                 <Text variant="bodySmall" style={styles.seeAllButton}>
                   {t('topMovers.seeAll')}
                 </Text>

@@ -4,8 +4,7 @@ import { Text, Searchbar } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { useMarket, useMarketError } from '../hooks/useMarket';
 import MarketCard from '../components/MarketCard';
@@ -15,15 +14,11 @@ import AppHeader from '../../../shared/components/AppHeader';
 import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { MarketAsset, SortType, SORT_TYPE } from '../types/market.types';
 import { useDebouncedValue } from '../../../shared/hooks/useDebouncedValue';
-import { RootStackParamList } from '../../../navigation/types';
 import { calcInstrumentReturn } from '../../../shared/utils/financialCalculations';
 import { styles } from '../styles/MarketScreen.styles';
 
-type MarketScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
-
 export default function MarketScreen() {
   const { t } = useTranslation('market');
-  const navigation = useNavigation<MarketScreenNavigationProp>();
   const [selectedSort, setSelectedSort] = useState<SortType>(SORT_TYPE.ALL);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
@@ -123,7 +118,12 @@ export default function MarketScreen() {
         renderItem={({ item }) => (
           <MarketCard
             asset={item}
-            onPress={() => navigation.navigate('NewOrder', { asset: item })}
+            onPress={() =>
+              router.push({
+                pathname: '/new-order',
+                params: { assetId: String(item.id) },
+              })
+            }
           />
         )}
         onRefresh={refetch}
