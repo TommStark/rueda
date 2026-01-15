@@ -30,6 +30,8 @@ import { styles } from '../styles/HomeScreen.styles';
 
 export default function HomeScreen() {
   const { t } = useTranslation('home');
+  const { t: tCommon } = useTranslation('common');
+  const { t: tNav } = useTranslation('navigation');
   const [hideBalance, setHideBalance] = React.useState(false);
 
   const { data: portfolioData, isLoading: portfolioLoading } = usePortfolio();
@@ -89,8 +91,12 @@ export default function HomeScreen() {
     return {
       id: order.id,
       type: order.side.toLowerCase() as 'buy' | 'sell' | 'deposit' | 'withdraw',
-      title: `${order.side} ${order.ticker}`,
-      subtitle: `${order.quantity} shares`,
+      title: `${
+        order.side === 'BUY'
+          ? t('recentActivity.side.buy')
+          : t('recentActivity.side.sell')
+      } ${order.ticker}`,
+      subtitle: `${order.quantity} ${t('recentActivity.units.shares')}`,
       amount: order.side === 'BUY' ? -orderAmount : orderAmount,
       date: new Date(order.timestamp).toLocaleDateString(),
       icon: order.side === 'BUY' ? 'arrow-down' : 'arrow-up',
@@ -129,7 +135,7 @@ export default function HomeScreen() {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
         <ColorStatusBar />
-        <AppHeader screenName="Home" />
+        <AppHeader screenName={tNav('tabs.home')} />
         <HomeScreenSkeleton />
       </SafeAreaView>
     );
@@ -184,7 +190,9 @@ export default function HomeScreen() {
             </Text>
             <View style={styles.changeContainer}>
               <View style={styles.currencyBadge}>
-                <Text style={styles.currencyText}>ARS</Text>
+                <Text style={styles.currencyText}>
+                  {tCommon('currency.ars')}
+                </Text>
               </View>
               <View style={styles.changeRow}>
                 <Ionicons
@@ -338,7 +346,9 @@ export default function HomeScreen() {
                   size={20}
                   color={colors.text.inverse}
                 />
-                <Text style={styles.clearButtonText}>Limpiar Todo</Text>
+                <Text style={styles.clearButtonText}>
+                  {tCommon('actions.clearAll')}
+                </Text>
               </TouchableOpacity>
             </View>
           )}

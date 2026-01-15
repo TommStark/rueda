@@ -11,6 +11,13 @@ export default {
   recentActivity: {
     title: 'Actividad Reciente',
     viewHistory: 'Ver Historial',
+    side: {
+      buy: 'Compra',
+      sell: 'Venta',
+    },
+    units: {
+      shares: 'acciones',
+    },
     emptyTitle: 'Sin actividad aún',
     emptyMessage: 'Tus órdenes ejecutadas aparecerán aquí',
   },

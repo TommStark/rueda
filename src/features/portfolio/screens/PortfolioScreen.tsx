@@ -21,6 +21,8 @@ import { styles } from '../styles/PortfolioScreen.styles';
 
 export default function PortfolioScreen() {
   const { t } = useTranslation('portfolio');
+  const { t: tCommon } = useTranslation('common');
+  const { t: tNav } = useTranslation('navigation');
   const { data, isLoading, error } = usePortfolio();
   const apiError = usePortfolioError(error);
 
@@ -44,7 +46,7 @@ export default function PortfolioScreen() {
   if (isLoading) {
     return (
       <SafeAreaView style={styles.safeArea}>
-        <AppHeader screenName="Portfolio" />
+        <AppHeader screenName={tNav('tabs.portfolio')} />
         <View style={styles.container}>
           <PortfolioBalanceSkeleton />
           <View style={styles.assetsHeader}>
@@ -120,7 +122,7 @@ export default function PortfolioScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <ColorStatusBar />
-      <AppHeader screenName="Portfolio" />
+      <AppHeader screenName={tNav('tabs.portfolio')} />
       <View style={styles.container}>
         <View style={styles.balanceCard}>
           <Text variant="bodySmall" style={styles.balanceLabel}>
@@ -135,7 +137,7 @@ export default function PortfolioScreen() {
           </Text>
           <View style={styles.changeContainer}>
             <View style={styles.currencyBadge}>
-              <Text style={styles.currencyText}>ARS</Text>
+              <Text style={styles.currencyText}>{tCommon('currency.ars')}</Text>
             </View>
             <View style={styles.changeRow}>
               <Ionicons

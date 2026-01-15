@@ -19,6 +19,7 @@ import { styles } from '../styles/MarketScreen.styles';
 
 export default function MarketScreen() {
   const { t } = useTranslation('market');
+  const { t: tNav } = useTranslation('navigation');
   const [selectedSort, setSelectedSort] = useState<SortType>(SORT_TYPE.ALL);
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearch = useDebouncedValue(searchQuery, 500);
@@ -136,7 +137,7 @@ export default function MarketScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ColorStatusBar />
-      <AppHeader screenName="Market" />
+      <AppHeader screenName={tNav('tabs.market')} />
       <View style={styles.headerContainer}>
         <Searchbar
           placeholder={t('search.placeholder')}

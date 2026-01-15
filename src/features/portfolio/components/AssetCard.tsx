@@ -2,6 +2,7 @@ import { View, Image } from 'react-native';
 import { Text } from 'react-native-paper';
 import { PortfolioPosition } from '../types/portfolio.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 import {
   calcMarketValue,
   calcGain,
@@ -29,6 +30,7 @@ const getAssetIcon = (ticker: string): string => {
 };
 
 export default function AssetCard({ position }: AssetCardProps) {
+  const { t } = useTranslation('portfolio');
   const currentValue = calcMarketValue(position.quantity, position.last_price);
   const totalGain = calcGain(
     position.quantity,
@@ -60,7 +62,7 @@ export default function AssetCard({ position }: AssetCardProps) {
             {position.ticker}
           </Text>
           <Text variant="bodySmall" style={styles.quantity}>
-            {position.quantity.toFixed(2)} shares
+            {position.quantity.toFixed(2)} {t('assets.shares')}
           </Text>
         </View>
       </View>

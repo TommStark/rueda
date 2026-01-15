@@ -15,6 +15,9 @@ interface OrderReceiptProps {
 export default function OrderReceipt({ order }: OrderReceiptProps) {
   const { t } = useTranslation('common');
 
+  const capitalize = (value: string) =>
+    value.length > 0 ? value[0].toUpperCase() + value.slice(1) : value;
+
   const getStatusIcon = () => {
     switch (order.status) {
       case 'FILLED':
@@ -68,23 +71,41 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   };
 
   const getStatusMessage = () => {
-    const type = order.type.toLowerCase();
-    const side = order.side.toLowerCase();
+    const type =
+      order.type === 'MARKET'
+        ? t('orderReceipt.values.type.market')
+        : t('orderReceipt.values.type.limit');
+    const side =
+      order.side === 'BUY'
+        ? t('orderReceipt.values.side.buy')
+        : t('orderReceipt.values.side.sell');
     const ticker = order.ticker;
 
     switch (order.status) {
       case 'FILLED':
-        return `Tu orden ${type} para ${side} ${ticker} ha sido ejecutada completamente.`;
+        return t('orderReceipt.message.filled', { type, side, ticker });
       case 'REJECTED':
-        return `Tu orden ${type} para ${side} ${ticker} fue rechazada.`;
+        return t('orderReceipt.message.rejected', { type, side, ticker });
       case 'PENDING':
-        return `Tu orden ${type} para ${side} ${ticker} está siendo procesada.`;
+        return t('orderReceipt.message.pending', { type, side, ticker });
       default:
         return '';
     }
   };
 
   const totalSpent = order.executedPrice * order.quantity;
+
+  const sideLabel = capitalize(
+    order.side === 'BUY'
+      ? t('orderReceipt.values.side.buy')
+      : t('orderReceipt.values.side.sell')
+  );
+
+  const typeLabel = capitalize(
+    order.type === 'MARKET'
+      ? t('orderReceipt.values.type.market')
+      : t('orderReceipt.values.type.limit')
+  );
 
   const handleClose = () => {
     router.back();
@@ -95,7 +116,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
   };
 
   const handleViewPortfolio = () => {
-    router.navigate('/portfolio');
+    router.navigate('/');
   };
 
   return (
@@ -202,7 +223,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
                   : styles.detailValueSell,
               ]}
             >
-              {order.side}
+              {sideLabel}
             </Text>
           </View>
 
@@ -213,7 +234,7 @@ export default function OrderReceipt({ order }: OrderReceiptProps) {
               {t('orderReceipt.details.type')}
             </Text>
             <Text variant="bodyMedium" style={styles.detailValue}>
-              {order.type} {t('orderReceipt.details.order')}
+              {typeLabel} {t('orderReceipt.details.order')}
             </Text>
           </View>
 

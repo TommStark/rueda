@@ -1,6 +1,7 @@
 import { View } from 'react-native';
 import { Text, Card } from 'react-native-paper';
 import { PortfolioPosition } from '../types/portfolio.types';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 import {
   calcMarketValue,
   calcCostBasis,
@@ -12,6 +13,7 @@ interface PositionCardProps {
 }
 
 export default function PositionCard({ position }: PositionCardProps) {
+  const { t } = useTranslation('portfolio');
   const currentValue = calcMarketValue(position.quantity, position.last_price);
   const costBasis = calcCostBasis(position.quantity, position.avg_cost_price);
   const profitLoss = currentValue - costBasis;
@@ -32,13 +34,13 @@ export default function PositionCard({ position }: PositionCardProps) {
         <View style={styles.details}>
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.label}>
-              Cantidad:
+              {t('positionCard.labels.quantity')}:
             </Text>
             <Text variant="bodySmall">{position.quantity}</Text>
           </View>
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.label}>
-              Precio promedio:
+              {t('positionCard.labels.avgPrice')}:
             </Text>
             <Text variant="bodySmall">
               ${position.avg_cost_price.toFixed(2)}
@@ -46,13 +48,13 @@ export default function PositionCard({ position }: PositionCardProps) {
           </View>
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.label}>
-              Precio actual:
+              {t('positionCard.labels.currentPrice')}:
             </Text>
             <Text variant="bodySmall">${position.last_price.toFixed(2)}</Text>
           </View>
           <View style={styles.detailRow}>
             <Text variant="bodySmall" style={styles.label}>
-              P&L:
+              {t('positionCard.labels.pnl')}:
             </Text>
             <Text
               variant="bodySmall"

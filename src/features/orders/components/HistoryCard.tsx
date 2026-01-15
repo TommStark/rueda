@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from '../../../theme/colors';
 import { OrderHistoryItem } from '../types/history.types';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 import { styles } from '../styles/HistoryCard.styles';
 
 interface HistoryCardProps {
@@ -12,6 +13,22 @@ interface HistoryCardProps {
 }
 
 export default function HistoryCard({ order, onPress }: HistoryCardProps) {
+  const { t } = useTranslation('common');
+
+  const capitalize = (value: string) =>
+    value.length > 0 ? value[0].toUpperCase() + value.slice(1) : value;
+
+  const sideLabel = capitalize(
+    order.side === 'BUY'
+      ? t('orderReceipt.values.side.buy')
+      : t('orderReceipt.values.side.sell')
+  );
+
+  const typeLabel = capitalize(
+    order.type === 'MARKET'
+      ? t('orderReceipt.values.type.market')
+      : t('orderReceipt.values.type.limit')
+  );
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'FILLED':
@@ -50,16 +67,14 @@ export default function HistoryCard({ order, onPress }: HistoryCardProps) {
   };
 
   const getOrderTypeLabel = () => {
-    return `${order.side === 'BUY' ? 'Buy' : 'Sell'} ${
-      order.type === 'MARKET' ? 'Market' : 'Limit'
-    }`;
+    return `${sideLabel} ${typeLabel}`;
   };
 
   const getQuantityLabel = () => {
     if (order.ticker.includes('/')) {
       return `${order.quantity} ${order.ticker.split('/')[0]}`;
     }
-    return `${order.quantity} Shares`;
+    return `${order.quantity} ${t('orderReceipt.details.shares')}`;
   };
 
   const localIcon = getTickerIcon(order.ticker);

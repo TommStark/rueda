@@ -5,10 +5,12 @@ import { View } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export default function OrderReceiptScreen() {
   const { orderId } = useLocalSearchParams<{ orderId?: string | string[] }>();
   const { orders, isLoading } = useOrderHistory();
+  const { t } = useTranslation('common');
 
   const normalizedOrderId = Array.isArray(orderId) ? orderId[0] : orderId;
   const order = orders.find(o => String(o.id) === String(normalizedOrderId));
@@ -17,10 +19,14 @@ export default function OrderReceiptScreen() {
     return (
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
         <View style={{ gap: 12 }}>
-          <Text variant="titleMedium">No se pudo cargar el recibo</Text>
-          <Text variant="bodyMedium">Falta el identificador de la orden.</Text>
+          <Text variant="titleMedium">
+            {t('orderReceipt.screen.missingIdTitle')}
+          </Text>
+          <Text variant="bodyMedium">
+            {t('orderReceipt.screen.missingIdSubtitle')}
+          </Text>
           <Button mode="contained" onPress={() => router.back()}>
-            Volver
+            {t('actions.back')}
           </Button>
         </View>
       </SafeAreaView>
@@ -32,13 +38,19 @@ export default function OrderReceiptScreen() {
       <SafeAreaView style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
         <View style={{ gap: 12 }}>
           <Text variant="titleMedium">
-            {isLoading ? 'Cargando recibo…' : 'Orden no encontrada'}
+            {isLoading
+              ? t('orderReceipt.screen.loading')
+              : t('orderReceipt.screen.notFound')}
           </Text>
           {!isLoading ? (
-            <Text variant="bodyMedium">Order ID: {normalizedOrderId}</Text>
+            <Text variant="bodyMedium">
+              {t('orderReceipt.screen.orderIdLabel', {
+                orderId: String(normalizedOrderId),
+              })}
+            </Text>
           ) : null}
           <Button mode="contained" onPress={() => router.back()}>
-            Volver
+            {t('actions.back')}
           </Button>
         </View>
       </SafeAreaView>

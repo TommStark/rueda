@@ -8,6 +8,8 @@ import {
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { OrderHistoryItem } from '../types/history.types';
+import { useToast } from '../../../shared/context/ToastContext';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 const STORAGE_KEY = '@rueda:order_history';
 
@@ -29,12 +31,10 @@ interface OrderHistoryProviderProps {
 export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
   const [orders, setOrders] = useState<OrderHistoryItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { showToast } = useToast();
+  const { t } = useTranslation('common');
 
-  useEffect(() => {
-    loadOrders();
-  }, []);
-
-  const loadOrders = async () => {
+  const loadOrders = useCallback(async () => {
     try {
       const stored = await AsyncStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -42,30 +42,39 @@ export function OrderHistoryProvider({ children }: OrderHistoryProviderProps) {
         setOrders(parsed);
       }
     } catch {
-      // Silently fail - order history is not critical for app functionality
+      showToast(t('toast.storageLoadFailed'), 'error');
+      await AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
+      setOrders([]);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [showToast, t]);
 
-  const addOrder = useCallback(async (order: OrderHistoryItem) => {
-    setOrders(prev => {
-      const updated = [order, ...prev];
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated)).catch(() => {
-        // Silently ignore storage errors - order is still added to state
+  useEffect(() => {
+    loadOrders();
+  }, [loadOrders]);
+
+  const addOrder = useCallback(
+    async (order: OrderHistoryItem) => {
+      setOrders(prev => {
+        const updated = [order, ...prev];
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated)).catch(() => {
+          showToast(t('toast.storageSaveFailed'), 'error');
+        });
+        return updated;
       });
-      return updated;
-    });
-  }, []);
+    },
+    [showToast, t]
+  );
 
   const clearHistory = useCallback(async () => {
     try {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setOrders([]);
     } catch {
-      // Silently fail - clearing is not critical
+      showToast(t('toast.storageClearFailed'), 'error');
     }
-  }, []);
+  }, [showToast, t]);
 
   return (
     <OrderHistoryContext.Provider

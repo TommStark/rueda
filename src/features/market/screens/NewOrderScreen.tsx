@@ -368,10 +368,12 @@ export default function NewOrderScreen() {
               style={styles.limitPriceInput}
               value={limitPrice}
               onChangeText={text => setLimitPrice(text.replace(/[^0-9.]/g, ''))}
-              placeholder="$0.00"
+              placeholder={t('newOrder.placeholders.limitPrice')}
               keyboardType="numeric"
             />
-            <Text style={styles.inputHint}>Precio por acción</Text>
+            <Text style={styles.inputHint}>
+              {t('newOrder.hints.pricePerShare')}
+            </Text>
           </View>
         )}
 
@@ -391,7 +393,7 @@ export default function NewOrderScreen() {
                 const num = parseInt(text.replace(/[^0-9]/g, '')) || 0;
                 handleQuantityChange(num);
               }}
-              placeholder="0"
+              placeholder={t('newOrder.placeholders.quantity')}
               keyboardType="numeric"
             />
             <TouchableOpacity
@@ -415,7 +417,7 @@ export default function NewOrderScreen() {
               ]}
               value={investmentAmount}
               onChangeText={handleInvestmentAmountChange}
-              placeholder="$0"
+              placeholder={t('newOrder.placeholders.amount')}
               keyboardType="numeric"
               editable={side === 'BUY'}
             />
@@ -425,19 +427,25 @@ export default function NewOrderScreen() {
                   style={styles.percentageChip}
                   onPress={() => handlePercentagePress(0.25)}
                 >
-                  <Text style={styles.percentageChipText}>25%</Text>
+                  <Text style={styles.percentageChipText}>
+                    {t('newOrder.percentages.p25')}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.percentageChip}
                   onPress={() => handlePercentagePress(0.5)}
                 >
-                  <Text style={styles.percentageChipText}>50%</Text>
+                  <Text style={styles.percentageChipText}>
+                    {t('newOrder.percentages.p50')}
+                  </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.percentageChip}
                   onPress={() => handlePercentagePress(1.0)}
                 >
-                  <Text style={styles.percentageChipText}>100%</Text>
+                  <Text style={styles.percentageChipText}>
+                    {t('newOrder.percentages.p100')}
+                  </Text>
                 </TouchableOpacity>
               </View>
             )}

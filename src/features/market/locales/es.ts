@@ -1,4 +1,5 @@
 export default {
+  loading: 'Cargando...',
   search: {
     placeholder: 'Buscar (ej., MTR, MOLA)...',
   },
@@ -30,6 +31,19 @@ export default {
     shares: 'acciones',
     investmentAmount: 'Monto a invertir',
     limitPrice: 'Precio límite',
+    placeholders: {
+      limitPrice: '$0.00',
+      quantity: '0',
+      amount: '$0',
+    },
+    hints: {
+      pricePerShare: 'Precio por acción',
+    },
+    percentages: {
+      p25: '25%',
+      p50: '50%',
+      p100: '100%',
+    },
     estimatedTotal: 'Total estimado',
     total: 'Total a pagar',
     totalToSell: 'Total a recibir',

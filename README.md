@@ -13,7 +13,7 @@
 - **Historial** completo de órdenes y transacciones
 - **Trading** con órdenes de mercado y límite
 
-**Stack:** React Native + Expo + TypeScript • React Navigation • React Native Paper • TanStack Query • Expo Linear Gradient • React Native SVG • Axios
+**Stack:** React Native + Expo + TypeScript • Expo Router • React Native Paper • TanStack Query • i18next • AsyncStorage • Axios
 
 ---
 
@@ -22,20 +22,41 @@
 El proyecto utiliza **Feature-Based Architecture**, organizando cada funcionalidad en módulos independientes (`src/features/`) con sus propios componentes, hooks, estilos y tipos. Los elementos compartidos están centralizados para facilitar el mantenimiento y escalabilidad.
 
 ```
+app/                 # Rutas (Expo Router)
+├── _layout.tsx       # Providers + Stack
+└── (tabs)/           # Tabs principales
+    ├── _layout.tsx
+    ├── index.tsx
+    ├── market.tsx
+    ├── favorites.tsx
+    ├── portfolio.tsx
+    └── history.tsx
+
 src/
 ├── features/           # Módulos por funcionalidad
 │   ├── home/          # Dashboard principal
 │   ├── market/        # Listado de instrumentos
 │   ├── portfolio/     # Gestión de posiciones
 │   ├── favorites/     # Activos favoritos
-│   └── history/       # Historial de órdenes
+│   └── orders/        # Historial + recibo de órdenes
 ├── shared/            # Elementos compartidos
 │   ├── components/    # Componentes reutilizables
 │   ├── hooks/         # Custom hooks
 │   ├── theme/         # Colores y estilos
 │   └── utils/         # Utilidades
-└── navigation/        # Configuración de navegación
 ```
+
+### Routing
+
+La navegación está implementada con **Expo Router** (file-based routing). Los params de navegación se pasan como IDs (`assetId`, `orderId`) para mantener URLs/deeplinks simples.
+
+### i18n
+
+La UI está internacionalizada con **i18next** (namespace por feature: `home`, `market`, `portfolio`, `favorites`, `history` + `common`).
+
+### Persistencia
+
+Favoritos e historial de órdenes se persisten con **AsyncStorage**. Si hay errores de lectura/escritura, se notifica con toast y se intenta recuperar estado (por ejemplo, limpiando storage corrupto).
 
 ---
 
@@ -55,14 +76,14 @@ git clone https://github.com/TommStark/rueda.git
 cd rueda
 
 # 2) Instalar dependencias
-npm install
+yarn
 
 # 3) Configurar variables de entorno
 cp .env.example .env
 # Editar .env con las configuraciones necesarias
 
 # 4) Iniciar el proyecto
-npx expo start
+yarn start
 
 # 5) Ejecutar en dispositivo
 # Escanear QR con Expo Go (desarrollo)
@@ -74,12 +95,20 @@ npx expo start
 ## Scripts Disponibles
 
 ```bash
-npm start          # Iniciar Expo Dev Server
-npm run android    # Ejecutar en Android
-npm run ios        # Ejecutar en iOS
-npm run web        # Ejecutar en navegador
-npm run lint       # Ejecutar ESLint
-npm run type-check # Verificar tipos TypeScript
+yarn start         # Iniciar Expo Dev Server
+yarn ios           # Ejecutar en iOS
+yarn android       # Ejecutar en Android
+yarn web           # Ejecutar en navegador
+
+yarn lint:check    # ESLint (sin fix)
+yarn lint          # ESLint (con fix)
+yarn format:check  # Prettier (check)
+yarn format        # Prettier (write)
+yarn typecheck     # TypeScript (tsc --noEmit)
+yarn test          # Jest
+
+yarn quality       # lint:check + format:check + typecheck + test
+yarn quality:fix   # lint + format + typecheck + test
 ```
 
 ---

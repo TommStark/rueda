@@ -34,11 +34,7 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
   const { showToast } = useToast();
   const { t } = useTranslation('common');
 
-  useEffect(() => {
-    loadFavorites();
-  }, []);
-
-  const loadFavorites = async () => {
+  const loadFavorites = useCallback(async () => {
     try {
       const stored = await AsyncStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -46,11 +42,17 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
         setFavorites(parsed);
       }
     } catch {
-      // Silently fail - favorites are not critical for app functionality
+      showToast(t('toast.storageLoadFailed'), 'error');
+      await AsyncStorage.removeItem(STORAGE_KEY).catch(() => {});
+      setFavorites([]);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [showToast, t]);
+
+  useEffect(() => {
+    loadFavorites();
+  }, [loadFavorites]);
 
   const toggleFavorite = useCallback(
     async (ticker: string) => {
@@ -64,7 +66,11 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
             ? prev.filter(t => t !== normalizedTicker)
             : [...prev, normalizedTicker];
 
-          AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+          AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated)).catch(
+            () => {
+              showToast(t('toast.storageSaveFailed'), 'error');
+            }
+          );
           return updated;
         });
 
@@ -75,7 +81,7 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
           );
         }, 100);
       } catch {
-        showToast('Error updating favorite', 'error');
+        showToast(t('toast.favoriteUpdateError'), 'error');
       }
     },
     [showToast, t]
@@ -93,9 +99,9 @@ export function FavoritesProvider({ children }: FavoritesProviderProps) {
       await AsyncStorage.removeItem(STORAGE_KEY);
       setFavorites([]);
     } catch {
-      // Silently fail - clearing is not critical
+      showToast(t('toast.storageClearFailed'), 'error');
     }
-  }, []);
+  }, [showToast, t]);
 
   return (
     <FavoritesContext.Provider
