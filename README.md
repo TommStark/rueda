@@ -1,9 +1,9 @@
 <p align="center"> <img src="src/assets/images/logo.png" alt="rueda logo" width="128" height="128"> </p> <h1 align="center">RUEDA</h1> <p align="center">“tu app de finanzas modernas”</p>
 
 <p align="center">
-  <img src="assets/gif/rueda22.gif" alt="Demo Rueda 2" width="30%" />
-  <img src="assets/gif/rueda11.gif" alt="Demo Rueda 1" width="30%" />
-  <img src="assets/gif/rueda33.gif" alt="Demo Rueda 3" width="30%" />
+  <img src="https://media.githubusercontent.com/media/TommStark/rueda/develop/assets/gif/rueda22.gif" alt="Demo Rueda 2" width="30%" />
+  <img src="https://media.githubusercontent.com/media/TommStark/rueda/develop/assets/gif/rueda11.gif" alt="Demo Rueda 1" width="30%" />
+  <img src="https://media.githubusercontent.com/media/TommStark/rueda/develop/assets/gif/rueda33.gif" alt="Demo Rueda 3" width="30%" />
 </p>
 
 ---
