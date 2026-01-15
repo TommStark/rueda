@@ -1,0 +1,62 @@
+export default {
+  loading: 'Cargando...',
+  search: {
+    placeholder: 'Buscar (ej., MTR, MOLA)...',
+  },
+  filters: {
+    all: 'Todos',
+    gainers: 'Top Gainers',
+    losers: 'Top Losers',
+    az: 'A-Z',
+    price: 'Precio',
+  },
+  section: {
+    trending: 'ACTIVOS EN TENDENCIA',
+    last24h: 'Últimas 24h',
+  },
+  errors: {
+    loading: 'Error al cargar activos',
+    notFound: 'No se encontraron activos',
+  },
+  newOrder: {
+    title: 'Nueva Orden',
+    buy: 'Comprar',
+    sell: 'Vender',
+    market: 'Mercado',
+    limit: 'Límite',
+    marketOrder: 'Orden de Mercado',
+    limitOrder: 'Orden Límite',
+    orderType: 'Tipo de Orden',
+    quantity: 'Cantidad',
+    shares: 'acciones',
+    investmentAmount: 'Monto a invertir',
+    limitPrice: 'Precio límite',
+    placeholders: {
+      limitPrice: '$0.00',
+      quantity: '0',
+      amount: '$0',
+    },
+    hints: {
+      pricePerShare: 'Precio por acción',
+    },
+    percentages: {
+      p25: '25%',
+      p50: '50%',
+      p100: '100%',
+    },
+    estimatedTotal: 'Total estimado',
+    total: 'Total a pagar',
+    totalToSell: 'Total a recibir',
+    availableBalance: 'Balance disponible',
+    swipeToConfirm: 'Desliza para confirmar',
+    orderPlaced: 'Orden colocada exitosamente',
+    orderFailed: 'Error al colocar la orden',
+  },
+  validation: {
+    invalidQuantity: 'Cantidad inválida',
+    invalidPrice: 'Precio inválido',
+    orderFailed: 'Error al procesar la orden',
+    insufficientFunds: 'Fondos insuficientes. Balance disponible: $',
+    insufficientFundsWarning: 'Fondos insuficientes para esta operación',
+  },
+};

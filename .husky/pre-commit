@@ -1,0 +1,2 @@
+echo "🔧 Running quality checks with auto-fix..."
+yarn quality:fix
