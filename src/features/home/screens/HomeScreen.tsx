@@ -18,7 +18,7 @@ import ColorStatusBar from '../../../shared/components/ColorStatusBar';
 import { getTickerIcon, hasTickerIcon } from '../../../shared/utils/icons';
 import { usePortfolio } from '../../portfolio/hooks/usePortfolio';
 import { useOrderHistory } from '../../orders/context/OrderHistoryContext';
-import { useMarket } from '../../market/hooks/useMarket';
+import { useMarket, useMarketError } from '../../market/hooks/useMarket';
 import { useFavorites } from '../../favorites/context/FavoritesContext';
 import { useDebugClear } from '../components/DebugClearButton';
 import {
@@ -36,8 +36,13 @@ export default function HomeScreen() {
 
   const { data: portfolioData, isLoading: portfolioLoading } = usePortfolio();
   const { orders } = useOrderHistory();
-  const { data: instruments } = useMarket();
+  const {
+    data: instruments,
+    error: marketError,
+    isLoading: marketLoading,
+  } = useMarket();
   const { favorites } = useFavorites();
+  const marketApiError = useMarketError(marketError);
 
   const { showDebugButton, handleBellPress, handleClearAllData } =
     useDebugClear();
@@ -233,20 +238,47 @@ export default function HomeScreen() {
                 </Text>
               </TouchableOpacity>
             </View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={styles.topMoversContainer}
-            >
-              {topGainers.map(mover => (
-                <TouchableOpacity
-                  key={mover.ticker}
-                  onPress={() => handleTopMoverPress(mover.ticker)}
-                >
-                  <TopMoverCard mover={mover} />
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
+            {marketError ? (
+              <View style={styles.errorContainer}>
+                <Ionicons
+                  name="alert-circle"
+                  size={32}
+                  color={colors.status.error}
+                />
+                <Text variant="bodyMedium" style={styles.errorText}>
+                  {marketApiError?.message || 'Error al cargar datos'}
+                </Text>
+              </View>
+            ) : marketLoading ? (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.topMoversContainer}
+              >
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <View key={index} style={styles.skeletonCard}>
+                    <View style={styles.skeletonIcon} />
+                    <View style={styles.skeletonText} />
+                    <View style={styles.skeletonPrice} />
+                  </View>
+                ))}
+              </ScrollView>
+            ) : (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.topMoversContainer}
+              >
+                {topGainers.map(mover => (
+                  <TouchableOpacity
+                    key={mover.ticker}
+                    onPress={() => handleTopMoverPress(mover.ticker)}
+                  >
+                    <TopMoverCard mover={mover} />
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            )}
           </View>
 
           <View style={styles.section}>

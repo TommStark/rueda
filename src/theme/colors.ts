@@ -1,18 +1,16 @@
 /**
- * Color Tokens - Sistema centralizado de colores
+ * Color Tokens
  *
- * Este archivo contiene todos los tokens de color utilizados en la aplicación.
- * Modificar estos valores afectará toda la app de manera consistente.
  */
 
 export const colors = {
-  primary: '#123A5E', // azul principal (header / splash)
-  primaryLight: '#1e4e79ff', // hover, gradientes, fondos suaves
-  primaryLightAlpha: 'rgba(30, 78, 121, 0.3)', // hover, gradientes, fondos suaves
-  primaryDark: '#0B2A44', // estados pressed / contraste
+  primary: '#123A5E',
+  primaryLight: '#5b85abff',
+  primaryLightAlpha: 'rgba(30, 78, 121, 0.3)',
+  primaryDark: '#0B2A44',
   white: '#ffffff',
 
-  // Secondary Colors (Acción / Ganancia)
+  // Secondary Colors
   secondary: '#00A86B',
   secondaryLight: '#e6f7f0',
   secondaryDark: '#008558',
@@ -73,7 +71,7 @@ export const colors = {
   },
 
   // Special Colors
-  avatar: '#fbcf30ff', // dorado moneda
+  avatar: '#fbcf30ff',
   skeleton: '#E1E9EE',
   skeletonGradient: ['#E1E9EE', '#F2F8FC', '#E1E9EE'],
 

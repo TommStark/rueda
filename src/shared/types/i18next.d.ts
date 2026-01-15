@@ -5,6 +5,7 @@ import favoritesEs from '../../features/favorites/locales/es';
 import historyEs from '../../features/orders/locales/es';
 import navigationEs from '../locales/es/navigation';
 import commonEs from '../locales/es/common';
+import errorsEs from '../locales/es/errors';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -17,6 +18,7 @@ declare module 'i18next' {
       history: typeof historyEs;
       navigation: typeof navigationEs;
       common: typeof commonEs;
+      errors: typeof errorsEs;
     };
   }
 }

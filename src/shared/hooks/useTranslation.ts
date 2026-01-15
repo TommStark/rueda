@@ -9,6 +9,7 @@ export const useTranslation = (
     | 'favorites'
     | 'history'
     | 'navigation'
+    | 'errors'
 ) => {
   return useI18nTranslation(namespace);
 };

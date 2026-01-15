@@ -10,6 +10,6 @@ export const HTTP_STATUS = {
   SERVICE_UNAVAILABLE: 503,
 } as const;
 
-export const MAX_RETRIES = 3;
+export const MAX_RETRIES = 1;
 export const BASE_DELAY_MS = 1000;
-export const REQUEST_TIMEOUT_MS = 10000;
+export const REQUEST_TIMEOUT_MS = 2000;

@@ -8,13 +8,14 @@ import { useMemo } from 'react';
 import { router } from 'expo-router';
 import { useTranslation } from '../../../shared/hooks/useTranslation';
 import AssetCard from '../components/AssetCard';
-import { usePortfolio } from '../hooks/usePortfolio';
+import { usePortfolio, usePortfolioError } from '../hooks/usePortfolio';
 import { PortfolioPosition } from '../types/portfolio.types';
 import { styles } from '../styles/AllAssetsScreen.styles';
 
 export default function AllAssetsScreen() {
   const { t } = useTranslation('portfolio');
   const { data, isLoading, error } = usePortfolio();
+  const apiError = usePortfolioError(error);
 
   const assets = useMemo(() => {
     if (!data) return [];
@@ -66,7 +67,15 @@ export default function AllAssetsScreen() {
           <View style={styles.placeholder} />
         </View>
         <View style={styles.listContent}>
-          <Text>{t('errors.loading')}</Text>
+          <Ionicons
+            name="alert-circle"
+            size={48}
+            color={colors.status.error}
+            style={{ alignSelf: 'center', marginBottom: 16 }}
+          />
+          <Text style={{ textAlign: 'center', color: colors.text.secondary }}>
+            {apiError?.message || t('errors.loading')}
+          </Text>
         </View>
       </SafeAreaView>
     );

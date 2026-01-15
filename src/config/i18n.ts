@@ -7,6 +7,7 @@ import favoritesEs from '../features/favorites/locales/es';
 import historyEs from '../features/orders/locales/es';
 import navigationEs from '../shared/locales/es/navigation';
 import commonEs from '../shared/locales/es/common';
+import errorsEs from '../shared/locales/es/errors';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -18,6 +19,7 @@ i18n.use(initReactI18next).init({
       history: historyEs,
       navigation: navigationEs,
       common: commonEs,
+      errors: errorsEs,
     },
   },
   lng: 'es',
