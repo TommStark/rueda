@@ -1,4 +1,4 @@
-<p align="center"> <img src="src/assets/images/logo.png" alt="rueda logo" width="128" height="128"> </p> <h1 align="center">RUEDA</h1> <p align="center">“tu app de finanzas modernas”</p>
+<p align="center"> <img src="src/assets/images/logo.png" alt="rueda logo" width="128" height="128"> </p> <h1 align="center">RUEDA</h1> <h2 align="center"> "tu app de finanzas modernas" </h2> <p align="center"> <i>Mercado, portfolio y órdenes en ARS</i></p>
 
 <p align="center">
   <img src="assets/gif/rueda22.gif" alt="Demo Rueda 2" width="30%" />
